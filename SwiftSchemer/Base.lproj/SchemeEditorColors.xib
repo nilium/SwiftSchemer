@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6185.11"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="QSchemeEditorColorController" customModule="SwiftSchemer" customModuleProvider="target">
+            <connections>
+                <outlet property="caretWell" destination="XKL-Xk-8gy" id="sZp-HC-aFy"/>
+                <outlet property="findBackWell" destination="0oM-fp-h2N" id="PlD-3j-7Vm"/>
+                <outlet property="findForeWell" destination="7EY-Yo-2gA" id="zut-TO-sNs"/>
+                <outlet property="gutterBackWell" destination="wfc-v6-daI" id="ngU-nW-dUm"/>
+                <outlet property="gutterForeWell" destination="kNG-6E-F0U" id="rf2-aH-BKQ"/>
+                <outlet property="invisiblesWell" destination="cm6-kH-7dF" id="fht-JM-Ucv"/>
+                <outlet property="lineHLWell" destination="Haj-M8-9iY" id="QPV-PM-szB"/>
+                <outlet property="selectionActiveWell" destination="jDb-2B-oQ8" id="PiH-Ar-vJb"/>
+                <outlet property="selectionBorderWell" destination="LIb-4d-nBS" id="33Y-yF-nWU"/>
+                <outlet property="selectionInactiveWell" destination="YAE-4F-bhX" id="9wf-u2-vmf"/>
+                <outlet property="view" destination="jnP-SI-CuB" id="Y5b-au-Jvh"/>
+                <outlet property="viewBackWell" destination="Teb-vD-Oe7" id="6Lx-tL-G5Z"/>
+                <outlet property="viewForeWell" destination="PH7-gf-Yus" id="jrG-73-YjZ"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="jnP-SI-CuB">
+            <rect key="frame" x="0.0" y="0.0" width="282" height="382"/>
+            <subviews>
+                <box autoresizesSubviews="NO" title="Viewport" boxType="oldStyle" borderType="none" translatesAutoresizingMaskIntoConstraints="NO" id="IeO-ld-Zj5">
+                    <rect key="frame" x="8" y="316" width="266" height="62"/>
+                    <view key="contentView">
+                        <rect key="frame" x="0.0" y="0.0" width="266" height="47"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="Teb-vD-Oe7" customClass="QAlphaColorWell" customModule="SwiftSchemer" customModuleProvider="target">
+                                <rect key="frame" x="206" y="26" width="44" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="kO8-f2-CW7"/>
+                                    <constraint firstAttribute="width" constant="44" id="mGN-TX-DHL"/>
+                                </constraints>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsAlpha" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="updateColor:" target="-2" id="Sj6-aB-8Rl"/>
+                                </connections>
+                            </colorWell>
+                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="PH7-gf-Yus" customClass="QAlphaColorWell" customModule="SwiftSchemer" customModuleProvider="target">
+                                <rect key="frame" x="206" y="2" width="44" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="3PW-uy-vj7"/>
+                                    <constraint firstAttribute="height" constant="20" id="vUn-uu-iQa"/>
+                                </constraints>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsAlpha" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="updateColor:" target="-2" id="vRW-kP-YYG"/>
+                                </connections>
+                            </colorWell>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mgD-t2-StQ">
+                                <rect key="frame" x="14" y="27" width="82" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="78" id="kCR-2N-lG3"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Background" id="lnx-h4-2uW">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cKq-Pu-p16">
+                                <rect key="frame" x="14" y="3" width="82" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="78" id="urJ-5D-2PB"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Foreground" id="XUo-LI-4T6">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                    <constraints>
+                        <constraint firstItem="PH7-gf-Yus" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cKq-Pu-p16" secondAttribute="trailing" constant="9" id="5Ag-OT-avB"/>
+                        <constraint firstAttribute="trailing" secondItem="Teb-vD-Oe7" secondAttribute="trailing" constant="16" id="92V-IA-f1d"/>
+                        <constraint firstItem="Teb-vD-Oe7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mgD-t2-StQ" secondAttribute="trailing" constant="8" id="EuA-sb-oe9"/>
+                        <constraint firstItem="Teb-vD-Oe7" firstAttribute="top" secondItem="IeO-ld-Zj5" secondAttribute="top" constant="16" id="F2M-xl-3rT"/>
+                        <constraint firstItem="PH7-gf-Yus" firstAttribute="top" secondItem="Teb-vD-Oe7" secondAttribute="bottom" constant="4" id="GbV-F2-ts1"/>
+                        <constraint firstAttribute="trailing" secondItem="PH7-gf-Yus" secondAttribute="trailing" constant="16" id="Nc0-tX-Fep"/>
+                        <constraint firstItem="mgD-t2-StQ" firstAttribute="centerY" secondItem="Teb-vD-Oe7" secondAttribute="centerY" id="RxS-NT-IDr"/>
+                        <constraint firstItem="PH7-gf-Yus" firstAttribute="centerY" secondItem="cKq-Pu-p16" secondAttribute="centerY" id="YQA-qc-kki"/>
+                        <constraint firstAttribute="bottom" secondItem="PH7-gf-Yus" secondAttribute="bottom" constant="2" id="Yb4-qX-RTa"/>
+                        <constraint firstItem="mgD-t2-StQ" firstAttribute="leading" secondItem="IeO-ld-Zj5" secondAttribute="leading" constant="16" id="p5a-UC-O5h"/>
+                        <constraint firstItem="cKq-Pu-p16" firstAttribute="leading" secondItem="IeO-ld-Zj5" secondAttribute="leading" constant="16" id="py8-3K-ae4"/>
+                    </constraints>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </box>
+                <box autoresizesSubviews="NO" title="Find Highlight" boxType="oldStyle" borderType="none" translatesAutoresizingMaskIntoConstraints="NO" id="apH-fy-e4M">
+                    <rect key="frame" x="8" y="4" width="266" height="62"/>
+                    <view key="contentView">
+                        <rect key="frame" x="0.0" y="0.0" width="266" height="47"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="0oM-fp-h2N" customClass="QAlphaColorWell" customModule="SwiftSchemer" customModuleProvider="target">
+                                <rect key="frame" x="206" y="26" width="44" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="PNz-Zu-3Ez"/>
+                                    <constraint firstAttribute="width" constant="44" id="jGt-Uk-nNZ"/>
+                                </constraints>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsAlpha" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="updateColor:" target="-2" id="gey-Qn-z0K"/>
+                                </connections>
+                            </colorWell>
+                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="7EY-Yo-2gA" customClass="QAlphaColorWell" customModule="SwiftSchemer" customModuleProvider="target">
+                                <rect key="frame" x="206" y="2" width="44" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="jNm-Zl-GBO"/>
+                                    <constraint firstAttribute="width" constant="44" id="oIb-SI-ynd"/>
+                                </constraints>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsAlpha" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="updateColor:" target="-2" id="eK1-DV-KfE"/>
+                                </connections>
+                            </colorWell>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="od5-ce-mdx">
+                                <rect key="frame" x="14" y="27" width="82" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="78" id="EsE-xf-OO2"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Background" id="UVN-tt-Hcy">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ONT-H0-cm4">
+                                <rect key="frame" x="14" y="3" width="82" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="78" id="bCT-yh-2Xn"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Foreground" id="fuU-mF-SLP">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                    <constraints>
+                        <constraint firstItem="ONT-H0-cm4" firstAttribute="leading" secondItem="apH-fy-e4M" secondAttribute="leading" constant="16" id="70H-KC-ZSG"/>
+                        <constraint firstItem="7EY-Yo-2gA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ONT-H0-cm4" secondAttribute="trailing" constant="9" id="8kI-KE-tV7"/>
+                        <constraint firstItem="od5-ce-mdx" firstAttribute="centerY" secondItem="0oM-fp-h2N" secondAttribute="centerY" id="9c4-Wg-V3q"/>
+                        <constraint firstItem="7EY-Yo-2gA" firstAttribute="centerY" secondItem="ONT-H0-cm4" secondAttribute="centerY" id="JKQ-DC-27j"/>
+                        <constraint firstItem="7EY-Yo-2gA" firstAttribute="top" secondItem="0oM-fp-h2N" secondAttribute="bottom" constant="4" id="OqN-9c-1kx"/>
+                        <constraint firstAttribute="trailing" secondItem="7EY-Yo-2gA" secondAttribute="trailing" constant="16" id="RzP-Ro-SDZ"/>
+                        <constraint firstItem="od5-ce-mdx" firstAttribute="leading" secondItem="apH-fy-e4M" secondAttribute="leading" constant="16" id="XES-LS-rB0"/>
+                        <constraint firstAttribute="bottom" secondItem="7EY-Yo-2gA" secondAttribute="bottom" constant="2" id="Yoi-b1-gdo"/>
+                        <constraint firstItem="0oM-fp-h2N" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="od5-ce-mdx" secondAttribute="trailing" constant="8" id="bw5-ct-hF7"/>
+                        <constraint firstAttribute="trailing" secondItem="0oM-fp-h2N" secondAttribute="trailing" constant="16" id="gao-oC-Ygd"/>
+                        <constraint firstItem="0oM-fp-h2N" firstAttribute="top" secondItem="apH-fy-e4M" secondAttribute="top" constant="16" id="vBj-XW-SrZ"/>
+                    </constraints>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </box>
+                <box autoresizesSubviews="NO" title="Gutter" boxType="oldStyle" borderType="none" translatesAutoresizingMaskIntoConstraints="NO" id="j8d-AA-McS">
+                    <rect key="frame" x="8" y="160" width="266" height="62"/>
+                    <view key="contentView">
+                        <rect key="frame" x="0.0" y="0.0" width="266" height="47"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="wfc-v6-daI" customClass="QAlphaColorWell" customModule="SwiftSchemer" customModuleProvider="target">
+                                <rect key="frame" x="206" y="26" width="44" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="dR3-kc-WGf"/>
+                                    <constraint firstAttribute="height" constant="20" id="pM2-GH-TWw"/>
+                                </constraints>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsAlpha" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="updateColor:" target="-2" id="jE7-Ds-hTZ"/>
+                                </connections>
+                            </colorWell>
+                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="kNG-6E-F0U" customClass="QAlphaColorWell" customModule="SwiftSchemer" customModuleProvider="target">
+                                <rect key="frame" x="206" y="2" width="44" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="YOS-yh-AtY"/>
+                                    <constraint firstAttribute="width" constant="44" id="hRH-mR-Byl"/>
+                                </constraints>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsAlpha" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="updateColor:" target="-2" id="pCb-fL-sJv"/>
+                                </connections>
+                            </colorWell>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xjo-QF-P44">
+                                <rect key="frame" x="14" y="27" width="82" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="78" id="GMw-xy-ixN"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Background" id="a0Q-si-piW">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wiQ-Ut-zAy">
+                                <rect key="frame" x="14" y="3" width="82" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="78" id="uyY-cc-qTx"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Foreground" id="gfs-vt-uS5">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                    <constraints>
+                        <constraint firstItem="kNG-6E-F0U" firstAttribute="centerY" secondItem="wiQ-Ut-zAy" secondAttribute="centerY" id="9Qi-do-n3P"/>
+                        <constraint firstAttribute="trailing" secondItem="wfc-v6-daI" secondAttribute="trailing" constant="16" id="EMb-tE-PMc"/>
+                        <constraint firstItem="kNG-6E-F0U" firstAttribute="top" secondItem="wfc-v6-daI" secondAttribute="bottom" constant="4" id="FDb-ir-yly"/>
+                        <constraint firstItem="wfc-v6-daI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xjo-QF-P44" secondAttribute="trailing" constant="8" id="HPh-d9-mGV"/>
+                        <constraint firstAttribute="trailing" secondItem="kNG-6E-F0U" secondAttribute="trailing" constant="16" id="NRA-N6-ZbJ"/>
+                        <constraint firstItem="wiQ-Ut-zAy" firstAttribute="leading" secondItem="j8d-AA-McS" secondAttribute="leading" constant="16" id="Shm-5g-Qbl"/>
+                        <constraint firstItem="xjo-QF-P44" firstAttribute="leading" secondItem="j8d-AA-McS" secondAttribute="leading" constant="16" id="cQI-ea-41j"/>
+                        <constraint firstItem="wfc-v6-daI" firstAttribute="top" secondItem="j8d-AA-McS" secondAttribute="top" constant="16" id="nWG-f0-BLB"/>
+                        <constraint firstAttribute="bottom" secondItem="kNG-6E-F0U" secondAttribute="bottom" constant="2" id="rhb-tN-4aB"/>
+                        <constraint firstItem="xjo-QF-P44" firstAttribute="centerY" secondItem="wfc-v6-daI" secondAttribute="centerY" id="sss-oF-NcO"/>
+                        <constraint firstItem="kNG-6E-F0U" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wiQ-Ut-zAy" secondAttribute="trailing" constant="9" id="yLB-KL-Y1T"/>
+                    </constraints>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </box>
+                <box autoresizesSubviews="NO" title="Selection" boxType="oldStyle" borderType="none" translatesAutoresizingMaskIntoConstraints="NO" id="bnb-km-haB">
+                    <rect key="frame" x="8" y="70" width="266" height="86"/>
+                    <view key="contentView">
+                        <rect key="frame" x="0.0" y="0.0" width="266" height="71"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="jDb-2B-oQ8" customClass="QAlphaColorWell" customModule="SwiftSchemer" customModuleProvider="target">
+                                <rect key="frame" x="206" y="50" width="44" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Hr3-bp-5sn"/>
+                                    <constraint firstAttribute="width" constant="44" id="eao-tK-pWP"/>
+                                </constraints>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsAlpha" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="updateColor:" target="-2" id="paQ-IN-LgD"/>
+                                </connections>
+                            </colorWell>
+                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="LIb-4d-nBS" customClass="QAlphaColorWell" customModule="SwiftSchemer" customModuleProvider="target">
+                                <rect key="frame" x="206" y="2" width="44" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="LaX-sW-GL7"/>
+                                    <constraint firstAttribute="height" constant="20" id="yMa-U4-ePI"/>
+                                </constraints>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsAlpha" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="updateColor:" target="-2" id="eE4-4B-INW"/>
+                                </connections>
+                            </colorWell>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v6G-oy-Z0n">
+                                <rect key="frame" x="14" y="51" width="68" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="sCB-00-OZz"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Active" id="ndI-d8-tOI">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ogN-pr-pqY">
+                                <rect key="frame" x="14" y="3" width="68" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="59Q-aF-97n"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Border" id="iDU-G3-A50">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ENe-6Z-Xhu">
+                                <rect key="frame" x="14" y="27" width="68" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="slE-zA-sHz"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Inactive" id="d45-PZ-N6C">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="YAE-4F-bhX" customClass="QAlphaColorWell" customModule="SwiftSchemer" customModuleProvider="target">
+                                <rect key="frame" x="206" y="26" width="44" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="IPR-2S-QDa"/>
+                                    <constraint firstAttribute="height" constant="20" id="JgS-c0-jwM"/>
+                                </constraints>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsAlpha" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="updateColor:" target="-2" id="3uy-by-eJV"/>
+                                </connections>
+                            </colorWell>
+                        </subviews>
+                    </view>
+                    <constraints>
+                        <constraint firstItem="ENe-6Z-Xhu" firstAttribute="leading" secondItem="bnb-km-haB" secondAttribute="leading" constant="16" id="0ng-y5-Nrs"/>
+                        <constraint firstItem="v6G-oy-Z0n" firstAttribute="leading" secondItem="bnb-km-haB" secondAttribute="leading" constant="16" id="54y-ri-OaN"/>
+                        <constraint firstItem="YAE-4F-bhX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ENe-6Z-Xhu" secondAttribute="trailing" constant="8" id="K52-RE-LBt"/>
+                        <constraint firstItem="ENe-6Z-Xhu" firstAttribute="centerY" secondItem="YAE-4F-bhX" secondAttribute="centerY" id="Lar-Nu-Zhq"/>
+                        <constraint firstItem="jDb-2B-oQ8" firstAttribute="top" secondItem="bnb-km-haB" secondAttribute="top" constant="16" id="SNM-7i-7n5"/>
+                        <constraint firstItem="jDb-2B-oQ8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="v6G-oy-Z0n" secondAttribute="trailing" constant="8" id="U2v-aM-YdZ"/>
+                        <constraint firstItem="v6G-oy-Z0n" firstAttribute="centerY" secondItem="jDb-2B-oQ8" secondAttribute="centerY" id="eDF-uK-Gba"/>
+                        <constraint firstAttribute="trailing" secondItem="jDb-2B-oQ8" secondAttribute="trailing" constant="16" id="etH-8g-7ou"/>
+                        <constraint firstItem="YAE-4F-bhX" firstAttribute="top" secondItem="jDb-2B-oQ8" secondAttribute="bottom" constant="4" id="ij0-25-fSK"/>
+                        <constraint firstAttribute="trailing" secondItem="YAE-4F-bhX" secondAttribute="trailing" constant="16" id="kFV-eJ-kNt"/>
+                        <constraint firstItem="LIb-4d-nBS" firstAttribute="top" secondItem="YAE-4F-bhX" secondAttribute="bottom" constant="4" id="nzO-6M-QLG"/>
+                        <constraint firstItem="LIb-4d-nBS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ogN-pr-pqY" secondAttribute="trailing" constant="9" id="pXj-np-EN6"/>
+                        <constraint firstAttribute="bottom" secondItem="LIb-4d-nBS" secondAttribute="bottom" constant="2" id="q9e-Y5-va3"/>
+                        <constraint firstAttribute="trailing" secondItem="LIb-4d-nBS" secondAttribute="trailing" constant="16" id="w46-PU-I91"/>
+                        <constraint firstItem="LIb-4d-nBS" firstAttribute="centerY" secondItem="ogN-pr-pqY" secondAttribute="centerY" id="wrp-X7-TCe"/>
+                        <constraint firstItem="ogN-pr-pqY" firstAttribute="leading" secondItem="bnb-km-haB" secondAttribute="leading" constant="16" id="xGE-0Y-AnL"/>
+                    </constraints>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </box>
+                <box autoresizesSubviews="NO" title="Editor" boxType="oldStyle" borderType="none" translatesAutoresizingMaskIntoConstraints="NO" id="vEi-vS-aAF">
+                    <rect key="frame" x="8" y="226" width="266" height="86"/>
+                    <view key="contentView">
+                        <rect key="frame" x="0.0" y="0.0" width="266" height="71"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="XKL-Xk-8gy" customClass="QAlphaColorWell" customModule="SwiftSchemer" customModuleProvider="target">
+                                <rect key="frame" x="206" y="2" width="44" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="A2Q-kY-u5S"/>
+                                    <constraint firstAttribute="height" constant="20" id="xcB-DH-F3a"/>
+                                </constraints>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsAlpha" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="updateColor:" target="-2" id="ez9-vv-gQe"/>
+                                </connections>
+                            </colorWell>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bNl-pa-DH3">
+                                <rect key="frame" x="14" y="51" width="93" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="89" id="UAf-tO-R97"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Line Highlight" id="dBn-r3-yJK">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ro2-mk-gxS">
+                                <rect key="frame" x="14" y="3" width="78" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="74" id="3Uh-si-WfQ"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Caret" id="1zY-wM-RQC">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="cm6-kH-7dF" customClass="QAlphaColorWell" customModule="SwiftSchemer" customModuleProvider="target">
+                                <rect key="frame" x="206" y="26" width="44" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="49W-sH-ZRG"/>
+                                    <constraint firstAttribute="width" constant="44" id="Vyo-ft-FCQ"/>
+                                </constraints>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsAlpha" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="updateColor:" target="-2" id="Uc0-od-Bc4"/>
+                                </connections>
+                            </colorWell>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6jC-Kz-gKu">
+                                <rect key="frame" x="14" y="27" width="79" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="NPz-Yc-wp0"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Invisibles" id="JUQ-mf-3R7">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="Haj-M8-9iY" customClass="QAlphaColorWell" customModule="SwiftSchemer" customModuleProvider="target">
+                                <rect key="frame" x="206" y="50" width="44" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="T80-bD-1p6"/>
+                                    <constraint firstAttribute="height" constant="20" id="eqX-Ma-CRA"/>
+                                </constraints>
+                                <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsAlpha" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="updateColor:" target="-2" id="wPA-ww-Pd1"/>
+                                </connections>
+                            </colorWell>
+                        </subviews>
+                    </view>
+                    <constraints>
+                        <constraint firstItem="Haj-M8-9iY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bNl-pa-DH3" secondAttribute="trailing" constant="8" id="0ka-le-siP"/>
+                        <constraint firstItem="XKL-Xk-8gy" firstAttribute="centerY" secondItem="ro2-mk-gxS" secondAttribute="centerY" id="IOa-gu-bla"/>
+                        <constraint firstItem="XKL-Xk-8gy" firstAttribute="top" secondItem="cm6-kH-7dF" secondAttribute="bottom" constant="4" id="JeO-sS-Bdl"/>
+                        <constraint firstAttribute="trailing" secondItem="XKL-Xk-8gy" secondAttribute="trailing" constant="16" id="LYD-r4-KER"/>
+                        <constraint firstItem="6jC-Kz-gKu" firstAttribute="centerY" secondItem="cm6-kH-7dF" secondAttribute="centerY" id="Mus-xG-5zI"/>
+                        <constraint firstItem="Haj-M8-9iY" firstAttribute="top" secondItem="vEi-vS-aAF" secondAttribute="top" constant="16" id="NcE-fj-nTd"/>
+                        <constraint firstAttribute="trailing" secondItem="Haj-M8-9iY" secondAttribute="trailing" constant="16" id="VGU-uH-zc0"/>
+                        <constraint firstItem="ro2-mk-gxS" firstAttribute="leading" secondItem="vEi-vS-aAF" secondAttribute="leading" constant="16" id="XTs-Jy-inU"/>
+                        <constraint firstItem="6jC-Kz-gKu" firstAttribute="leading" secondItem="vEi-vS-aAF" secondAttribute="leading" constant="16" id="c2o-nw-zZG"/>
+                        <constraint firstItem="bNl-pa-DH3" firstAttribute="centerY" secondItem="Haj-M8-9iY" secondAttribute="centerY" id="cCt-Uz-aJ4"/>
+                        <constraint firstAttribute="bottom" secondItem="XKL-Xk-8gy" secondAttribute="bottom" constant="2" id="dDE-hr-v4r"/>
+                        <constraint firstAttribute="trailing" secondItem="cm6-kH-7dF" secondAttribute="trailing" constant="16" id="ewe-Up-IcO"/>
+                        <constraint firstItem="bNl-pa-DH3" firstAttribute="leading" secondItem="vEi-vS-aAF" secondAttribute="leading" constant="16" id="hHy-uP-a3x"/>
+                        <constraint firstItem="cm6-kH-7dF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6jC-Kz-gKu" secondAttribute="trailing" constant="8" id="lgC-Qf-g8D"/>
+                        <constraint firstItem="XKL-Xk-8gy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ro2-mk-gxS" secondAttribute="trailing" constant="9" id="nzf-oc-cih"/>
+                        <constraint firstItem="cm6-kH-7dF" firstAttribute="top" secondItem="Haj-M8-9iY" secondAttribute="bottom" constant="4" id="uZr-S1-CdN"/>
+                    </constraints>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </box>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="vEi-vS-aAF" secondAttribute="trailing" constant="8" id="5L2-yC-qFY"/>
+                <constraint firstAttribute="bottom" secondItem="apH-fy-e4M" secondAttribute="bottom" constant="4" id="9vM-Gi-5hO"/>
+                <constraint firstItem="apH-fy-e4M" firstAttribute="leading" secondItem="jnP-SI-CuB" secondAttribute="leading" constant="8" id="A7u-cU-QTq"/>
+                <constraint firstItem="j8d-AA-McS" firstAttribute="top" secondItem="vEi-vS-aAF" secondAttribute="bottom" constant="4" id="Gb3-Ub-fvb"/>
+                <constraint firstItem="bnb-km-haB" firstAttribute="leading" secondItem="jnP-SI-CuB" secondAttribute="leading" constant="8" id="H5A-FG-vwi"/>
+                <constraint firstItem="j8d-AA-McS" firstAttribute="leading" secondItem="jnP-SI-CuB" secondAttribute="leading" constant="8" id="ILp-Ue-veK"/>
+                <constraint firstItem="bnb-km-haB" firstAttribute="top" secondItem="j8d-AA-McS" secondAttribute="bottom" constant="4" id="JqD-yV-abI"/>
+                <constraint firstItem="vEi-vS-aAF" firstAttribute="top" secondItem="IeO-ld-Zj5" secondAttribute="bottom" constant="4" id="P1G-d5-nWh"/>
+                <constraint firstItem="IeO-ld-Zj5" firstAttribute="leading" secondItem="jnP-SI-CuB" secondAttribute="leading" constant="8" id="bCl-Pb-8SG"/>
+                <constraint firstAttribute="trailing" secondItem="IeO-ld-Zj5" secondAttribute="trailing" constant="8" id="mTC-cq-7qy"/>
+                <constraint firstAttribute="trailing" secondItem="bnb-km-haB" secondAttribute="trailing" constant="8" id="nau-fC-nnn"/>
+                <constraint firstItem="IeO-ld-Zj5" firstAttribute="top" secondItem="jnP-SI-CuB" secondAttribute="top" constant="4" id="v91-ZD-xt3"/>
+                <constraint firstItem="vEi-vS-aAF" firstAttribute="leading" secondItem="jnP-SI-CuB" secondAttribute="leading" constant="8" id="vQU-zi-peB"/>
+                <constraint firstItem="apH-fy-e4M" firstAttribute="top" secondItem="bnb-km-haB" secondAttribute="bottom" constant="4" id="xSm-E1-xZ2"/>
+                <constraint firstAttribute="trailing" secondItem="apH-fy-e4M" secondAttribute="trailing" constant="8" id="yYq-Ao-3Aq"/>
+                <constraint firstAttribute="trailing" secondItem="j8d-AA-McS" secondAttribute="trailing" constant="8" id="zdL-sq-Gum"/>
+            </constraints>
+            <point key="canvasLocation" x="734" y="355"/>
+        </customView>
+    </objects>
+</document>

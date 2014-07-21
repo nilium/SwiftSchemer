@@ -1,0 +1,597 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1C10CABC19849F68004E8018 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C10CAB619849F68004E8018 /* MainMenu.xib */; };
+		1C10CABD19849F68004E8018 /* SchemeDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C10CAB819849F68004E8018 /* SchemeDocument.xib */; };
+		1C10CABE19849F68004E8018 /* SchemeEditorColors.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C10CABA19849F68004E8018 /* SchemeEditorColors.xib */; };
+		1C32B05519832AC000A949A0 /* QRuleTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C32B05419832AC000A949A0 /* QRuleTableController.swift */; };
+		1C32B05719832ACD00A949A0 /* QSelectorTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C32B05619832ACD00A949A0 /* QSelectorTableController.swift */; };
+		1C32B05919832DE800A949A0 /* QSelectorTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C32B05819832DE800A949A0 /* QSelectorTableSource.swift */; };
+		1C5D029B197D01890095ECEB /* SnowKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C5D029A197D01890095ECEB /* SnowKit.framework */; };
+		1C5D029D197D02220095ECEB /* SnowKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1C5D029A197D01890095ECEB /* SnowKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		1C7FFC7B197CEA9900863982 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7FFC7A197CEA9900863982 /* main.swift */; };
+		1C7FFC7D197CEA9900863982 /* QSchemeDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7FFC7C197CEA9900863982 /* QSchemeDocument.swift */; };
+		1C7FFC82197CEA9900863982 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C7FFC81197CEA9900863982 /* Images.xcassets */; };
+		1C7FFC91197CEA9900863982 /* SwiftSchemerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7FFC90197CEA9900863982 /* SwiftSchemerTests.swift */; };
+		1C8513051982DA5B002670DB /* QAlphaColorWell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8513041982DA5B002670DB /* QAlphaColorWell.swift */; };
+		1C8513081982E3F5002670DB /* QSchemeEditorColorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8513061982E3F5002670DB /* QSchemeEditorColorController.swift */; };
+		1C85130E1982E59A002670DB /* QSchemeRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C85130C1982E59A002670DB /* QSchemeRule.swift */; };
+		1C85130F1982E59A002670DB /* QScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C85130D1982E59A002670DB /* QScheme.swift */; };
+		1C8513111982E5C2002670DB /* NSColor+QHexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8513101982E5C2002670DB /* NSColor+QHexColor.swift */; };
+		1C8513131982E5CC002670DB /* Aux.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8513121982E5CC002670DB /* Aux.swift */; };
+		1C8513151982F062002670DB /* NSView+Replacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8513141982F062002670DB /* NSView+Replacement.swift */; };
+		1C851317198307DE002670DB /* QAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C851316198307DE002670DB /* QAppDelegate.swift */; };
+		1C8D03BC19838C07007D059B /* QControlBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8D03BB19838C07007D059B /* QControlBinding.swift */; };
+		1C8D03BE198481B6007D059B /* QRuleTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8D03BD198481B6007D059B /* QRuleTableSource.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1C7FFC8B197CEA9900863982 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C7FFC6D197CEA9900863982 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C7FFC74197CEA9900863982;
+			remoteInfo = SwiftSchemer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1C5D029C197D02110095ECEB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1C5D029D197D02220095ECEB /* SnowKit.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1C10CAB719849F68004E8018 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		1C10CAB919849F68004E8018 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SchemeDocument.xib; sourceTree = "<group>"; };
+		1C10CABB19849F68004E8018 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SchemeEditorColors.xib; sourceTree = "<group>"; };
+		1C32B05419832AC000A949A0 /* QRuleTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRuleTableController.swift; sourceTree = "<group>"; };
+		1C32B05619832ACD00A949A0 /* QSelectorTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSelectorTableController.swift; sourceTree = "<group>"; };
+		1C32B05819832DE800A949A0 /* QSelectorTableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSelectorTableSource.swift; sourceTree = "<group>"; };
+		1C5D029A197D01890095ECEB /* SnowKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnowKit.framework; path = ../Projects/SnowKit/bin/Debug/SnowKit.framework; sourceTree = "<group>"; };
+		1C7FFC75197CEA9900863982 /* SwiftSchemer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftSchemer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C7FFC79197CEA9900863982 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C7FFC7A197CEA9900863982 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		1C7FFC7C197CEA9900863982 /* QSchemeDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSchemeDocument.swift; sourceTree = "<group>"; };
+		1C7FFC81197CEA9900863982 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1C7FFC8A197CEA9900863982 /* SwiftSchemerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftSchemerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C7FFC8F197CEA9900863982 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C7FFC90197CEA9900863982 /* SwiftSchemerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftSchemerTests.swift; sourceTree = "<group>"; };
+		1C7FFC9C197CEBBE00863982 /* SwiftSchemer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftSchemer-Bridging-Header.h"; sourceTree = "<group>"; };
+		1C8513041982DA5B002670DB /* QAlphaColorWell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QAlphaColorWell.swift; sourceTree = "<group>"; };
+		1C8513061982E3F5002670DB /* QSchemeEditorColorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSchemeEditorColorController.swift; sourceTree = "<group>"; };
+		1C85130C1982E59A002670DB /* QSchemeRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSchemeRule.swift; sourceTree = "<group>"; };
+		1C85130D1982E59A002670DB /* QScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QScheme.swift; sourceTree = "<group>"; };
+		1C8513101982E5C2002670DB /* NSColor+QHexColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+QHexColor.swift"; sourceTree = "<group>"; };
+		1C8513121982E5CC002670DB /* Aux.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aux.swift; sourceTree = "<group>"; };
+		1C8513141982F062002670DB /* NSView+Replacement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSView+Replacement.swift"; sourceTree = "<group>"; };
+		1C851316198307DE002670DB /* QAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QAppDelegate.swift; sourceTree = "<group>"; };
+		1C8D03BB19838C07007D059B /* QControlBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QControlBinding.swift; sourceTree = "<group>"; };
+		1C8D03BD198481B6007D059B /* QRuleTableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRuleTableSource.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1C7FFC72197CEA9900863982 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C5D029B197D01890095ECEB /* SnowKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C7FFC87197CEA9900863982 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1C10CAA7198491B8004E8018 /* Selector Table */ = {
+			isa = PBXGroup;
+			children = (
+				1C32B05619832ACD00A949A0 /* QSelectorTableController.swift */,
+				1C32B05819832DE800A949A0 /* QSelectorTableSource.swift */,
+			);
+			name = "Selector Table";
+			sourceTree = "<group>";
+		};
+		1C10CAA8198491BF004E8018 /* Rule Table */ = {
+			isa = PBXGroup;
+			children = (
+				1C32B05419832AC000A949A0 /* QRuleTableController.swift */,
+				1C8D03BD198481B6007D059B /* QRuleTableSource.swift */,
+			);
+			name = "Rule Table";
+			sourceTree = "<group>";
+		};
+		1C10CAA9198491DC004E8018 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1C8513041982DA5B002670DB /* QAlphaColorWell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		1C10CAAA198491EA004E8018 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1C10CAA8198491BF004E8018 /* Rule Table */,
+				1C10CAA7198491B8004E8018 /* Selector Table */,
+				1C8513061982E3F5002670DB /* QSchemeEditorColorController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		1C10CAAB19849204004E8018 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				1C8513121982E5CC002670DB /* Aux.swift */,
+				1C8513101982E5C2002670DB /* NSColor+QHexColor.swift */,
+				1C8513141982F062002670DB /* NSView+Replacement.swift */,
+				1C8D03BB19838C07007D059B /* QControlBinding.swift */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		1C10CAAC1984920D004E8018 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				1C7FFC7A197CEA9900863982 /* main.swift */,
+				1C851316198307DE002670DB /* QAppDelegate.swift */,
+				1C7FFC7C197CEA9900863982 /* QSchemeDocument.swift */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		1C10CAAD1984928F004E8018 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1C5D029A197D01890095ECEB /* SnowKit.framework */,
+			);
+			name = Frameworks;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		1C7FFC6C197CEA9900863982 = {
+			isa = PBXGroup;
+			children = (
+				1C7FFC77197CEA9900863982 /* SwiftSchemer */,
+				1C7FFC8D197CEA9900863982 /* SwiftSchemerTests */,
+				1C7FFC76197CEA9900863982 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1C7FFC76197CEA9900863982 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1C7FFC75197CEA9900863982 /* SwiftSchemer.app */,
+				1C7FFC8A197CEA9900863982 /* SwiftSchemerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1C7FFC77197CEA9900863982 /* SwiftSchemer */ = {
+			isa = PBXGroup;
+			children = (
+				1C10CAAC1984920D004E8018 /* Application */,
+				1C10CAAA198491EA004E8018 /* Controllers */,
+				1CC7563F197DC18A00CDA8E6 /* Models */,
+				1CC7563E197DC17600CDA8E6 /* Resources */,
+				1C7FFC78197CEA9900863982 /* Supporting Files */,
+				1C10CAAB19849204004E8018 /* Utility */,
+				1C10CAA9198491DC004E8018 /* Views */,
+			);
+			path = SwiftSchemer;
+			sourceTree = "<group>";
+		};
+		1C7FFC78197CEA9900863982 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1C10CAAD1984928F004E8018 /* Frameworks */,
+				1C7FFC79197CEA9900863982 /* Info.plist */,
+				1C7FFC9C197CEBBE00863982 /* SwiftSchemer-Bridging-Header.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1C7FFC8D197CEA9900863982 /* SwiftSchemerTests */ = {
+			isa = PBXGroup;
+			children = (
+				1C7FFC8E197CEA9900863982 /* Supporting Files */,
+				1C7FFC90197CEA9900863982 /* SwiftSchemerTests.swift */,
+			);
+			path = SwiftSchemerTests;
+			sourceTree = "<group>";
+		};
+		1C7FFC8E197CEA9900863982 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1C7FFC8F197CEA9900863982 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1CC7563E197DC17600CDA8E6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1C7FFC81197CEA9900863982 /* Images.xcassets */,
+				1C10CAB619849F68004E8018 /* MainMenu.xib */,
+				1C10CAB819849F68004E8018 /* SchemeDocument.xib */,
+				1C10CABA19849F68004E8018 /* SchemeEditorColors.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		1CC7563F197DC18A00CDA8E6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1C85130D1982E59A002670DB /* QScheme.swift */,
+				1C85130C1982E59A002670DB /* QSchemeRule.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1C7FFC74197CEA9900863982 /* SwiftSchemer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C7FFC94197CEA9900863982 /* Build configuration list for PBXNativeTarget "SwiftSchemer" */;
+			buildPhases = (
+				1C7FFC71197CEA9900863982 /* Sources */,
+				1C7FFC72197CEA9900863982 /* Frameworks */,
+				1C7FFC73197CEA9900863982 /* Resources */,
+				1C5D029C197D02110095ECEB /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftSchemer;
+			productName = SwiftSchemer;
+			productReference = 1C7FFC75197CEA9900863982 /* SwiftSchemer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1C7FFC89197CEA9900863982 /* SwiftSchemerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C7FFC97197CEA9900863982 /* Build configuration list for PBXNativeTarget "SwiftSchemerTests" */;
+			buildPhases = (
+				1C7FFC86197CEA9900863982 /* Sources */,
+				1C7FFC87197CEA9900863982 /* Frameworks */,
+				1C7FFC88197CEA9900863982 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1C7FFC8C197CEA9900863982 /* PBXTargetDependency */,
+			);
+			name = SwiftSchemerTests;
+			productName = SwiftSchemerTests;
+			productReference = 1C7FFC8A197CEA9900863982 /* SwiftSchemerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1C7FFC6D197CEA9900863982 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Noel Cower";
+				TargetAttributes = {
+					1C7FFC74197CEA9900863982 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					1C7FFC89197CEA9900863982 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = 1C7FFC74197CEA9900863982;
+					};
+				};
+			};
+			buildConfigurationList = 1C7FFC70197CEA9900863982 /* Build configuration list for PBXProject "SwiftSchemer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1C7FFC6C197CEA9900863982;
+			productRefGroup = 1C7FFC76197CEA9900863982 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1C7FFC74197CEA9900863982 /* SwiftSchemer */,
+				1C7FFC89197CEA9900863982 /* SwiftSchemerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1C7FFC73197CEA9900863982 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C7FFC82197CEA9900863982 /* Images.xcassets in Resources */,
+				1C10CABE19849F68004E8018 /* SchemeEditorColors.xib in Resources */,
+				1C10CABD19849F68004E8018 /* SchemeDocument.xib in Resources */,
+				1C10CABC19849F68004E8018 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C7FFC88197CEA9900863982 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1C7FFC71197CEA9900863982 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C851317198307DE002670DB /* QAppDelegate.swift in Sources */,
+				1C8513051982DA5B002670DB /* QAlphaColorWell.swift in Sources */,
+				1C8513131982E5CC002670DB /* Aux.swift in Sources */,
+				1C32B05519832AC000A949A0 /* QRuleTableController.swift in Sources */,
+				1C8D03BC19838C07007D059B /* QControlBinding.swift in Sources */,
+				1C8513111982E5C2002670DB /* NSColor+QHexColor.swift in Sources */,
+				1C8513081982E3F5002670DB /* QSchemeEditorColorController.swift in Sources */,
+				1C7FFC7D197CEA9900863982 /* QSchemeDocument.swift in Sources */,
+				1C8D03BE198481B6007D059B /* QRuleTableSource.swift in Sources */,
+				1C32B05919832DE800A949A0 /* QSelectorTableSource.swift in Sources */,
+				1C32B05719832ACD00A949A0 /* QSelectorTableController.swift in Sources */,
+				1C7FFC7B197CEA9900863982 /* main.swift in Sources */,
+				1C8513151982F062002670DB /* NSView+Replacement.swift in Sources */,
+				1C85130F1982E59A002670DB /* QScheme.swift in Sources */,
+				1C85130E1982E59A002670DB /* QSchemeRule.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C7FFC86197CEA9900863982 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C7FFC91197CEA9900863982 /* SwiftSchemerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1C7FFC8C197CEA9900863982 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1C7FFC74197CEA9900863982 /* SwiftSchemer */;
+			targetProxy = 1C7FFC8B197CEA9900863982 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1C10CAB619849F68004E8018 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1C10CAB719849F68004E8018 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		1C10CAB819849F68004E8018 /* SchemeDocument.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1C10CAB919849F68004E8018 /* Base */,
+			);
+			name = SchemeDocument.xib;
+			sourceTree = "<group>";
+		};
+		1C10CABA19849F68004E8018 /* SchemeEditorColors.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1C10CABB19849F68004E8018 /* Base */,
+			);
+			name = SchemeEditorColors.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1C7FFC92197CEA9900863982 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1C7FFC93197CEA9900863982 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		1C7FFC95197CEA9900863982 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					../Projects/SnowKit/bin/Debug,
+				);
+				INFOPLIST_FILE = SwiftSchemer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftSchemer/SwiftSchemer-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1C7FFC96197CEA9900863982 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					../Projects/SnowKit/bin/Debug,
+				);
+				INFOPLIST_FILE = SwiftSchemer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftSchemer/SwiftSchemer-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		1C7FFC98197CEA9900863982 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SwiftSchemer.app/Contents/MacOS/SwiftSchemer";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SwiftSchemerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		1C7FFC99197CEA9900863982 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SwiftSchemer.app/Contents/MacOS/SwiftSchemer";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SwiftSchemerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1C7FFC70197CEA9900863982 /* Build configuration list for PBXProject "SwiftSchemer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C7FFC92197CEA9900863982 /* Debug */,
+				1C7FFC93197CEA9900863982 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1C7FFC94197CEA9900863982 /* Build configuration list for PBXNativeTarget "SwiftSchemer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C7FFC95197CEA9900863982 /* Debug */,
+				1C7FFC96197CEA9900863982 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1C7FFC97197CEA9900863982 /* Build configuration list for PBXNativeTarget "SwiftSchemerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C7FFC98197CEA9900863982 /* Debug */,
+				1C7FFC99197CEA9900863982 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1C7FFC6D197CEA9900863982 /* Project object */;
+}

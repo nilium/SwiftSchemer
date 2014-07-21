@@ -1,0 +1,25 @@
+# Build results
+*.o
+*.a
+*.framework/
+
+# Xcode
+build/
+DerivedData/
+xcuserdata/
+bin/
+
+.DS_Store
+.Trashes
+*.swp
+*~.nib
+
+*.xcworkspace
+*.pbxuser
+*.mode?v3
+*.perspectivev3
+
+!default.pbxuser
+!default.mode?v3
+!default.perspectivev3
+!default.xcworkspace
