@@ -27,7 +27,7 @@ private func getBaseRuleDictionary(settings: NSArray) -> QPropertyList? {
         return nil
     }
 
-    return settings[index] as QPropertyList?
+    return settings[index] as? QPropertyList
 }
 
 

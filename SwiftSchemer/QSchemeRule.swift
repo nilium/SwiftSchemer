@@ -100,7 +100,7 @@ class QSchemeRule: NSObject {
 
         name = propertyList["name"]? as? NSString ~| name
 
-        self.flags = convertRuleFlags(propertyList["fontStyle"]? as NSString?)
+        self.flags = convertRuleFlags(propertyList["fontStyle"] as? NSString)
     }
 
 
