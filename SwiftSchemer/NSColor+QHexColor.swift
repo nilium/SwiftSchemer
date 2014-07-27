@@ -87,7 +87,7 @@ extension NSColor {
 
         colorInt = UInt(colorInt32)
         var a: CGFloat = 1.0
-        if countElements(hexString) > 6 {
+        if countElements(hexString) > 7 {
             a = octetToFloat(colorInt)
             colorInt >>= 8
         }
