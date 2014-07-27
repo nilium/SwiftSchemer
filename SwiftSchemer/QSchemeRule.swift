@@ -99,7 +99,7 @@ class QSchemeRule: NSObject {
     init(propertyList: QPropertyList) {
         super.init()
 
-        if let settings = (propertyList["settings"] as? NSDictionary) as? QPropertyList {
+        if let settings = propertyList["settings"] as? NSDictionary {
             assignColorFromPList(&foreground, settings, "foreground")
             assignColorFromPList(&background, settings, "background")
         }
@@ -108,7 +108,7 @@ class QSchemeRule: NSObject {
 
         self.flags = convertRuleFlags(propertyList["fontStyle"] as? NSString)
         if let scope: String = propertyList["scope"] as? NSString {
-            let splitScope = split(scope as String, {$0 == ","}, allowEmptySlices: false)
+            let splitScope = split(scope, {$0 == ","}, allowEmptySlices: false)
             selectors = splitScope.map { $0.stringByTrimmingCharactersInSet(whitespaceSet) }
         }
     }
