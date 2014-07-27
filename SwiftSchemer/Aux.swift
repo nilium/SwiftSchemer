@@ -85,3 +85,19 @@ func indexOf<S: Sequence, T, L where T == S.GeneratorType.Element, L: LogicValue
     }
     return nil
 }
+
+
+extension Array {
+
+    func withoutIndices(indices: NSIndexSet) -> [Element] {
+        var copyOfSelf: [Element] = self
+
+        indices.enumerateIndexesWithOptions(.Reverse) { index, _ in
+            copyOfSelf.removeAtIndex(index)
+            return
+        }
+
+        return copyOfSelf
+    }
+
+}
