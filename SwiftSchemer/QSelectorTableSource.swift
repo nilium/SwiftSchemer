@@ -52,3 +52,39 @@ class QSelectorTableSource: NSObject, NSTableViewDataSource {
     }
 
 }
+
+
+// MARK: Drag & Drop
+
+let kQSelectorPasteType = "net.spifftastic.SwiftSchemer.SelectorPaste"
+
+
+extension QSelectorTableSource {
+
+    func tableView(
+        tableView: NSTableView!,
+        acceptDrop info: NSDraggingInfo!,
+        row: Int,
+        dropOperation: NSTableViewDropOperation
+        ) -> Bool
+    {
+        return false
+    }
+
+
+    func tableView(
+        tableView: NSTableView!,
+        validateDrop info: NSDraggingInfo!,
+        proposedRow row: Int,
+        proposedDropOperation dropOperation: NSTableViewDropOperation
+        ) -> NSDragOperation
+    {
+        return .None
+    }
+
+
+    func tableView(tableView: NSTableView!, pasteboardWriterForRow row: Int) -> NSPasteboardWriting! {
+        return nil
+    }
+
+}
