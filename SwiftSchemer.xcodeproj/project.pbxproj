@@ -29,6 +29,7 @@
 		1C851317198307DE002670DB /* QAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C851316198307DE002670DB /* QAppDelegate.swift */; };
 		1C8D03BC19838C07007D059B /* QControlBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8D03BB19838C07007D059B /* QControlBinding.swift */; };
 		1C8D03BE198481B6007D059B /* QRuleTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8D03BD198481B6007D059B /* QRuleTableSource.swift */; };
+		1CDC44D41985A8870092BB3F /* RawMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDC44D31985A8870092BB3F /* RawMask.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		1C851316198307DE002670DB /* QAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QAppDelegate.swift; sourceTree = "<group>"; };
 		1C8D03BB19838C07007D059B /* QControlBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QControlBinding.swift; sourceTree = "<group>"; };
 		1C8D03BD198481B6007D059B /* QRuleTableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRuleTableSource.swift; sourceTree = "<group>"; };
+		1CDC44D31985A8870092BB3F /* RawMask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawMask.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				1C8513101982E5C2002670DB /* NSColor+QHexColor.swift */,
 				1C8513141982F062002670DB /* NSView+Replacement.swift */,
 				1C8D03BB19838C07007D059B /* QControlBinding.swift */,
+				1CDC44D31985A8870092BB3F /* RawMask.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				1C7FFC7B197CEA9900863982 /* main.swift in Sources */,
 				1C8513151982F062002670DB /* NSView+Replacement.swift in Sources */,
 				1C85130F1982E59A002670DB /* QScheme.swift in Sources */,
+				1CDC44D41985A8870092BB3F /* RawMask.swift in Sources */,
 				1C85130E1982E59A002670DB /* QSchemeRule.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
