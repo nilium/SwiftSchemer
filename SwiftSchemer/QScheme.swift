@@ -89,7 +89,7 @@ class QScheme: NSObject {
         assert(settingsAry?, "Cannot initialize scheme without valid property list")
 
         let baseRules = getBaseRuleDictionary(settingsAry!)!
-        let rules = getSyntaxRuleDictionaries(settingsAry!)
+        let plistRules = getSyntaxRuleDictionaries(settingsAry!)
 
         if let uuidString = baseRules["uuid"]? as? NSString {
             uuid = NSUUID(UUIDString: uuidString)
@@ -113,6 +113,10 @@ class QScheme: NSObject {
         assignColorFromPList(&selectionFill, baseRules, "selection")
         assignColorFromPList(&selectionBorder, baseRules, "selectionBorder")
         assignColorFromPList(&inactiveSelectionFill, baseRules, "inactiveSelection")
+
+        for plistRule in plistRules {
+            rules += QSchemeRule(propertyList: plistRule)
+        }
     }
 
 
