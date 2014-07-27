@@ -97,8 +97,9 @@ class QSchemeDocument: NSDocument {
 
 
     override func readFromURL(url: NSURL!, ofType typeName: String!, error outError: NSErrorPointer) -> Bool {
-        outError.memory = NSError.errorWithDomain(NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
-        return false
+        let plist: QPropertyList = NSDictionary(contentsOfURL: url)
+        scheme = QScheme(propertyList: plist)
+        return true
     }
 
 
