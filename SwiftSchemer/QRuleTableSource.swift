@@ -28,6 +28,9 @@ class QRuleTableSource: NSObject, NSTableViewDataSource {
 }
 
 
+
+// MARK: Drag & Drop
+
 let kQRulePasteType = "net.spifftastic.Schemer.RulePaste"
 
 
