@@ -97,22 +97,24 @@ class QScheme: NSObject {
             uuid = NSUUID.UUID()
         }
 
-        assignColorFromPList(&viewportBackground, baseRules, "background")
-        assignColorFromPList(&viewportForeground, baseRules, "foreground")
+        if let settings = (baseRules["settings"] as? NSDictionary) as? QPropertyList {
+            assignColorFromPList(&viewportBackground, settings, "background")
+            assignColorFromPList(&viewportForeground, settings, "foreground")
 
-        assignColorFromPList(&gutterBackground, baseRules, "gutterBackground")
-        assignColorFromPList(&gutterForeground, baseRules, "gutterForeground")
+            assignColorFromPList(&gutterBackground, settings, "gutter")
+            assignColorFromPList(&gutterForeground, settings, "gutterForeground")
 
-        assignColorFromPList(&findHighlightBackground, baseRules, "findHighlight")
-        assignColorFromPList(&findHighlightForeground, baseRules, "findHighlightForeground")
+            assignColorFromPList(&findHighlightBackground, settings, "findHighlight")
+            assignColorFromPList(&findHighlightForeground, settings, "findHighlightForeground")
 
-        assignColorFromPList(&invisiblesForeground, baseRules, "invisibles")
-        assignColorFromPList(&lineHighlight, baseRules, "lineHighlight")
-        assignColorFromPList(&caretForeground, baseRules, "caret")
+            assignColorFromPList(&invisiblesForeground, settings, "invisibles")
+            assignColorFromPList(&lineHighlight, settings, "lineHighlight")
+            assignColorFromPList(&caretForeground, settings, "caret")
 
-        assignColorFromPList(&selectionFill, baseRules, "selection")
-        assignColorFromPList(&selectionBorder, baseRules, "selectionBorder")
-        assignColorFromPList(&inactiveSelectionFill, baseRules, "inactiveSelection")
+            assignColorFromPList(&selectionFill, settings, "selection")
+            assignColorFromPList(&selectionBorder, settings, "selectionBorder")
+            assignColorFromPList(&inactiveSelectionFill, settings, "inactiveSelection")
+        }
 
         for plistRule in plistRules {
             rules += QSchemeRule(propertyList: plistRule)
