@@ -128,16 +128,22 @@ class QSchemeRule: NSObject {
 
 
     func toPropertyList() -> QPropertyList {
-        let flagsString = " ".join(flags.map { $0.name })
-
         var plist: QPropertyList = [
             "name": name,
-            "selectors": "",
-            "flags": flagsString,
+            "scope": ", ".join(selectors)
         ]
 
-        putColorIfVisible(&plist, "foreground", foreground)
-        putColorIfVisible(&plist, "background", foreground)
+        var settings = QPropertyList()
+
+        putColorIfVisible(&settings, "foreground", foreground)
+        putColorIfVisible(&settings, "background", background)
+
+        if !flags.isEmpty {
+            let flagsString = " ".join(flags.map { $0.name })
+            settings["fontStyle"] = flagsString
+        }
+
+        plist["settings"] = settings
 
         return plist
     }
