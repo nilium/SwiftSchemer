@@ -64,15 +64,6 @@ class QSchemeDocument: NSDocument {
 
     init() {
         super.init()
-
-        // TODO: Remove dummy data
-        let rule = QSchemeRule()
-        rule.selectors = ["foo.bar.baz", "wimbleton", "entity.name.function"]
-        scheme.rules += rule
-        scheme.rules += QSchemeRule()
-        scheme.rules += QSchemeRule()
-        scheme.rules += QSchemeRule()
-        scheme.rules += QSchemeRule()
     }
 
 
