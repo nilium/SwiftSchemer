@@ -25,7 +25,7 @@ extension NSColor {
             return []
         }
         var result = [CGFloat](count: count, repeatedValue: 0.0)
-        withUnsafePointer(&result[0]) { self.getComponents($0) }
+        self.getComponents(&result)
         return result
     }
 
@@ -81,7 +81,7 @@ extension NSColor {
             return nil
         }
 
-        if !(withUnsafePointer(&colorInt32) { scanner.scanHexInt($0) }) {
+        if !scanner.scanHexInt(&colorInt32) {
             return nil
         }
 
