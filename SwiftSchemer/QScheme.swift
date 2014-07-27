@@ -83,7 +83,7 @@ class QScheme: NSObject {
     }
 
 
-    init(propertyList: NSDictionary) {
+    init(propertyList: QPropertyList) {
         let settingsAry = propertyList["settings"]? as? NSArray
 
         assert(settingsAry?, "Cannot initialize scheme without valid property list")
