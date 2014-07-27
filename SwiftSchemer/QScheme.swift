@@ -160,8 +160,8 @@ class QScheme: NSObject {
         putColorIfVisible(&settings, "background",
             viewportBackground.colorWithAlphaComponent(1.0))
 
+        putColorIfVisible(&settings, "gutter", gutterBackground)
         putColorIfVisible(&settings, "gutterForeground", gutterForeground)
-        putColorIfVisible(&settings, "gutterBackground", gutterBackground)
 
         putColorIfVisible(&settings, "findHighlightForeground", findHighlightForeground)
         putColorIfVisible(&settings, "findHighlight", findHighlightBackground)
