@@ -88,6 +88,11 @@ class QSchemeDocument: NSDocument {
     }
 
 
+    override class func usesUbiquitousStorage() -> Bool {
+        return false
+    }
+
+
     override var windowNibName: String {
         return "SchemeDocument"
     }
