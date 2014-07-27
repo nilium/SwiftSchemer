@@ -51,6 +51,9 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
         view.doubleAction = "doubleClickedTableView:"
         view.setDelegate(self)
         view.setDataSource(source)
+
+        view.registerForDraggedTypes([kQRulePasteType])
+        view.setDraggingSourceOperationMask(.Move | .Copy, forLocal: true)
     }
 
 
