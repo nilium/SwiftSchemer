@@ -35,7 +35,7 @@ private func getSyntaxRuleDictionaries(settings: NSArray) -> [QPropertyList] {
     let pred = NSPredicate(block: { (obj, _) -> Bool in
             obj as? QPropertyList && !isBaseRulesDictionary(obj)
         })
-    return settings.filteredArrayUsingPredicate(pred).map({ $0 as QPropertyList })
+    return settings.filteredArrayUsingPredicate(pred).filter { $0 is QPropertyList }.map { $0 as QPropertyList }
 }
 
 
