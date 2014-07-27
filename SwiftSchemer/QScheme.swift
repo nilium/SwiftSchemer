@@ -174,11 +174,11 @@ class QScheme: NSObject {
         putColorIfVisible(&settings, "selectionBorder", selectionBorder)
         putColorIfVisible(&settings, "inactiveSelection", inactiveSelectionFill)
 
-        baseRules.append(settings)
+        baseRules += ["settings": settings]
+        baseRules += rules.map { $0.toPropertyList() }
 
-        for rule in rules {
-            baseRules.append(rule.toPropertyList())
-        }
+        plist["uuid"] = uuid.UUIDString
+        plist["settings"] = baseRules
 
         return plist
     }
