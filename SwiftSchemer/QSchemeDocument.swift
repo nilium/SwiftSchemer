@@ -8,6 +8,9 @@ import Cocoa
 import SnowKit
 
 
+internal let kQCannotWritePListException = "QCannotWritePropertyList"
+
+
 class QSchemeDocument: NSDocument {
 
     @IBOutlet weak var colorControllerView: NSView!
@@ -91,8 +94,20 @@ class QSchemeDocument: NSDocument {
 
 
     override func writeToURL(url: NSURL!, ofType typeName: String!, error outError: NSErrorPointer) -> Bool {
-        outError.memory = NSError.errorWithDomain(NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
-        return false
+        var plist = scheme.toPropertyList()
+        var name = url.lastPathComponent.stringByDeletingPathExtension
+        plist["name"] = name
+
+        let nsPList = plist.bridgeToObjectiveC()
+        if !nsPList.writeToURL(url, atomically: false) {
+            outError.memory = NSError(domain: kQCannotWritePListException, code: 3, userInfo: [
+                "url": url,
+                "type": typeName
+                ])
+            return false
+        }
+
+        return true
     }
 
 
