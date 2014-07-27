@@ -90,28 +90,13 @@ class QSchemeDocument: NSDocument {
     }
 
 
-    override func dataOfType(typeName: String?, error outError: NSErrorPointer) -> NSData? {
-        // TODO: Handle tmTheme saving (use URL-based read/save)
-        // Insert code here to write your document to data of the specified type.
-        // If outError != nil, ensure that you create and set an appropriate error when
-        // returning nil.
-        // You can also choose to override fileWrapperOfType:error:,
-        // writeToURL:ofType:error:, or
-        // writeToURL:ofType:forSaveOperation:originalContentsURL:error: instead.
+    override func writeToURL(url: NSURL!, ofType typeName: String!, error outError: NSErrorPointer) -> Bool {
         outError.memory = NSError.errorWithDomain(NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
-        return nil
+        return false
     }
 
 
-    override func readFromData(data: NSData?, ofType typeName: String?, error outError: NSErrorPointer) -> Bool {
-        // TODO: Handle tmTheme loading (use URL-based read/save)
-        // Insert code here to read your document from the given data of the
-        // specified type. If outError != nil, ensure that you create and set
-        // an appropriate error when returning false.
-        // You can also choose to override readFromFileWrapper:ofType:error:
-        // or readFromURL:ofType:error: instead.
-        // If you override either of these, you should also override
-        // -isEntireFileLoaded to return NO if the contents are lazily loaded.
+    override func readFromURL(url: NSURL!, ofType typeName: String!, error outError: NSErrorPointer) -> Bool {
         outError.memory = NSError.errorWithDomain(NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
         return false
     }
