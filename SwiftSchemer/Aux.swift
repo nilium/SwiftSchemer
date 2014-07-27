@@ -37,7 +37,7 @@ func whiteColor(white: CGFloat = 1.0, alpha: CGFloat = 1.0) -> NSColor {
 
 /// Assigns a hex color from plist[key], if defined. Otherwise, does nothing.
 func assignColorFromPList(inout color: NSColor, plist: QPropertyList, key: String) {
-    if let colorString = plist[key]? as? NSString {
+    if let colorString = plist[key] as? NSString {
         color = NSColor.fromHexString(colorString) ~| color
     }
 }

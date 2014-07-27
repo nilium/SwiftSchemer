@@ -84,14 +84,14 @@ class QScheme: NSObject {
 
 
     init(propertyList: QPropertyList) {
-        let settingsAry = propertyList["settings"]? as? NSArray
+        let settingsAry = propertyList["settings"] as? NSArray
 
         assert(settingsAry?, "Cannot initialize scheme without valid property list")
 
         let baseRules = getBaseRuleDictionary(settingsAry!)!
         let plistRules = getSyntaxRuleDictionaries(settingsAry!)
 
-        if let uuidString = baseRules["uuid"]? as? NSString {
+        if let uuidString = baseRules["uuid"] as? NSString {
             uuid = NSUUID(UUIDString: uuidString)
         } else {
             uuid = NSUUID.UUID()

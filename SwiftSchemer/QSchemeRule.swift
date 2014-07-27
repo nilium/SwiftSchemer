@@ -104,10 +104,10 @@ class QSchemeRule: NSObject {
             assignColorFromPList(&background, settings, "background")
         }
 
-        name = propertyList["name"]? as? NSString ~| name
+        name = propertyList["name"] as? NSString ~| name
 
         self.flags = convertRuleFlags(propertyList["fontStyle"] as? NSString)
-        if let scope: String = propertyList["scope"]? as? NSString {
+        if let scope: String = propertyList["scope"] as? NSString {
             let splitScope = split(scope as String, {$0 == ","}, allowEmptySlices: false)
             selectors = splitScope.map { $0.stringByTrimmingCharactersInSet(whitespaceSet) }
         }
