@@ -18,7 +18,7 @@ class QSelectorTableController: NSObject, NSTableViewDelegate {
 
     var selectedRule: QSchemeRule? = nil {
         didSet {
-            dataSource.source = selectedRule
+            dataSource.rule = selectedRule
             selectorTable?.reloadData()
             addButtonEnabled = selectedRule != nil
         }
