@@ -24,7 +24,7 @@ func octetToFloat(octet: UInt) -> CGFloat {
 /// The float should be in the range of 0.0 ... 1.0 and will be scaled to
 /// 0 ... 255.
 func floatToOctet(flt: CGFloat) -> UInt {
-    return UInt(min(max(flt * 255.0, 255.0), 0.0)) & 0xFF
+    return UInt(min(max(flt * 255.0, 0.0), 255.0)) & 0xFF
 }
 
 
