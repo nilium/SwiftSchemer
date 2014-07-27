@@ -8,6 +8,10 @@ import Cocoa
 import SnowKit
 
 
+let kQPropertyListSettingsKey = "settings"
+private let whitespaceSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()
+
+
 enum QRuleFlag {
 
     case Bold
@@ -95,12 +99,18 @@ class QSchemeRule: NSObject {
     init(propertyList: QPropertyList) {
         super.init()
 
-        assignColorFromPList(&foreground, propertyList, "foreground")
-        assignColorFromPList(&background, propertyList, "background")
+        if let settings = (propertyList["settings"] as? NSDictionary) as? QPropertyList {
+            assignColorFromPList(&foreground, settings, "foreground")
+            assignColorFromPList(&background, settings, "background")
+        }
 
         name = propertyList["name"]? as? NSString ~| name
 
         self.flags = convertRuleFlags(propertyList["fontStyle"] as? NSString)
+        if let scope: String = propertyList["scope"]? as? NSString {
+            let splitScope = split(scope as String, {$0 == ","}, allowEmptySlices: false)
+            selectors = splitScope.map { $0.stringByTrimmingCharactersInSet(whitespaceSet) }
+        }
     }
 
 
