@@ -112,7 +112,7 @@ public func bindAction<T: QControlBindingProtocol>(control: T, block: (T) -> Voi
 /// The object is not discarded if it is not a QControlBinding instance.
 public func unbindAction<T: QControlBindingProtocol>(control: T) -> Bool {
     var hadObject = false
-    if let obj = objc_getAssociatedObject(control, kQActionBindingPtr) as? QControlBinding {
+    if let obj: AnyObject? = objc_getAssociatedObject(control, kQActionBindingPtr) {
         hadObject = true
         if control.target === obj {
             control.target = nil
