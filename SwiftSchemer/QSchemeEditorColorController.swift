@@ -88,37 +88,37 @@ class QSchemeEditorColorController: NSViewController {
         switch sender {
         // Viewport colors
         case viewBackWell:
-            scheme.viewportBackground = viewBackWell.color
+            scheme.viewportBackground = sender.color
         case viewForeWell:
-            scheme.viewportForeground = viewForeWell.color
+            scheme.viewportForeground = sender.color
 
         // Gutter colors
         case gutterBackWell:
-            scheme.gutterBackground = gutterBackWell.color
+            scheme.gutterBackground = sender.color
         case gutterForeWell:
-            scheme.gutterForeground = gutterForeWell.color
+            scheme.gutterForeground = sender.color
 
         // Find highlights
         case findBackWell:
-            scheme.findHighlightBackground = findBackWell.color
+            scheme.findHighlightBackground = sender.color
         case findForeWell:
-            scheme.findHighlightForeground = findForeWell.color
+            scheme.findHighlightForeground = sender.color
 
         // Editor group
         case caretWell:
-            scheme.caretForeground = caretWell.color
+            scheme.caretForeground = sender.color
         case lineHLWell:
-            scheme.lineHighlight = lineHLWell.color
+            scheme.lineHighlight = sender.color
         case invisiblesWell:
-            scheme.invisiblesForeground = invisiblesWell.color
+            scheme.invisiblesForeground = sender.color
 
         // Selection colors
         case selectionActiveWell:
-            scheme.selectionFill = selectionActiveWell.color
+            scheme.selectionFill = sender.color
         case selectionInactiveWell:
-            scheme.inactiveSelectionFill = selectionInactiveWell.color
+            scheme.inactiveSelectionFill = sender.color
         case selectionBorderWell:
-            scheme.selectionBorder = selectionBorderWell.color
+            scheme.selectionBorder = sender.color
 
         default:
             NSLog("Received unrecognized color well as sender: \(sender)")
