@@ -17,11 +17,20 @@ class QSelectorTableController: NSObject, NSTableViewDelegate {
     /// selectorTable data source
     let dataSource = QSelectorTableSource()
 
+    var selectorsObserver = QKeyValueObserver.None
     var selectedRule: QSchemeRule? = nil {
         didSet {
+            selectorsObserver.disconnect()
             dataSource.rule = selectedRule
             selectorTable?.reloadData()
             addButtonEnabled = selectedRule != nil
+
+            if let rule = selectedRule {
+                selectorsObserver = observeKeyPath("selectors", ofObject: rule, options: []) { [weak self] _, _, _ in
+                    self?.selectorTable?.reloadData()
+                    return // <-- you might think this `return` is extraneous, but it won't compile without it
+                }
+            }
         }
     }
 
@@ -37,6 +46,11 @@ class QSelectorTableController: NSObject, NSTableViewDelegate {
             addButtonEnabled = selectedRule != nil
             removeButtonEnabled = (selectorTable?.selectedRowIndexes.count ~| 0) > 0
         }
+    }
+
+
+    deinit {
+        selectorsObserver.disconnect()
     }
 
 
