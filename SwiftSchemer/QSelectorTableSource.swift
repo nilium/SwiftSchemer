@@ -59,6 +59,11 @@ class QSelectorTableSource: NSObject, NSTableViewDataSource {
 let kQSelectorPasteType = "net.spifftastic.SwiftSchemer.SelectorPaste"
 
 
+internal func pasteItemToSelectorPropertyList(obj: AnyObject) -> NSDictionary {
+    return (obj as NSPasteboardItem).propertyListForType(kQSelectorPasteType) as NSDictionary
+}
+
+
 extension QSelectorTableSource {
 
     func tableView(
@@ -68,7 +73,45 @@ extension QSelectorTableSource {
         dropOperation: NSTableViewDropOperation
         ) -> Bool
     {
-        return false
+        if dropOperation == .On || !rule {
+            return false
+        }
+
+        var newRow = row
+        let mask = info.draggingSourceOperationMask()
+        let source: AnyObject? = info.draggingSource()
+        let pasteboard = info.draggingPasteboard()
+
+        let items = pasteboard.readObjectsForClasses([NSPasteboardItem.self],
+            options: [NSPasteboardURLReadingContentsConformToTypesKey: [kQSelectorPasteType]])
+            .map(pasteItemToSelectorPropertyList)
+
+        let indices = NSMutableIndexSet()
+
+        if mask &== .Move && source === tableView {
+            for item in items {
+                let itemRow: Int = item["row"] as NSNumber
+
+                indices.addIndex(itemRow)
+                if itemRow < row {
+                    newRow -= 1
+                }
+            }
+        }
+
+        var newSelectors = rule!.selectors.withoutIndices(indices)
+        let pastedSelectors: [String] = items.map { $0["selector"] as NSString }
+
+        if newRow >= newSelectors.count {
+            newSelectors += pastedSelectors
+        } else {
+            newSelectors.replaceRange(newRow ..< newRow, with: pastedSelectors)
+        }
+
+        rule!.selectors = newSelectors
+        tableView.reloadData()
+
+        return true
     }
 
 
