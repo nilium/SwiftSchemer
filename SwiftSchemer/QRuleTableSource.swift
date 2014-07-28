@@ -62,6 +62,10 @@ extension QRuleTableSource {
             options: [NSPasteboardURLReadingContentsConformToTypesKey: [kQRulePasteType]])
             .map(pasteItemToRulePropertyList)
 
+        if items.isEmpty {
+            return false
+        }
+
         let indicesToRemove = NSMutableIndexSet()
 
         if mask &== .Move && source === tableView {
