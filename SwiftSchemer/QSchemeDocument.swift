@@ -8,6 +8,7 @@ import Cocoa
 import SnowKit
 
 
+internal let QSchemeChangedNotification = "QSchemeChangedNotification"
 internal let kQCannotWritePListException = "QCannotWritePropertyList"
 
 
