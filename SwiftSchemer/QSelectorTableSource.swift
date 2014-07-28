@@ -13,6 +13,7 @@ let kQSelectorDataColumn = "selector"
 
 class QSelectorTableSource: NSObject, NSTableViewDataSource {
 
+    var scheme: QScheme? = nil
     var rule: QSchemeRule? = nil
 
 

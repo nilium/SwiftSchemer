@@ -17,6 +17,12 @@ class QSelectorTableController: NSObject, NSTableViewDelegate {
     /// selectorTable data source
     let dataSource = QSelectorTableSource()
 
+    var scheme: QScheme? = nil {
+        didSet {
+            dataSource.scheme = scheme
+        }
+    }
+
     var selectorsObserver = QKeyValueObserver.None
     var selectedRule: QSchemeRule? = nil {
         didSet (previous) {
