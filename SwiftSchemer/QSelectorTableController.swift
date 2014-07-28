@@ -19,11 +19,15 @@ class QSelectorTableController: NSObject, NSTableViewDelegate {
 
     var selectorsObserver = QKeyValueObserver.None
     var selectedRule: QSchemeRule? = nil {
-        didSet {
+        didSet (previous) {
             selectorsObserver.disconnect()
             dataSource.rule = selectedRule
             selectorTable?.reloadData()
             addButtonEnabled = selectedRule != nil
+
+            if previous !== selectedRule {
+                selectorTable?.deselectAll(self)
+            }
 
             if let rule = selectedRule {
                 selectorsObserver = observeKeyPath("selectors", ofObject: rule, options: []) { [weak self] _, _, _ in
