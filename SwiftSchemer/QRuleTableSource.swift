@@ -34,14 +34,6 @@ class QRuleTableSource: NSObject, NSTableViewDataSource {
 let kQRulePasteType = "net.spifftastic.Schemer.RulePaste"
 
 
-private func objectIsRulePaste(obj: AnyObject!) -> Bool {
-    if let pasteItem = obj as? NSPasteboardItem {
-        return pasteItem.types.bridgeToObjectiveC().containsObject(kQRulePasteType)
-    }
-    return false
-}
-
-
 private func pasteItemToRulePropertyList(obj: AnyObject!) -> QPropertyList {
     return (obj as NSPasteboardItem).propertyListForType(kQRulePasteType) as NSDictionary
 }
