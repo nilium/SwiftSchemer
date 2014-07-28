@@ -84,6 +84,15 @@ extension QSelectorTableSource {
 
 
     func tableView(tableView: NSTableView!, pasteboardWriterForRow row: Int) -> NSPasteboardWriting! {
+        if let rule = self.rule {
+            let item = NSPasteboardItem()
+            let plist: NSDictionary = [
+                "selector": rule.selectors[row].bridgeToObjectiveC(),
+                "row": row.bridgeToObjectiveC()
+            ]
+            item.setPropertyList(plist, forType: kQSelectorPasteType)
+            return item
+        }
         return nil
     }
 
