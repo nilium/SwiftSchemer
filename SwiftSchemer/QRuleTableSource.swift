@@ -66,8 +66,8 @@ extension QRuleTableSource {
         let source: AnyObject? = info.draggingSource()
         let pasteboard = info.draggingPasteboard()
 
-        let items = pasteboard.readObjectsForClasses([NSPasteboardItem.self], options: nil)
-            .filter(objectIsRulePaste)
+        let items = pasteboard.readObjectsForClasses([NSPasteboardItem.self],
+            options: [NSPasteboardURLReadingContentsConformToTypesKey: [kQRulePasteType]])
             .map(pasteItemToRulePropertyList)
 
         let indices = NSMutableIndexSet()
