@@ -35,6 +35,7 @@ class QSchemeDocument: NSDocument {
             }
 
             if let con = selectorController? {
+                con.scheme = scheme
                 con.selectedRule = nil
             }
         }
@@ -90,6 +91,8 @@ class QSchemeDocument: NSDocument {
         loadColorControllerForScheme(scheme)
 
         ruleController.scheme = scheme
+        selectorController.scheme = scheme
+        selectorController.selectedRule = nil
     }
 
 
