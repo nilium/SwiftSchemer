@@ -79,6 +79,25 @@ extension QSelectorTableSource {
         proposedDropOperation dropOperation: NSTableViewDropOperation
         ) -> NSDragOperation
     {
+        if !rule {
+            return .None
+        }
+
+        if dropOperation != .Above {
+            tableView.setDropRow(row, dropOperation: .Above)
+        }
+
+        if row >= 0 && row <= rule!.selectors.count {
+            let source: AnyObject? = info.draggingSource()
+            let mask = info.draggingSourceOperationMask()
+
+            if mask == .Copy || (source !== tableView && mask &== .Copy) {
+                return .Copy
+            } else if mask &== .Move && source === tableView {
+                return .Move
+            }
+        }
+
         return .None
     }
 
