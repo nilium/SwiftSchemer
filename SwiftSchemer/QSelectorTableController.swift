@@ -49,6 +49,9 @@ class QSelectorTableController: NSObject, NSTableViewDelegate {
         table.setDelegate(self)
         table.setDataSource(dataSource)
         table.reloadData()
+
+        table.registerForDraggedTypes([kQSelectorPasteType])
+        table.setDraggingSourceOperationMask(.Move | .Copy, forLocal: true)
     }
 
 
