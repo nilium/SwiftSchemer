@@ -34,7 +34,7 @@ class QRuleTableSource: NSObject, NSTableViewDataSource {
 let kQRulePasteType = "net.spifftastic.Schemer.RulePaste"
 
 
-private func pasteItemToRulePropertyList(obj: AnyObject!) -> QPropertyList {
+internal func pasteItemToRulePropertyList(obj: AnyObject!) -> QPropertyList {
     return (obj as NSPasteboardItem).propertyListForType(kQRulePasteType) as NSDictionary
 }
 
