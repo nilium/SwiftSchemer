@@ -121,7 +121,7 @@ class QSchemeEditorColorController: NSViewController {
             scheme.selectionBorder = selectionBorderWell.color
 
         default:
-            debugPrint("Received unrecognized color well as sender: \(sender)")
+            NSLog("Received unrecognized color well as sender: \(sender)")
         }
     }
 

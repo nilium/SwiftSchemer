@@ -145,7 +145,7 @@ extension QRuleTableSource {
         case kQSelectorPasteType:
             return acceptSelectorDrop(tableView, info: info, row: row, dropOperation: dropOperation)
         case let type:
-            debugPrint("Unrecognized paste type: \(type)")
+            NSLog("Unrecognized paste type: \(type)")
             return false
         }
     }
@@ -195,7 +195,7 @@ extension QRuleTableSource {
             }
 
         case let type:
-            debugPrint("Unrecognized paste type \(type)")
+            NSLog("Unrecognized paste type \(type)")
             return .None
         }
 

@@ -129,7 +129,7 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
             seg.setSelected(contains(rule.flags, { $0.isUnderline }), forSegment: 0)
 
         case let unknownIdent:
-            debugPrint("Unrecognized rule table column specified: \(unknownIdent)")
+            NSLog("Unrecognized rule table column specified: \(unknownIdent)")
         }
     }
 

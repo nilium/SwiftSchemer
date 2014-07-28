@@ -27,7 +27,7 @@ class QSelectorTableSource: NSObject, NSTableViewDataSource {
         case kQSelectorDataColumn:
             return rule?.selectors[row]
         case let unknownColumn:
-            debugPrint("Attempt to access row \(row) of undefined column '\(unknownColumn)' from selector data source; returning nil")
+            NSLog("Attempt to access row \(row) of undefined column '\(unknownColumn)' from selector data source; returning nil")
             return nil
         }
     }
@@ -35,7 +35,7 @@ class QSelectorTableSource: NSObject, NSTableViewDataSource {
 
     func tableView(tableView: NSTableView!, setObjectValue object: AnyObject!, forTableColumn tableColumn: NSTableColumn!, row: Int) {
         if !rule {
-            debugPrint("Attempt to set row \(row) of column \(tableColumn.identifier) to \(object) when rule is undefined")
+            NSLog("Attempt to set row \(row) of column \(tableColumn.identifier) to \(object) when rule is undefined")
             assert(false)
             return
         }
@@ -44,10 +44,10 @@ class QSelectorTableSource: NSObject, NSTableViewDataSource {
         case kQSelectorDataColumn where object is NSString:
             rule!.selectors[row] = object as NSString
         case kQSelectorDataColumn:
-            debugPrint("Attempt to write non-NSString value [\(object)] to selector at row \(row)")
+            NSLog("Attempt to write non-NSString value [\(object)] to selector at row \(row)")
             assert(false)
         case let unknownColumn:
-            debugPrint("Attempt to write object [\(object)] to row \(row) of undefined column '\(unknownColumn)' from selector data source")
+            NSLog("Attempt to write object [\(object)] to row \(row) of undefined column '\(unknownColumn)' from selector data source")
         }
     }
 
