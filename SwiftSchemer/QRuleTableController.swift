@@ -52,7 +52,7 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
         view.setDelegate(self)
         view.setDataSource(source)
 
-        view.registerForDraggedTypes([kQRulePasteType])
+        view.registerForDraggedTypes([kQRulePasteType, kQSelectorPasteType])
         view.setDraggingSourceOperationMask(.Move | .Copy, forLocal: true)
     }
 
