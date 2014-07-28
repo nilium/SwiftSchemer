@@ -16,8 +16,16 @@ class QSchemeDocument: NSDocument {
 
     @IBOutlet weak var colorControllerView: NSView!
     var editorColorController: QSchemeEditorColorController? = nil
+    var schemeChangedObserver = QNotificationObserver.None
     var scheme: QScheme = QScheme() {
         didSet {
+            schemeChangedObserver.disconnect()
+            schemeChangedObserver =
+                observeNotification(sentBy: scheme, named: QSchemeChangedNotification) { [weak self] _ in
+                    self?.updateChangeCount(.ChangeDone)
+                    return
+            }
+
             if let con = editorColorController {
                 con.scheme = scheme
             }
@@ -72,7 +80,8 @@ class QSchemeDocument: NSDocument {
 
 
     deinit {
-        disconnectObserver(&selectedRuleObserver)
+        selectedRuleObserver.disconnect()
+        schemeChangedObserver.disconnect()
     }
 
 
