@@ -90,6 +90,10 @@ func indexOf<S: Sequence, T, L where T == S.GeneratorType.Element, L: LogicValue
 extension Array {
 
     func withoutIndices(indices: NSIndexSet) -> [Element] {
+        if indices.count == 0 {
+            return self
+        }
+
         var copyOfSelf: [Element] = self
 
         indices.enumerateIndexesWithOptions(.Reverse) { index, _ in
