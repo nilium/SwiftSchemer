@@ -14,6 +14,6 @@ operator infix &== { associativity none precedence 130 }
 
 @infix func &== <T: RawRepresentable where T.RawType: UnsignedInteger>(lhs: T, rhs: T) -> Bool {
     let rhsRaw: T.RawType = rhs.toRaw()
-    let lhsRaw: T.RawType = rhs.toRaw()
+    let lhsRaw: T.RawType = lhs.toRaw()
     return (lhsRaw & rhsRaw) == rhsRaw
 }
