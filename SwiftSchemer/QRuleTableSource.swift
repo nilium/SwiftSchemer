@@ -49,9 +49,10 @@ private func pasteItemToRulePropertyList(obj: AnyObject!) -> QPropertyList {
 
 extension QRuleTableSource {
 
-    func tableView(
+
+    func acceptRuleDrop(
         tableView: NSTableView!,
-        acceptDrop info: NSDraggingInfo!,
+        info: NSDraggingInfo,
         row: Int,
         dropOperation: NSTableViewDropOperation
         ) -> Bool
@@ -98,6 +99,47 @@ extension QRuleTableSource {
     }
 
 
+    func acceptSelectorDrop(
+        tableView: NSTableView!,
+        info: NSDraggingInfo,
+        row: Int,
+        dropOperation: NSTableViewDropOperation
+        ) -> Bool
+    {
+        if dropOperation != .On || !scheme {
+            return false
+        }
+
+        return false
+    }
+
+
+    func tableView(
+        tableView: NSTableView!,
+        acceptDrop info: NSDraggingInfo!,
+        row: Int,
+        dropOperation: NSTableViewDropOperation
+        ) -> Bool
+    {
+        let pasteboard = info.draggingPasteboard()
+        let types = pasteboard.types as [String]
+        if types.count != 1 {
+            NSLog("Rule table drop received no or mixed types: %@", types)
+            return false
+        }
+
+        switch types[0] {
+        case kQRulePasteType:
+            return acceptRuleDrop(tableView, info: info, row: row, dropOperation: dropOperation)
+        case kQSelectorPasteType:
+            return acceptSelectorDrop(tableView, info: info, row: row, dropOperation: dropOperation)
+        case let type:
+            debugPrint("Unrecognized paste type: \(type)")
+            return false
+        }
+    }
+
+
     func tableView(
         tableView: NSTableView!,
         validateDrop info: NSDraggingInfo!,
@@ -109,19 +151,41 @@ extension QRuleTableSource {
             return .None
         }
 
-        if dropOperation != .Above {
-            tableView.setDropRow(row, dropOperation: .Above)
+        let mask = info.draggingSourceOperationMask()
+        let pasteboard = info.draggingPasteboard()
+        let source: AnyObject? = info.draggingSource()
+        let types = pasteboard.types as [String]
+
+        if types.count != 1 {
+            return .None
         }
 
-        if row >= 0 && row <= scheme!.rules.count {
-            let source: AnyObject? = info.draggingSource()
-            let mask = info.draggingSourceOperationMask()
-
-            if mask == .Copy || (source !== tableView && mask &== .Copy) {
-                return .Copy
-            } else if mask &== .Move && source === tableView {
-                return .Move
+        switch types[0] {
+        case kQRulePasteType:
+            if dropOperation != .Above {
+                tableView.setDropRow(row, dropOperation: .Above)
             }
+
+            if row >= 0 && row <= scheme!.rules.count {
+                if mask == .Copy || (source !== tableView && mask &== .Copy) {
+                    return .Copy
+                } else if mask &== .Move && source === tableView {
+                    return .Move
+                }
+            }
+
+        case kQSelectorPasteType:
+            if dropOperation != .On {
+                tableView.setDropRow(row, dropOperation: .On)
+            }
+
+            if mask &== .Copy && row >= 0 && row < scheme!.rules.count {
+                return .Copy
+            }
+
+        case let type:
+            debugPrint("Unrecognized paste type \(type)")
+            return .None
         }
 
         return .None
