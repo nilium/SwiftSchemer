@@ -62,20 +62,20 @@ extension QRuleTableSource {
             options: [NSPasteboardURLReadingContentsConformToTypesKey: [kQRulePasteType]])
             .map(pasteItemToRulePropertyList)
 
-        let indices = NSMutableIndexSet()
+        let indicesToRemove = NSMutableIndexSet()
 
         if mask &== .Move && source === tableView {
             for item in items {
                 let itemRow: Int = item["row"] as NSNumber
 
-                indices.addIndex(itemRow)
+                indicesToRemove.addIndex(itemRow)
                 if itemRow < row {
                     newRow -= 1
                 }
             }
         }
 
-        var newRules = scheme!.rules.withoutIndices(indices)
+        var newRules = scheme!.rules.withoutIndices(indicesToRemove)
         let pastedRules = items.map { QSchemeRule(propertyList: $0["rule"] as NSDictionary) }
 
         if newRow >= newRules.count {
