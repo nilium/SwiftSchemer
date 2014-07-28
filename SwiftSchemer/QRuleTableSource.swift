@@ -106,7 +106,22 @@ extension QRuleTableSource {
             return false
         }
 
-        return false
+        var newRow = row
+        let pasteboard = info.draggingPasteboard()
+        let mask = info.draggingSourceOperationMask()
+
+        let items = pasteboard.readObjectsForClasses([NSPasteboardItem.self],
+            options: [NSPasteboardURLReadingContentsConformToTypesKey: [kQSelectorPasteType]])
+            .map(pasteItemToSelectorPropertyList)
+
+        let rule = scheme!.rules[row]
+        var newSelectors = rule.selectors
+        let pastedSelectors: [String] = items.map { $0["selector"] as NSString }
+
+        newSelectors += pastedSelectors
+        rule.selectors = newSelectors
+
+        return true
     }
 
 
