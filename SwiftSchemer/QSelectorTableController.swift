@@ -14,6 +14,7 @@ private let QSelectorTagRemove = 1
 
 class QSelectorTableController: NSObject, NSTableViewDelegate {
 
+    /// selectorTable data source
     let dataSource = QSelectorTableSource()
 
     var selectedRule: QSchemeRule? = nil {
