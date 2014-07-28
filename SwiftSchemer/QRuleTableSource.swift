@@ -139,15 +139,22 @@ extension QRuleTableSource {
             return false
         }
 
+        var result = false
         switch types[0] {
         case kQRulePasteType:
-            return acceptRuleDrop(tableView, info: info, row: row, dropOperation: dropOperation)
+            result = acceptRuleDrop(tableView, info: info, row: row, dropOperation: dropOperation)
         case kQSelectorPasteType:
-            return acceptSelectorDrop(tableView, info: info, row: row, dropOperation: dropOperation)
+            result = acceptSelectorDrop(tableView, info: info, row: row, dropOperation: dropOperation)
         case let type:
             NSLog("Unrecognized paste type: \(type)")
             return false
         }
+
+        if result {
+            notify(QSchemeChangedNotification, from: scheme)
+        }
+
+        return result
     }
 
 
