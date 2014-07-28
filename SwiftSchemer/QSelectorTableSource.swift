@@ -44,6 +44,7 @@ class QSelectorTableSource: NSObject, NSTableViewDataSource {
         switch tableColumn.identifier as String {
         case kQSelectorDataColumn where object is NSString:
             rule!.selectors[row] = object as NSString
+            notify(QSchemeChangedNotification, from: scheme)
         case kQSelectorDataColumn:
             NSLog("Attempt to write non-NSString value [\(object)] to selector at row \(row)")
             assert(false)
@@ -111,6 +112,8 @@ extension QSelectorTableSource {
 
         rule!.selectors = newSelectors
         tableView.reloadData()
+
+        notify(QSchemeChangedNotification, from: scheme)
 
         return true
     }
