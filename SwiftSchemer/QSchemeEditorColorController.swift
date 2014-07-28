@@ -122,7 +122,10 @@ class QSchemeEditorColorController: NSViewController {
 
         default:
             NSLog("Received unrecognized color well as sender: \(sender)")
+            return
         }
+
+        notify(QSchemeChangedNotification, from: scheme)
     }
 
 }
