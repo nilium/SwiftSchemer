@@ -46,35 +46,73 @@ internal let unsetColor = whiteColor(white: 0.0, alpha: 0.0)
 /* Inherits from NSObject for KVO */
 class QScheme: NSObject {
 
-    var viewportBackground = blackColor
-    var viewportForeground = whiteColor()
+    // Document's revision tracker
+    var revisionTracker = QRevisionTracker()
 
-    var gutterBackground = unsetColor
-    var gutterForeground = unsetColor
+    // Viewport colors (i.e., default background/foreground)
+    var viewportBackground: NSColor = blackColor {
+        didSet { revisionTracker.addRevision { self.viewportBackground = oldValue } }
+    }
 
-    var findHighlightBackground = unsetColor
-    var findHighlightForeground = unsetColor
+    var viewportForeground: NSColor = whiteColor() {
+        didSet { revisionTracker.addRevision { self.viewportForeground = oldValue } }
+    }
 
-    var invisiblesForeground: NSColor = whiteColor(white: 0.75)
-    var lineHighlight: NSColor = blackColor.colorWithAlphaComponent(0.07)
-    var caretForeground: NSColor = blackColor
 
-    var selectionFill: NSColor =
-        NSColor.selectedTextBackgroundColor()
-            .colorUsingSchemeColorSpace()
+    // Gutter colors
+    var gutterBackground: NSColor = unsetColor {
+        didSet { revisionTracker.addRevision { self.gutterBackground = oldValue } }
+    }
 
-    var selectionBorder: NSColor =
-        NSColor.selectedTextBackgroundColor()
-            .colorUsingSchemeColorSpace()
-            .colorWithAlphaComponent(0.0)
+    var gutterForeground: NSColor = unsetColor {
+        didSet { revisionTracker.addRevision { self.gutterForeground = oldValue } }
+    }
 
-    var inactiveSelectionFill: NSColor =
-        NSColor.selectedTextBackgroundColor()
-            .colorUsingSchemeColorSpace()
-            .colorWithAlphaComponent(0.5)
 
-    var rules = [QSchemeRule]()
+    // Find highlight colors
+    var findHighlightBackground: NSColor = unsetColor {
+        didSet { revisionTracker.addRevision { self.findHighlightBackground = oldValue } }
+    }
 
+    var findHighlightForeground: NSColor = unsetColor {
+        didSet { revisionTracker.addRevision { self.findHighlightForeground = oldValue } }
+    }
+
+
+    // Editor colors
+    var invisiblesForeground: NSColor = whiteColor(white: 0.75) {
+        didSet { revisionTracker.addRevision { self.invisiblesForeground = oldValue } }
+    }
+
+    var lineHighlight: NSColor = blackColor.colorWithAlphaComponent(0.07) {
+        didSet { revisionTracker.addRevision { self.lineHighlight = oldValue } }
+    }
+
+    var caretForeground: NSColor = blackColor {
+        didSet { revisionTracker.addRevision { self.caretForeground = oldValue } }
+    }
+
+
+    // Selection colors
+    var selectionFill: NSColor = NSColor.selectedTextBackgroundColor().colorUsingSchemeColorSpace() {
+        didSet { revisionTracker.addRevision { self.selectionFill = oldValue } }
+    }
+
+    var selectionBorder: NSColor = NSColor.selectedTextBackgroundColor().colorUsingSchemeColorSpace().colorWithAlphaComponent(0.0) {
+        didSet { revisionTracker.addRevision { self.selectionBorder = oldValue } }
+    }
+
+    var inactiveSelectionFill: NSColor = NSColor.selectedTextBackgroundColor().colorUsingSchemeColorSpace().colorWithAlphaComponent(0.5) {
+        didSet { revisionTracker.addRevision { self.inactiveSelectionFill = oldValue } }
+    }
+
+
+    var rules: [QSchemeRule] = [] {
+        didSet { revisionTracker.addRevision { self.rules = oldValue } }
+    }
+
+
+    // Not permitted to change unless instantiating a new QScheme or a copy.
     let uuid: NSUUID
 
 
