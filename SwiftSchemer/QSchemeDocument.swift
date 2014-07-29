@@ -19,6 +19,8 @@ class QSchemeDocument: NSDocument {
     var schemeChangedObserver = QNotificationObserver.None
     var scheme: QScheme = QScheme() {
         didSet {
+            scheme.revisionTracker = revisionTracker
+
             schemeChangedObserver.disconnect()
             schemeChangedObserver =
                 observeNotification(sentBy: scheme, named: QSchemeChangedNotification) { [weak self] _ in
