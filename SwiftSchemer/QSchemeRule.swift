@@ -136,6 +136,7 @@ class QSchemeRule: NSObject {
 
 
     init(rule: QSchemeRule) {
+        revisionTracker = rule.revisionTracker
         name = rule.name
         selectors = [String](rule.selectors)
         foreground = rule.foreground

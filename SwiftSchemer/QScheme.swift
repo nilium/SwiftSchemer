@@ -192,6 +192,8 @@ class QScheme: NSObject {
     // Initializes a scheme by copying the colors/settings of another scheme.
     // A new UUID is generated unless one is provided here.
     init(scheme: QScheme, uuid: NSUUID? = nil) {
+        revisionTracker = scheme.revisionTracker
+
         viewportBackground = scheme.viewportBackground
         viewportForeground = scheme.viewportForeground
 
