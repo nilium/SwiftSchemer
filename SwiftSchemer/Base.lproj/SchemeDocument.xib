@@ -42,6 +42,9 @@
                                                 <segment toolTip="Remove selected rule" image="NSRemoveTemplate" width="32" enabled="NO" tag="1"/>
                                             </segments>
                                         </segmentedCell>
+                                        <connections>
+                                            <action selector="addRemoveButtonPressed:" target="CJ0-rV-zPM" id="ZbD-Gf-oAh"/>
+                                        </connections>
                                     </segmentedControl>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="25" horizontalPageScroll="10" verticalLineScroll="25" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOc-Fl-PX6">
                                         <rect key="frame" x="0.0" y="19" width="403" height="595"/>
