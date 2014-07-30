@@ -1,9 +1,7 @@
 //
-//  RawMask.swift
-//  SwiftSchemer
-//
-//  Created by Noel Cower on 07/27/14.
-//  Copyright (c) 2014 Noel Cower. All rights reserved.
+// Copyright Noel Cower 2014.
+// Distributed under the Boost Software License, Version 1.0.
+// (See accompanying file ../LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
 import Foundation
