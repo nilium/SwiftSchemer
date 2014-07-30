@@ -19,7 +19,7 @@ class QSchemeDocument: NSDocument {
     var schemeChangedObserver = QNotificationObserver.None
     var scheme: QScheme = QScheme() {
         didSet {
-            scheme.revisionTracker = revisionTracker
+            scheme.revisionTracker = QRevisionTracker(parent: self)
 
             schemeChangedObserver.disconnect()
             schemeChangedObserver =
@@ -79,6 +79,8 @@ class QSchemeDocument: NSDocument {
 
     init() {
         super.init()
+        scheme = QScheme()
+        scheme.revisionTracker = QRevisionTracker(parent: self)
     }
 
 
