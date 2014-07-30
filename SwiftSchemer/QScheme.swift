@@ -46,6 +46,24 @@ internal let unsetColor = whiteColor(white: 0.0, alpha: 0.0)
 /* Inherits from NSObject for KVO */
 class QScheme: NSObject {
 
+    class var colorProperties: [String] {
+        return [
+            "viewportBackground",
+            "viewportForeground",
+            "gutterBackground",
+            "gutterForeground",
+            "findHighlightBackground",
+            "findHighlightForeground",
+            "invisiblesForeground",
+            "lineHighlight",
+            "caretForeground",
+            "selectionFill",
+            "selectionBorder",
+            "inactiveSelectionFill",
+            ]
+    }
+
+
     // Document's revision tracker
     var revisionTracker = QRevisionTracker()
 
