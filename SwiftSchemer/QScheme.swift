@@ -211,6 +211,8 @@ class QScheme: NSObject {
         selectionBorder = scheme.selectionBorder
         inactiveSelectionFill = scheme.inactiveSelectionFill
 
+        rules = scheme.rules.map { QSchemeRule(rule: $0) }
+
         if uuid? {
             self.uuid = uuid!
         } else {
