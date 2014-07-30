@@ -7,6 +7,8 @@
 import Cocoa
 
 
+/// A thin class wrapper around a closure so it can be passed to an
+/// NSUndoManager.
 @objc class QBlockRevision {
 
     let block: () -> ()
@@ -25,13 +27,13 @@ import Cocoa
 }
 
 
-/// Wrapper around a weak reference to any QHasUndoManager.
+/// Wrapper around a weak reference to any NSUndoManager.
 @objc class QRevisionTracker {
 
     weak var manager: NSUndoManager?
 
 
-    /// Adds a revision to the
+    /// Adds a revision closure to the undo manager.
     func addRevision(op: () -> ()) {
 //        if let parent = trackingParent {
             if let manager = self.manager? {
