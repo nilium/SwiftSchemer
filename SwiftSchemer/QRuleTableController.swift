@@ -199,6 +199,14 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
     }
 
 
+    func removeSelectedRules() {
+    }
+
+
+    func addNewRule() {
+    }
+
+
     var removeButtonEnabled: Bool {
         get { return addRemoveButtons?.isEnabledForSegment(1) ~| false }
         set { addRemoveButtons?.setEnabled(newValue, forSegment: 1) }
