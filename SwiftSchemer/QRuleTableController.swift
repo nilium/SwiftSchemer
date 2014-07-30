@@ -31,7 +31,7 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
     var scheme: QScheme? = nil {
         didSet {
             source.scheme = scheme
-            table?.reloadData()
+            reloadData()
         }
     }
 
@@ -74,6 +74,20 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
             return view
         }
         return nil
+    }
+
+
+    func reloadData() {
+        // Assign two weak variables to auto-unwrapping optionals
+        let definedTable: NSTableView! = self.table
+        let definedScheme: QScheme! = self.scheme
+
+        // Note: !(a && b) does not compile because it's a compiler bug.
+        if !definedTable || !definedScheme {
+            return
+        }
+
+        definedTable.reloadData()
     }
 
 
