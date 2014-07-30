@@ -35,15 +35,13 @@ import Cocoa
 
     /// Adds a revision closure to the undo manager.
     func addRevision(op: () -> ()) {
-//        if let parent = trackingParent {
-            if let manager = self.manager? {
-                let rev = QBlockRevision(op)
-                // target isn't retained, but object is, so pass it for both
-                manager.registerUndoWithTarget(rev, selector: "invoke:", object: rev)
-            } else {
-                fatalError("No undo manager available while parent is still accessible")
-            }
-//        }
+        if let manager = self.manager? {
+            let rev = QBlockRevision(op)
+            // target isn't retained, but object is, so pass it for both
+            manager.registerUndoWithTarget(rev, selector: "invoke:", object: rev)
+        } else {
+            NSLog("No undo manager available -- discarding revision")
+        }
     }
 
 
