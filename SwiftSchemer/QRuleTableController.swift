@@ -21,6 +21,7 @@ private let QRuleKeysToColumns = [
     "name": kQRuleColumnName,
     "foreground": kQRuleColumnForeground,
     "background": kQRuleColumnBackground,
+    "flagsCounter": kQRuleColumnFlags,
 ]
 
 
