@@ -17,6 +17,13 @@ private let kQRuleColumnBackground = "rule_background"
 private let kQRuleColumnFlags = "rule_flags"
 
 
+private let QRuleKeysToColumns = [
+    "name": kQRuleColumnName,
+    "foreground": kQRuleColumnForeground,
+    "background": kQRuleColumnBackground,
+]
+
+
 class QRuleTableController: NSObject, NSTableViewDelegate {
 
     @IBOutlet weak var addRemoveButtons: NSSegmentedControl? = nil
@@ -101,6 +108,25 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
         }
 
         definedTable.reloadData()
+
+        for (row, rule) in enumerate(definedScheme.rules) {
+            let rowIndex = NSIndexSet(index: row)
+
+            for (key, column) in QRuleKeysToColumns {
+                ruleObservers += observeKeyPath(key, ofObject: rule, options: []) { [weak self] _, _, _ in
+                    let definedSelf: QRuleTableController! = self
+                    if !definedSelf { return }
+
+                    let table: NSTableView! = definedSelf.table
+                    if !table { return }
+
+                    let columnIndex = table.columnWithIdentifier(column)
+                    if columnIndex == -1 { return }
+
+                    table.reloadDataForRowIndexes(rowIndex, columnIndexes: NSIndexSet(index: columnIndex))
+                }
+            }
+        }
     }
 
 
@@ -119,12 +145,6 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
                 }
 
                 assign(colorWell.color)
-
-                if let nameColumn = con.table!.tableColumnWithIdentifier(kQRuleColumnName)? {
-                    if let columnIndex = indexOfObject(con.table!.tableColumns!, nameColumn) {
-                        con.table!.reloadDataForRowIndexes(NSIndexSet(index: row), columnIndexes: NSIndexSet(index: columnIndex))
-                    }
-                }
             }
         }
     }
