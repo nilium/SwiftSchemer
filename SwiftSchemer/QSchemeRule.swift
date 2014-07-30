@@ -108,8 +108,13 @@ class QSchemeRule: NSObject {
     }
 
     var flags: [QRuleFlag] = [] {
-        didSet { revisionTracker.addRevision { self.flags = oldValue } }
+        didSet {
+            revisionTracker.addRevision { self.flags = oldValue }
+            flagsCounter = flagsCounter &+ 1
+        }
     }
+
+    private(set) var flagsCounter: Int = 0
 
 
     init(propertyList: QPropertyList) {
