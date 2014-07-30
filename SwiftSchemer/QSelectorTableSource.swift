@@ -111,7 +111,6 @@ extension QSelectorTableSource {
         }
 
         rule!.selectors = newSelectors
-        tableView.reloadData()
 
         notify(QSchemeChangedNotification, from: scheme)
 
