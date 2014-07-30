@@ -28,6 +28,7 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
         }
     }
 
+    var ruleObservers: [QKeyValueObserver] = []
     var scheme: QScheme? = nil {
         didSet {
             source.scheme = scheme
@@ -36,6 +37,11 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
     }
 
     let source = QRuleTableSource()
+
+
+    deinit {
+        disconnectObservers(&ruleObservers)
+    }
 
 
     func disconnectTableView(view: NSTableView) {
