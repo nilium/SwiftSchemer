@@ -196,4 +196,10 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
         }
     }
 
+
+    var removeButtonEnabled: Bool {
+        get { return addRemoveButtons?.isEnabledForSegment(1) ~| false }
+        set { addRemoveButtons?.setEnabled(newValue, forSegment: 1) }
+    }
+
 }
