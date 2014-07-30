@@ -19,6 +19,8 @@ private let kQRuleColumnFlags = "rule_flags"
 
 class QRuleTableController: NSObject, NSTableViewDelegate {
 
+    @IBOutlet weak var addRemoveButtons: NSSegmentedControl? = nil
+
     @IBOutlet weak var table: NSTableView? = nil {
         didSet(previous) {
             if let p = previous { disconnectTableView(p) }
