@@ -36,8 +36,19 @@ class QSchemeEditorColorController: NSViewController {
     /// representedObject property.
     var scheme: QScheme! {
         set {
+            disconnectObservers(&colorObserver)
+
             self.representedObject = newValue
             loadColorValues()
+
+            if !scheme { return }
+
+            colorObserver = QScheme.colorProperties.map { name in
+                observeKeyPath(name, ofObject: self.scheme, options: []) { [weak self] _, _, _ in
+                    self?.loadColorValues()
+                    return
+                }
+            }
         }
 
         get {
