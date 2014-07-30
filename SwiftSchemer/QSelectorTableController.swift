@@ -116,10 +116,12 @@ class QSelectorTableController: NSObject, NSTableViewDelegate {
             selectorTable?.removeRowsAtIndexes(indices, withAnimation: NSTableViewAnimationOptions.SlideRight)
             table.endUpdates()
 
+            var newSelectors = self.selectedRule!.selectors
             indices.enumerateIndexesWithOptions(.Reverse) { i, _ in
-                self.selectedRule!.selectors.removeAtIndex(i)
+                newSelectors.removeAtIndex(i)
                 return
             }
+            self.selectedRule!.selectors = newSelectors
 
             needsUpdate = true
 
