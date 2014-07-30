@@ -217,6 +217,11 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
 
 
     func addNewRule() {
+        assert(scheme, "Scheme may not be nil")
+
+        if let scheme = self.scheme {
+            scheme.rules += QSchemeRule()
+        }
     }
 
 
