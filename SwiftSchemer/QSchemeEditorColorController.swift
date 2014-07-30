@@ -28,6 +28,8 @@ class QSchemeEditorColorController: NSViewController {
     @IBOutlet weak var selectionInactiveWell: QAlphaColorWell!
     @IBOutlet weak var selectionBorderWell: QAlphaColorWell!
 
+
+    var colorObserver: [QKeyValueObserver] = []
     /// Gets the controller's current scheme. May return nil.
     /// This is simply trying to cast the controller's representedObject to
     /// a QScheme when getting the value. When setting, it assigns the
@@ -49,6 +51,11 @@ class QSchemeEditorColorController: NSViewController {
         assert(nibName != nil || bundle != nil, "At least nibName or bundle must be non-nil")
         super.init(nibName: nibName, bundle: bundle)
         self.scheme = scheme
+    }
+
+
+    deinit {
+        disconnectObservers(&colorObserver)
     }
 
 
