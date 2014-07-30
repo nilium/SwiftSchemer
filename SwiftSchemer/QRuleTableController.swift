@@ -24,6 +24,10 @@ private let QRuleKeysToColumns = [
 ]
 
 
+private let QRuleTagAdd = 0
+private let QRuleTagRemove = 1
+
+
 class QRuleTableController: NSObject, NSTableViewDelegate {
 
     @IBOutlet weak var addRemoveButtons: NSSegmentedControl? = nil
@@ -200,6 +204,18 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
 
 
     @IBAction func addRemoveButtonPressed(sender: NSSegmentedControl) {
+        let seg = sender.selectedSegment
+        let cell = sender.selectedCell() as NSSegmentedCell
+        let tag = cell.tagForSegment(seg)
+
+        switch tag {
+        case QRuleTagAdd:
+            addNewRule()
+        case QRuleTagRemove:
+            removeSelectedRules()
+        case let unknown:
+            NSLog("Unrecognized button tag \(unknown)")
+        }
     }
 
 
