@@ -200,6 +200,15 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
 
 
     func removeSelectedRules() {
+        assert(scheme, "Scheme may not be nil")
+        assert(table, "Table may not be nil")
+
+        var newRules = scheme!.rules
+        table!.selectedRowIndexes.enumerateIndexesWithOptions(.Reverse) { index, _ in
+            newRules.removeAtIndex(index)
+            return
+        }
+        scheme!.rules = newRules
     }
 
 
