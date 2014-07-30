@@ -142,7 +142,7 @@
                                                                         <font key="font" metaFont="smallSystem"/>
                                                                         <segments>
                                                                             <segment label="B" width="22"/>
-                                                                            <segment label="F" width="22" tag="1"/>
+                                                                            <segment label="I" tag="1"/>
                                                                             <segment label="U" width="22"/>
                                                                         </segments>
                                                                     </segmentedCell>
