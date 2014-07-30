@@ -172,8 +172,18 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
             bindAction(well, updateRowWithColor { rule.foreground = $0 })
 
         case kQRuleColumnFlags:
-            view.target = self
-            view.action = "updateRuleFlags:"
+            bindAction(view as NSSegmentedControl) { segButton in
+                let flags: [QRuleFlag] = [.Bold, .Italic, .Underline]
+                var result: [QRuleFlag] = []
+
+                for (i, f) in enumerate(flags) {
+                    if segButton.isSelectedForSegment(i) {
+                        result += f
+                    }
+                }
+
+                rule.flags = result
+            }
 
             assert(view as? NSSegmentedControl, "Column view must be an NSSegmentedControl")
             let seg: NSSegmentedControl! = view as? NSSegmentedControl
