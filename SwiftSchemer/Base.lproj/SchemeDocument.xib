@@ -124,7 +124,7 @@
                                                             </prototypeCellViews>
                                                         </tableColumn>
                                                         <tableColumn identifier="rule_flags" width="76" minWidth="76" maxWidth="76" id="PFA-UG-cAu">
-                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Flags">
+                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Style">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
