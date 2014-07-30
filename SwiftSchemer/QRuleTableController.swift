@@ -199,6 +199,10 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
     }
 
 
+    @IBAction func addRemoveButtonPressed(sender: NSSegmentedControl) {
+    }
+
+
     func removeSelectedRules() {
         assert(scheme, "Scheme may not be nil")
         assert(table, "Table may not be nil")
