@@ -17,6 +17,7 @@ class QSelectorTableController: NSObject, NSTableViewDelegate {
     /// selectorTable data source
     let dataSource = QSelectorTableSource()
 
+    var needsUpdate: Bool = true
     var scheme: QScheme? = nil {
         didSet {
             dataSource.scheme = scheme
@@ -37,8 +38,9 @@ class QSelectorTableController: NSObject, NSTableViewDelegate {
 
             if let rule = selectedRule {
                 selectorsObserver = observeKeyPath("selectors", ofObject: rule, options: []) { [weak self] _, _, _ in
-                    self?.selectorTable?.reloadData()
-                    return // <-- you might think this `return` is extraneous, but it won't compile without it
+                    if self?.needsUpdate ~| false {
+                        self?.selectorTable?.reloadData()
+                    }
                 }
             }
         }
