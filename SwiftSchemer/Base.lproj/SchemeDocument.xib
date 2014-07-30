@@ -293,6 +293,7 @@
         </customObject>
         <customObject id="CJ0-rV-zPM" customClass="QRuleTableController" customModule="SwiftSchemer" customModuleProvider="target">
             <connections>
+                <outlet property="addRemoveButtons" destination="5XE-gH-LYd" id="nUl-c0-KAE"/>
                 <outlet property="table" destination="vZg-3p-T3H" id="92a-tZ-C5N"/>
             </connections>
         </customObject>
