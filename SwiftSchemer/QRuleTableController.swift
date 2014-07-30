@@ -193,6 +193,8 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
                 : nil
 
             notify(kQSelectedRuleChanged, from: self, info: info)
+
+            removeButtonEnabled = indices.count > 0
         }
     }
 
