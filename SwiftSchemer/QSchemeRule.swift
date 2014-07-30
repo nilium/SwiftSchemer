@@ -89,13 +89,27 @@ private func convertRuleFlags(list: String?) -> [QRuleFlag] {
 /* Inherits from NSObject for KVO */
 class QSchemeRule: NSObject {
 
-    var name = "Unnamed Rule"
-    var selectors = [String]()
-    var foreground = NSColor(white:0.0, alpha:0.0)
-    var background = NSColor(white:1.0, alpha:0.0)
-    var flags: [QRuleFlag] = []
     var revisionTracker = QRevisionTracker()
 
+    var name: NSString = "Unnamed Rule" {
+        didSet { revisionTracker.addRevision { self.name = oldValue } }
+    }
+
+    var selectors: [String] = [] {
+        didSet { revisionTracker.addRevision { self.selectors = oldValue } }
+    }
+
+    var foreground: NSColor = NSColor(white:0.0, alpha:0.0) {
+        didSet { revisionTracker.addRevision { self.foreground = oldValue } }
+    }
+
+    var background: NSColor = NSColor(white:1.0, alpha:0.0) {
+        didSet { revisionTracker.addRevision { self.background = oldValue } }
+    }
+
+    var flags: [QRuleFlag] = [] {
+        didSet { revisionTracker.addRevision { self.flags = oldValue } }
+    }
 
 
     init(propertyList: QPropertyList) {
