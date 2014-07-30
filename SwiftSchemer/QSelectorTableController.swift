@@ -94,6 +94,8 @@ class QSelectorTableController: NSObject, NSTableViewDelegate {
 
         switch tag {
         case QSelectorTagAdd:
+            needsUpdate = false
+
             let newRow = selectedRule!.selectors.count
             selectedRule!.selectors += "selector"
 
@@ -103,7 +105,11 @@ class QSelectorTableController: NSObject, NSTableViewDelegate {
             table.scrollRowToVisible(newRow + 1)
             table.editColumn(0, row: newRow, withEvent: nil, select: true)
 
+            needsUpdate = true
+
         case QSelectorTagRemove:
+            needsUpdate = false
+
             let indices = selectorTable!.selectedRowIndexes
 
             table.beginUpdates()
@@ -114,6 +120,8 @@ class QSelectorTableController: NSObject, NSTableViewDelegate {
                 self.selectedRule!.selectors.removeAtIndex(i)
                 return
             }
+
+            needsUpdate = true
 
         default:
             assert(false, "Invalid segment tag")
