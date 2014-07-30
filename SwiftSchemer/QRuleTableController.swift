@@ -84,12 +84,19 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
 
 
     func reloadData() {
+        disconnectObservers(&ruleObservers)
+
         // Assign two weak variables to auto-unwrapping optionals
         let definedTable: NSTableView! = self.table
         let definedScheme: QScheme! = self.scheme
 
         // Note: !(a && b) does not compile because it's a compiler bug.
         if !definedTable || !definedScheme {
+            return
+        }
+
+        ruleObservers += observeKeyPath("rules", ofObject: definedScheme, options: []) { [weak self] _, _, _ in
+            self?.reloadData()
             return
         }
 
