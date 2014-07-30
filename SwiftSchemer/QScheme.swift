@@ -65,7 +65,13 @@ class QScheme: NSObject {
 
 
     // Document's revision tracker
-    var revisionTracker = QRevisionTracker()
+    var revisionTracker: QRevisionTracker = QRevisionTracker() {
+        didSet {
+            for rule in rules {
+                rule.revisionTracker = revisionTracker
+            }
+        }
+    }
 
     // Viewport colors (i.e., default background/foreground)
     var viewportBackground: NSColor = blackColor {
@@ -126,7 +132,12 @@ class QScheme: NSObject {
 
 
     var rules: [QSchemeRule] = [] {
-        didSet { revisionTracker.addRevision { self.rules = oldValue } }
+        didSet {
+            for rule in rules {
+                rule.revisionTracker = revisionTracker
+            }
+            revisionTracker.addRevision { self.rules = oldValue }
+        }
     }
 
 
