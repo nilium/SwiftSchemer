@@ -94,6 +94,8 @@ class QSchemeRule: NSObject {
     var foreground = NSColor(white:0.0, alpha:0.0)
     var background = NSColor(white:1.0, alpha:0.0)
     var flags: [QRuleFlag] = []
+    var revisionTracker = QRevisionTracker()
+
 
 
     init(propertyList: QPropertyList) {
