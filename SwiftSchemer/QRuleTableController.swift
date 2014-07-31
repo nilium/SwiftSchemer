@@ -165,11 +165,13 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
         case kQRuleColumnBackground:
             let well: NSColorWell = view as NSColorWell
             well.color = rule.background
+
             bindAction(well, updateRowWithColor { rule.background = $0 })
 
         case kQRuleColumnForeground:
             let well: NSColorWell = view as NSColorWell
             well.color = rule.foreground
+
             bindAction(well, updateRowWithColor { rule.foreground = $0 })
 
         case kQRuleColumnFlags:
