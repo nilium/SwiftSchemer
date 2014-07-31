@@ -46,10 +46,6 @@ private let QRuleKeysToColumns = [
 ]
 
 
-private let QRuleTagAdd = 0
-private let QRuleTagRemove = 1
-
-
 /// Converts a font to have, or not have, a given trait. Just a wrapper around
 /// a font manager's convertFont:to(Not)?HaveTrait: methods.
 private func convertFontWithTrait(hasTrait: Bool, #trait: NSFontTraitMask, #font: NSFont, #fontManager: NSFontManager) -> NSFont {
@@ -195,65 +191,6 @@ class QRuleTableController: NSObject {
                 }
             }
         }
-    }
-
-
-    @IBAction func addRemoveButtonPressed(sender: NSSegmentedControl) {
-        let seg = sender.selectedSegment
-        let cell = sender.selectedCell() as NSSegmentedCell
-        let tag = cell.tagForSegment(seg)
-
-        shouldAutoUpdate(false) {
-            switch tag {
-            case QRuleTagAdd:
-                self.addNewRule()
-            case QRuleTagRemove:
-                self.removeSelectedRules()
-            case let unknown:
-                NSLog("Unrecognized button tag \(unknown)")
-            }
-        }
-    }
-
-
-    func removeSelectedRules() {
-        assert(scheme, "Scheme may not be nil")
-        assert(table, "Table may not be nil")
-
-        var newRules = scheme!.rules
-        let rows = table!.selectedRowIndexes
-        rows.enumerateIndexesWithOptions(.Reverse) { index, _ in
-            newRules.removeAtIndex(index)
-            return
-        }
-        scheme!.rules = newRules
-        table!.removeRowsAtIndexes(rows, withAnimation: .SlideLeft)
-    }
-
-
-    func addNewRule() {
-        assert(scheme, "Scheme may not be nil")
-        assert(table, "Table may not be nil")
-
-        if let scheme = self.scheme {
-            scheme.rules += QSchemeRule()
-            let newRowIndex = table!.numberOfRows
-            let newRowIndexSet = NSIndexSet(index: newRowIndex)
-            table!.insertRowsAtIndexes(newRowIndexSet, withAnimation: .EffectNone)
-            table!.scrollRowToVisible(newRowIndex)
-
-            let nameColumn = table!.columnWithIdentifier(kQRuleColumnName)
-            if nameColumn != -1 {
-                table!.selectRowIndexes(newRowIndexSet, byExtendingSelection: false)
-                table!.editColumn(nameColumn, row: newRowIndex, withEvent: nil, select: true)
-            }
-        }
-    }
-
-
-    var removeButtonEnabled: Bool {
-        get { return addRemoveButtons?.isEnabledForSegment(1) ~| false }
-        set { addRemoveButtons?.setEnabled(newValue, forSegment: 1) }
     }
 
 }
@@ -447,6 +384,75 @@ extension QRuleTableController {
                 }
 
                 assign(colorWell.color)
+            }
+        }
+    }
+
+}
+
+
+// MARK: Add / Remove Rule Buttons
+
+private let QRuleTagAdd = 0
+private let QRuleTagRemove = 1
+
+
+extension QRuleTableController {
+
+    var removeButtonEnabled: Bool {
+        get { return addRemoveButtons?.isEnabledForSegment(1) ~| false }
+        set { addRemoveButtons?.setEnabled(newValue, forSegment: 1) }
+    }
+
+
+    @IBAction func addRemoveButtonPressed(sender: NSSegmentedControl) {
+        let seg = sender.selectedSegment
+        let cell = sender.selectedCell() as NSSegmentedCell
+        let tag = cell.tagForSegment(seg)
+
+        shouldAutoUpdate(false) {
+            switch tag {
+            case QRuleTagAdd:
+                self.addNewRule()
+            case QRuleTagRemove:
+                self.removeSelectedRules()
+            case let unknown:
+                NSLog("Unrecognized button tag \(unknown)")
+            }
+        }
+    }
+
+
+    func removeSelectedRules() {
+        assert(scheme, "Scheme may not be nil")
+        assert(table, "Table may not be nil")
+
+        var newRules = scheme!.rules
+        let rows = table!.selectedRowIndexes
+        rows.enumerateIndexesWithOptions(.Reverse) { index, _ in
+            newRules.removeAtIndex(index)
+            return
+        }
+        scheme!.rules = newRules
+        table!.removeRowsAtIndexes(rows, withAnimation: .SlideLeft)
+    }
+
+
+    func addNewRule() {
+        assert(scheme, "Scheme may not be nil")
+        assert(table, "Table may not be nil")
+
+        if let scheme = self.scheme {
+            scheme.rules += QSchemeRule()
+            let newRowIndex = table!.numberOfRows
+            let newRowIndexSet = NSIndexSet(index: newRowIndex)
+            table!.insertRowsAtIndexes(newRowIndexSet, withAnimation: .EffectNone)
+            table!.scrollRowToVisible(newRowIndex)
+
+            let nameColumn = table!.columnWithIdentifier(kQRuleColumnName)
+            if nameColumn != -1 {
+                table!.selectRowIndexes(newRowIndexSet, byExtendingSelection: false)
+                table!.editColumn(nameColumn, row: newRowIndex, withEvent: nil, select: true)
             }
         }
     }
