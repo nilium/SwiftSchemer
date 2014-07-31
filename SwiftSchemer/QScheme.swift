@@ -74,11 +74,11 @@ class QScheme: NSObject {
     }
 
     // Viewport colors (i.e., default background/foreground)
-    var viewportBackground: NSColor = blackColor {
+    var viewportBackground: NSColor = whiteColor() {
         didSet { revisionTracker.addRevision { self.viewportBackground = oldValue } }
     }
 
-    var viewportForeground: NSColor = whiteColor() {
+    var viewportForeground: NSColor = blackColor {
         didSet { revisionTracker.addRevision { self.viewportForeground = oldValue } }
     }
 
