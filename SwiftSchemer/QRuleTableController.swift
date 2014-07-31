@@ -104,6 +104,10 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
     }
 
 
+    func refreshColumnNames() {
+    }
+
+
     func reloadData() {
         disconnectObservers(&ruleObservers)
 
@@ -117,6 +121,10 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
         }
 
         definedTable.backgroundColor = definedScheme.viewportBackground
+        ruleObservers += observeKeyPath("viewportBackground", ofObject: definedScheme, options: []) { [weak self] _, _, _ in
+            self?.refreshColumnNames()
+            return
+        }
 
         ruleObservers += observeKeyPath("rules", ofObject: definedScheme, options: []) { [weak self] _, _, _ in
             self?.reloadData()
