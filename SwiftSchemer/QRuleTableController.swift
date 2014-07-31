@@ -80,8 +80,10 @@ private func underlineString(str: String) -> NSAttributedString {
 
 class QRuleTableController: NSObject, NSTableViewDelegate {
 
+    /// Buttons for adding new rules and removing selected rules
     @IBOutlet weak var addRemoveButtons: NSSegmentedControl? = nil
 
+    /// The table view the controller is so-named for.
     @IBOutlet weak var table: NSTableView? = nil {
         didSet(previous) {
             if let p = previous { disconnectTableView(p) }
@@ -89,7 +91,10 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
         }
     }
 
+    /// Key-value observers for observing the scheme and its rules
     var ruleObservers: [QKeyValueObserver] = []
+
+    /// The color scheme to display the rules of.
     var scheme: QScheme? = nil {
         didSet {
             source.scheme = scheme
@@ -97,6 +102,7 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
         }
     }
 
+    /// The NSTableViewDataSource for the table view.
     let source = QRuleTableSource()
 
 
