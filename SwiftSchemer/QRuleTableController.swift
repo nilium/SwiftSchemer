@@ -171,6 +171,16 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
             let text: NSTextField = view as NSTextField
             text.stringValue = rule.name
 
+            text.textColor = rule.foreground.isVisible()
+                ? rule.foreground
+                : (scheme!.viewportForeground)
+
+            if rule.background.isVisible() {
+                text.backgroundColor = rule.background
+            } else {
+                text.backgroundColor = scheme!.viewportBackground.colorWithAlphaComponent(0.5)
+            }
+
             // Get rule's font style
             let (bold, italic, underline) = (
                 contains(rule.flags, { $0.isBold }),
