@@ -162,6 +162,10 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
             let text: NSTextField = view as NSTextField
             text.stringValue = rule.name
 
+            bindAction(text) { sender in
+                rule.name = sender.stringValue
+            }
+
         case kQRuleColumnBackground:
             let well: NSColorWell = view as NSColorWell
             well.color = rule.background
