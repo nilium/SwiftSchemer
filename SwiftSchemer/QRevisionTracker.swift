@@ -31,6 +31,19 @@ import Cocoa
 @objc class QRevisionTracker {
 
     weak var manager: NSUndoManager?
+    var actionName: String? = nil {
+        willSet {
+            if actionName && newValue {
+                NSLog("Discarding unused action name \(actionName)")
+            }
+        }
+    }
+
+
+    func addRevision(name: String, op: () -> ()) {
+        actionName = name
+        addRevision(op)
+    }
 
 
     /// Adds a revision closure to the undo manager.
@@ -39,9 +52,11 @@ import Cocoa
             let rev = QBlockRevision(op)
             // target isn't retained, but object is, so pass it for both
             manager.registerUndoWithTarget(rev, selector: "invoke:", object: rev)
+            manager.setActionName(actionName)
         } else {
             NSLog("No undo manager available -- discarding revision")
         }
+        actionName = nil
     }
 
 
