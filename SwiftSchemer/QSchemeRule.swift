@@ -12,7 +12,7 @@ let kQPropertyListSettingsKey = "settings"
 private let whitespaceSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()
 
 
-enum QRuleFlag {
+enum QRuleFlag: Equatable {
 
     case Bold
     case Italic
@@ -61,6 +61,14 @@ enum QRuleFlag {
         }
     }
 
+}
+
+
+@infix func == (lhs: QRuleFlag, rhs: QRuleFlag) -> Bool {
+    return (lhs.isBold && rhs.isBold)
+    || (lhs.isItalic && rhs.isItalic)
+    || (lhs.isUnderline && rhs.isUnderline)
+    || (lhs.isUnknown && rhs.isUnknown && lhs.name == rhs.name)
 }
 
 
