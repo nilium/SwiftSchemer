@@ -227,52 +227,55 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
     }
 
 
-    /// Hooks up a view to its column and rule.
-    func bindView(view: NSView, toRule rule: QSchemeRule, forColumn column: NSTableColumn) {
-        switch column.identifier {
-        case kQRuleColumnName:
-            let text: NSTextField = view as NSTextField
+    func bindNameColumnView(text: NSTextField, toRule rule: QSchemeRule) {
+        text.textColor = rule.foreground.isVisible()
+            ? rule.foreground
+            : (scheme!.viewportForeground)
 
-            text.textColor = rule.foreground.isVisible()
-                ? rule.foreground
-                : (scheme!.viewportForeground)
+        if rule.background.isVisible() {
+            text.backgroundColor = rule.background
+        } else {
+            text.backgroundColor = scheme!.viewportBackground.colorWithAlphaComponent(0.5)
+        }
 
-            if rule.background.isVisible() {
-                text.backgroundColor = rule.background
-            } else {
-                text.backgroundColor = scheme!.viewportBackground.colorWithAlphaComponent(0.5)
-            }
+        // Get rule's font style
+        let (bold, italic, underline) = (
+            contains(rule.flags, .Bold),
+            contains(rule.flags, .Italic),
+            contains(rule.flags, .Underline)
+        )
 
-            // Get rule's font style
-            let (bold, italic, underline) = (
-                contains(rule.flags, { $0.isBold }),
-                contains(rule.flags, { $0.isItalic }),
-                contains(rule.flags, { $0.isUnderline })
-            )
+        // Set the rule's bold/italic formatting via the font
+        var font = NSFont.userFixedPitchFontOfSize(0.0)
+        let fontManager = NSFontManager.sharedFontManager()
+        font = convertFontWithTrait(bold, trait: .BoldFontMask, font: font, fontManager: fontManager)
+        font = convertFontWithTrait(italic, trait: .ItalicFontMask, font: font, fontManager: fontManager)
+        text.font = font
 
-            // Set the rule's bold/italic formatting via the font
-            var font = NSFont.userFixedPitchFontOfSize(0.0)
-            let fontManager = NSFontManager.sharedFontManager()
-            font = convertFontWithTrait(bold, trait: .BoldFontMask, font: font, fontManager: fontManager)
-            font = convertFontWithTrait(italic, trait: .ItalicFontMask, font: font, fontManager: fontManager)
-            text.font = font
+        // Apply underline formatting
+        if underline {
+            text.attributedStringValue = underlineString(rule.name)
+        } else {
+            text.stringValue = rule.name
+        }
 
-            // Apply underline formatting
+        bindAction(text) { sender in
+            rule.name = sender.stringValue
+
             if underline {
                 text.attributedStringValue = underlineString(rule.name)
             } else {
                 text.stringValue = rule.name
             }
+        }
+    }
 
-            bindAction(text) { sender in
-                rule.name = sender.stringValue
 
-                if underline {
-                    text.attributedStringValue = underlineString(rule.name)
-                } else {
-                    text.stringValue = rule.name
-                }
-            }
+    /// Hooks up a view to its column and rule.
+    func bindView(view: NSView, toRule rule: QSchemeRule, forColumn column: NSTableColumn) {
+        switch column.identifier {
+        case kQRuleColumnName:
+            bindNameColumnView(view as NSTextField, toRule: rule)
 
         case kQRuleColumnBackground:
             let well: NSColorWell = view as NSColorWell
