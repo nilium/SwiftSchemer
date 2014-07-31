@@ -48,6 +48,10 @@ private let QRuleKeysToColumns = [
 
 class QRuleTableController: NSObject {
 
+    /// Block type for observing a rule.
+    typealias RuleObserverBlock = (String, QSchemeRule, NSDictionary) -> ()
+
+
     /// Override indicating whether the table view's reloadData method should
     /// be called. If true, reloadData should be called, if false, something
     /// else _must_ notify the table view of updates to its data.
@@ -123,6 +127,31 @@ class QRuleTableController: NSObject {
     }
 
 
+    func observerForRule(rule: QSchemeRule, row: Int) -> RuleObserverBlock {
+        let rowIndex = NSIndexSet(index: row)
+
+        return { [weak self] key, _, _ in
+            let definedSelf: QRuleTableController! = self
+            if !definedSelf { return }
+
+            let table: NSTableView! = definedSelf.table
+            if !table { return }
+
+            let column = QRuleKeysToColumns[key]
+            let columnIndex = table.columnWithIdentifier(column)
+            if columnIndex == -1 { return }
+
+            let columnIndices = NSMutableIndexSet(index: columnIndex)
+            let nameIndex = table.columnWithIdentifier(kQRuleColumnName)
+            if nameIndex != -1 {
+                columnIndices.addIndex(nameIndex)
+            }
+
+            table.reloadDataForRowIndexes(rowIndex, columnIndexes: columnIndices)
+        }
+    }
+
+
     func reloadData() {
         disconnectObservers(&ruleObservers)
 
@@ -153,24 +182,10 @@ class QRuleTableController: NSObject {
         }
 
         for (row, rule) in enumerate(definedScheme.rules) {
-            let rowIndex = NSIndexSet(index: row)
+            let block = observerForRule(rule, row: row)
 
             for (key, column) in QRuleKeysToColumns {
-                ruleObservers += observeKeyPath(key, ofObject: rule, options: []) { [weak self] _, _, _ in
-                    let definedSelf: QRuleTableController! = self
-                    if !definedSelf { return }
-
-                    let table: NSTableView! = definedSelf.table
-                    if !table { return }
-
-                    let columnIndex = table.columnWithIdentifier(column)
-                    if columnIndex == -1 { return }
-
-                    table.reloadDataForRowIndexes(
-                        rowIndex,
-                        columnIndexes: NSIndexSet(indexesInRange: NSRange(0 ..< table.numberOfColumns))
-                    )
-                }
+                ruleObservers += observeKeyPath(key, ofObject: rule, options: [], block)
             }
         }
     }
