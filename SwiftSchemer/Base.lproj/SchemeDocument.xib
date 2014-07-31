@@ -42,6 +42,7 @@
                                                 <segment toolTip="Remove selected rule" image="NSRemoveTemplate" width="32" enabled="NO" tag="1"/>
                                             </segments>
                                         </segmentedCell>
+                                        <accessibility description="Add new rule and remove highlighted rules buttons"/>
                                         <connections>
                                             <action selector="addRemoveButtonPressed:" target="CJ0-rV-zPM" id="ZbD-Gf-oAh"/>
                                         </connections>
@@ -74,11 +75,12 @@
                                                                 <textField verticalHuggingPriority="750" id="AFN-BH-FF9">
                                                                     <rect key="frame" x="1" y="1" width="251" height="22"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Rule Name" drawsBackground="YES" id="irw-FP-4IK">
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" toolTip="Rule Name" placeholderString="Rule Name" drawsBackground="YES" id="irw-FP-4IK">
                                                                         <font key="font" metaFont="fixedUser" size="11"/>
                                                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <accessibility description="Rule name"/>
                                                                 </textField>
                                                             </prototypeCellViews>
                                                         </tableColumn>
@@ -94,13 +96,14 @@
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                             <prototypeCellViews>
-                                                                <colorWell id="BBq-ZI-zih" customClass="QAlphaColorWell" customModule="SwiftSchemer" customModuleProvider="target">
+                                                                <colorWell toolTip="Foreground color" id="BBq-ZI-zih" customClass="QAlphaColorWell" customModule="SwiftSchemer" customModuleProvider="target">
                                                                     <rect key="frame" x="255" y="1" width="32" height="22"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="showsAlpha" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
+                                                                    <accessibility description="Rule foreground color"/>
                                                                 </colorWell>
                                                             </prototypeCellViews>
                                                         </tableColumn>
@@ -116,13 +119,14 @@
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                             <prototypeCellViews>
-                                                                <colorWell id="FYE-TV-oAG" customClass="QAlphaColorWell" customModule="SwiftSchemer" customModuleProvider="target">
+                                                                <colorWell toolTip="Background color" id="FYE-TV-oAG" customClass="QAlphaColorWell" customModule="SwiftSchemer" customModuleProvider="target">
                                                                     <rect key="frame" x="290" y="1" width="32" height="22"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="showsAlpha" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
+                                                                    <accessibility description="Rule background color"/>
                                                                 </colorWell>
                                                             </prototypeCellViews>
                                                         </tableColumn>
@@ -144,11 +148,12 @@
                                                                     <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectAny" id="egj-X5-19z">
                                                                         <font key="font" metaFont="smallSystem"/>
                                                                         <segments>
-                                                                            <segment label="B" width="22"/>
-                                                                            <segment label="I" tag="1"/>
-                                                                            <segment label="U" width="22"/>
+                                                                            <segment label="B" toolTip="Bold style" width="22"/>
+                                                                            <segment label="I" toolTip="Italic style" tag="1"/>
+                                                                            <segment label="U" toolTip="Underlined style" width="22"/>
                                                                         </segments>
                                                                     </segmentedCell>
+                                                                    <accessibility description="Rule font style options"/>
                                                                 </segmentedControl>
                                                             </prototypeCellViews>
                                                         </tableColumn>
@@ -203,6 +208,7 @@
                                                 <segment toolTip="Remove selected rule" image="NSRemoveTemplate" width="32" enabled="NO" tag="1"/>
                                             </segments>
                                         </segmentedCell>
+                                        <accessibility description="Add new selector and remove highlighted selector buttons"/>
                                         <connections>
                                             <action selector="pressAddRemove:" target="uXK-oD-w4o" id="L8U-Es-yWc"/>
                                         </connections>
@@ -237,6 +243,7 @@
                                                 </tableView>
                                             </subviews>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <accessibility description="Rule selector list" help="The currently selected rule's list of selectors."/>
                                         </clipView>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="120" id="waC-CI-6K9"/>
