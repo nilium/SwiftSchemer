@@ -38,6 +38,13 @@ private func convertFontWithTrait(hasTrait: Bool, #trait: NSFontTraitMask, #font
 }
 
 
+private func underlineString(str: String) -> NSAttributedString {
+    return NSAttributedString(string: str, attributes: [
+        NSUnderlineStyleAttributeName: NSUnderlineStyleSingle
+        ])
+}
+
+
 class QRuleTableController: NSObject, NSTableViewDelegate {
 
     @IBOutlet weak var addRemoveButtons: NSSegmentedControl? = nil
@@ -190,7 +197,6 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
         switch column.identifier {
         case kQRuleColumnName:
             let text: NSTextField = view as NSTextField
-            text.stringValue = rule.name
 
             text.textColor = rule.foreground.isVisible()
                 ? rule.foreground
@@ -216,8 +222,21 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
             font = convertFontWithTrait(italic, trait: .ItalicFontMask, font: font, fontManager: fontManager)
             text.font = font
 
+            // Apply underline formatting
+            if underline {
+                text.attributedStringValue = underlineString(rule.name)
+            } else {
+                text.stringValue = rule.name
+            }
+
             bindAction(text) { sender in
                 rule.name = sender.stringValue
+
+                if underline {
+                    text.attributedStringValue = underlineString(rule.name)
+                } else {
+                    text.stringValue = rule.name
+                }
             }
 
         case kQRuleColumnBackground:
