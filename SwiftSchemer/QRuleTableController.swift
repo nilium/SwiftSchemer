@@ -116,6 +116,8 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
             return
         }
 
+        definedTable.backgroundColor = definedScheme.viewportBackground
+
         ruleObservers += observeKeyPath("rules", ofObject: definedScheme, options: []) { [weak self] _, _, _ in
             self?.reloadData()
             return
