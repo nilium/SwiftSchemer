@@ -50,18 +50,6 @@ private let QRuleTagAdd = 0
 private let QRuleTagRemove = 1
 
 
-private let QBoldSegmentIndex = 0
-private let QItalicSegmentIndex = 1
-private let QUnderlineSegmentIndex = 2
-
-
-private let QStyleSegments: [(index: Int, flag: QRuleFlag)] = [
-    (QBoldSegmentIndex, .Bold),
-    (QItalicSegmentIndex, .Italic),
-    (QUnderlineSegmentIndex, .Underline),
-]
-
-
 private func convertFontWithTrait(hasTrait: Bool, #trait: NSFontTraitMask, #font: NSFont, #fontManager: NSFontManager) -> NSFont {
     if hasTrait {
         return fontManager.convertFont(font, toHaveTrait: trait)
@@ -232,25 +220,98 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
     }
 
 
-    // Calls the assign(color) block with the color from the given colorWell.
-    // Returns a block that can be passed as the bound action for a color well.
-    func updateRowWithColor(assign: (NSColor) -> Void) -> (NSColorWell) -> Void {
-        return { [weak self] colorWell in
-            if let con = self {
-                if !con.table {
-                    return
-                }
+    func tableViewSelectionDidChange(note: NSNotification!) {
+        if let view = note.object as? NSTableView {
+            let indices = view.selectedRowIndexes
+            let selectedRule = indices.count != 1 ? nil : scheme?.rules[indices.firstIndex]
+            let info: [NSObject: AnyObject]? =
+            selectedRule
+                ? [kQSelectedRuleInfo: selectedRule!]
+                : nil
 
-                let row = con.table!.rowForView(colorWell)
-                if row == -1 {
-                    return
-                }
+            notify(kQSelectedRuleChanged, from: self, info: info)
 
-                assign(colorWell.color)
-            }
+            removeButtonEnabled = indices.count > 0
         }
     }
 
+
+    @IBAction func addRemoveButtonPressed(sender: NSSegmentedControl) {
+        let seg = sender.selectedSegment
+        let cell = sender.selectedCell() as NSSegmentedCell
+        let tag = cell.tagForSegment(seg)
+
+        switch tag {
+        case QRuleTagAdd:
+            addNewRule()
+        case QRuleTagRemove:
+            removeSelectedRules()
+        case let unknown:
+            NSLog("Unrecognized button tag \(unknown)")
+        }
+    }
+
+
+    func removeSelectedRules() {
+        assert(scheme, "Scheme may not be nil")
+        assert(table, "Table may not be nil")
+
+        var newRules = scheme!.rules
+        table!.selectedRowIndexes.enumerateIndexesWithOptions(.Reverse) { index, _ in
+            newRules.removeAtIndex(index)
+            return
+        }
+        scheme!.rules = newRules
+    }
+
+
+    func addNewRule() {
+        assert(scheme, "Scheme may not be nil")
+
+        if let scheme = self.scheme {
+            scheme.rules += QSchemeRule()
+        }
+    }
+
+
+    var removeButtonEnabled: Bool {
+        get { return addRemoveButtons?.isEnabledForSegment(1) ~| false }
+        set { addRemoveButtons?.setEnabled(newValue, forSegment: 1) }
+    }
+
+}
+
+
+// MARK: Department of Observer-Trigger Data-Reload Mitigation
+
+extension QRuleTableController {
+
+    func shouldAutoUpdate(enabled: Bool, block: () -> ()) {
+        let past = needsUpdate
+        needsUpdate = enabled
+        block()
+        needsUpdate = past
+    }
+
+}
+
+
+// MARK: View Binding
+
+private let QBoldSegmentIndex = 0
+private let QItalicSegmentIndex = 1
+private let QUnderlineSegmentIndex = 2
+
+
+/// Style button segments with their associated indices and flags.
+private let QStyleSegments: [(index: Int, flag: QRuleFlag)] = [
+    (QBoldSegmentIndex, .Bold),
+    (QItalicSegmentIndex, .Italic),
+    (QUnderlineSegmentIndex, .Underline),
+]
+
+
+extension QRuleTableController {
 
     func bindNameColumnView(text: NSTextField, toRule rule: QSchemeRule) {
         text.textColor = rule.foreground.isVisible()
@@ -340,77 +401,23 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
     }
 
 
-    func tableViewSelectionDidChange(note: NSNotification!) {
-        if let view = note.object as? NSTableView {
-            let indices = view.selectedRowIndexes
-            let selectedRule = indices.count != 1 ? nil : scheme?.rules[indices.firstIndex]
-            let info: [NSObject: AnyObject]? =
-            selectedRule
-                ? [kQSelectedRuleInfo: selectedRule!]
-                : nil
+    // Calls the assign(color) block with the color from the given colorWell.
+    // Returns a block that can be passed as the bound action for a color well.
+    func updateRowWithColor(assign: (NSColor) -> Void) -> (NSColorWell) -> Void {
+        return { [weak self] colorWell in
+            if let con = self {
+                if !con.table {
+                    return
+                }
 
-            notify(kQSelectedRuleChanged, from: self, info: info)
+                let row = con.table!.rowForView(colorWell)
+                if row == -1 {
+                    return
+                }
 
-            removeButtonEnabled = indices.count > 0
+                assign(colorWell.color)
+            }
         }
-    }
-
-
-    @IBAction func addRemoveButtonPressed(sender: NSSegmentedControl) {
-        let seg = sender.selectedSegment
-        let cell = sender.selectedCell() as NSSegmentedCell
-        let tag = cell.tagForSegment(seg)
-
-        switch tag {
-        case QRuleTagAdd:
-            addNewRule()
-        case QRuleTagRemove:
-            removeSelectedRules()
-        case let unknown:
-            NSLog("Unrecognized button tag \(unknown)")
-        }
-    }
-
-
-    func removeSelectedRules() {
-        assert(scheme, "Scheme may not be nil")
-        assert(table, "Table may not be nil")
-
-        var newRules = scheme!.rules
-        table!.selectedRowIndexes.enumerateIndexesWithOptions(.Reverse) { index, _ in
-            newRules.removeAtIndex(index)
-            return
-        }
-        scheme!.rules = newRules
-    }
-
-
-    func addNewRule() {
-        assert(scheme, "Scheme may not be nil")
-
-        if let scheme = self.scheme {
-            scheme.rules += QSchemeRule()
-        }
-    }
-
-
-    var removeButtonEnabled: Bool {
-        get { return addRemoveButtons?.isEnabledForSegment(1) ~| false }
-        set { addRemoveButtons?.setEnabled(newValue, forSegment: 1) }
-    }
-
-}
-
-
-// MARK: Department of Observer-Trigger Data-Reload Mitigation
-
-extension QRuleTableController {
-
-    func shouldAutoUpdate(enabled: Bool, block: () -> ()) {
-        let past = needsUpdate
-        needsUpdate = enabled
-        block()
-        needsUpdate = past
     }
 
 }
