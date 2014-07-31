@@ -80,6 +80,11 @@ private func underlineString(str: String) -> NSAttributedString {
 
 class QRuleTableController: NSObject, NSTableViewDelegate {
 
+    /// Override indicating whether the table view's reloadData method should
+    /// be called. If true, reloadData should be called, if false, something
+    /// else _must_ notify the table view of updates to its data.
+    private var needsUpdate: Bool = true
+
     /// Buttons for adding new rules and removing selected rules
     @IBOutlet weak var addRemoveButtons: NSSegmentedControl? = nil
 
@@ -199,7 +204,9 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
             return
         }
 
-        definedTable.reloadData()
+        if needsUpdate {
+            definedTable.reloadData()
+        }
 
         for (row, rule) in enumerate(definedScheme.rules) {
             let rowIndex = NSIndexSet(index: row)
@@ -390,6 +397,20 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
     var removeButtonEnabled: Bool {
         get { return addRemoveButtons?.isEnabledForSegment(1) ~| false }
         set { addRemoveButtons?.setEnabled(newValue, forSegment: 1) }
+    }
+
+}
+
+
+// MARK: Department of Observer-Trigger Data-Reload Mitigation
+
+extension QRuleTableController {
+
+    func shouldAutoUpdate(enabled: Bool, block: () -> ()) {
+        let past = needsUpdate
+        needsUpdate = enabled
+        block()
+        needsUpdate = past
     }
 
 }
