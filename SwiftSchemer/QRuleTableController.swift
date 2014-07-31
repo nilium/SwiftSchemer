@@ -70,7 +70,7 @@ private func underlineString(str: String) -> NSAttributedString {
 }
 
 
-class QRuleTableController: NSObject, NSTableViewDelegate {
+class QRuleTableController: NSObject {
 
     /// Override indicating whether the table view's reloadData method should
     /// be called. If true, reloadData should be called, if false, something
@@ -126,19 +126,6 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
 
         view.registerForDraggedTypes([kQRulePasteType, kQSelectorPasteType])
         view.setDraggingSourceOperationMask(.Move | .Copy, forLocal: true)
-    }
-
-
-    func tableView(tableView: NSTableView!, viewForTableColumn tableColumn: NSTableColumn!, row: Int) -> NSView! {
-        if !scheme {
-            return nil
-        }
-
-        if let view = tableView.makeViewWithIdentifier(tableColumn.identifier, owner: self) as? NSView {
-            bindView(view, toRule: scheme!.rules[row], forColumn: tableColumn)
-            return view
-        }
-        return nil
     }
 
 
@@ -211,22 +198,6 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
     }
 
 
-    func tableViewSelectionDidChange(note: NSNotification!) {
-        if let view = note.object as? NSTableView {
-            let indices = view.selectedRowIndexes
-            let selectedRule = indices.count != 1 ? nil : scheme?.rules[indices.firstIndex]
-            let info: [NSObject: AnyObject]? =
-            selectedRule
-                ? [kQSelectedRuleInfo: selectedRule!]
-                : nil
-
-            notify(kQSelectedRuleChanged, from: self, info: info)
-
-            removeButtonEnabled = indices.count > 0
-        }
-    }
-
-
     @IBAction func addRemoveButtonPressed(sender: NSSegmentedControl) {
         let seg = sender.selectedSegment
         let cell = sender.selectedCell() as NSSegmentedCell
@@ -283,6 +254,41 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
     var removeButtonEnabled: Bool {
         get { return addRemoveButtons?.isEnabledForSegment(1) ~| false }
         set { addRemoveButtons?.setEnabled(newValue, forSegment: 1) }
+    }
+
+}
+
+
+// MARK: NSTableViewDelegate Implementation
+
+extension QRuleTableController: NSTableViewDelegate {
+
+    func tableView(tableView: NSTableView!, viewForTableColumn tableColumn: NSTableColumn!, row: Int) -> NSView! {
+        if !scheme {
+            return nil
+        }
+
+        if let view = tableView.makeViewWithIdentifier(tableColumn.identifier, owner: self) as? NSView {
+            bindView(view, toRule: scheme!.rules[row], forColumn: tableColumn)
+            return view
+        }
+        return nil
+    }
+
+
+    func tableViewSelectionDidChange(note: NSNotification!) {
+        if let view = note.object as? NSTableView {
+            let indices = view.selectedRowIndexes
+            let selectedRule = indices.count != 1 ? nil : scheme?.rules[indices.firstIndex]
+            let info: [NSObject: AnyObject]? =
+            selectedRule
+                ? [kQSelectedRuleInfo: selectedRule!]
+                : nil
+
+            notify(kQSelectedRuleChanged, from: self, info: info)
+
+            removeButtonEnabled = indices.count > 0
+        }
     }
 
 }
