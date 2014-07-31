@@ -100,24 +100,27 @@ class QSchemeRule: NSObject {
     var revisionTracker = QRevisionTracker()
 
     var name: NSString = "Unnamed Rule" {
-        didSet { revisionTracker.addRevision { self.name = oldValue } }
+        didSet { revisionTracker.addRevision("rule name change") { self.name = oldValue } }
     }
 
     var selectors: [String] = [] {
-        didSet { revisionTracker.addRevision { self.selectors = oldValue } }
+        didSet {
+            revisionTracker.actionName ~|= "change to selectors"
+            revisionTracker.addRevision { self.selectors = oldValue }
+        }
     }
 
     var foreground: NSColor = NSColor(white:0.0, alpha:0.0) {
-        didSet { revisionTracker.addRevision { self.foreground = oldValue } }
+        didSet { revisionTracker.addRevision("foreground color change") { self.foreground = oldValue } }
     }
 
     var background: NSColor = NSColor(white:1.0, alpha:0.0) {
-        didSet { revisionTracker.addRevision { self.background = oldValue } }
+        didSet { revisionTracker.addRevision("background color change") { self.background = oldValue } }
     }
 
     var flags: [QRuleFlag] = [] {
         didSet {
-            revisionTracker.addRevision { self.flags = oldValue }
+            revisionTracker.addRevision("rule style change") { self.flags = oldValue }
             flagsCounter = flagsCounter &+ 1
         }
     }
