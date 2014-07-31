@@ -120,6 +120,18 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
 
 
     func refreshColumnNames() {
+        if let table = self.table {
+            table.backgroundColor = scheme!.viewportBackground
+
+            let rows = NSIndexSet(indexesInRange: NSRange(0 ..< table.numberOfRows))
+            if rows.count == 0 { return }
+
+            let columnNameIndex = table.columnWithIdentifier(kQRuleColumnName)
+            if columnNameIndex == -1 { return }
+
+            let columnNameIndexSet = NSIndexSet(index: columnNameIndex)
+            table.reloadDataForRowIndexes(rows, columnIndexes: columnNameIndexSet)
+        }
     }
 
 
