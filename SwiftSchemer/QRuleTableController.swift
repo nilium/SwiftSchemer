@@ -173,6 +173,11 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
             bindAction(well, updateRowWithColor { rule.foreground = $0 })
 
         case kQRuleColumnFlags:
+            let seg: NSSegmentedControl! = view as? NSSegmentedControl
+            seg.setSelected(contains(rule.flags, { $0.isBold }), forSegment: 0)
+            seg.setSelected(contains(rule.flags, { $0.isItalic }), forSegment: 1)
+            seg.setSelected(contains(rule.flags, { $0.isUnderline }), forSegment: 2)
+
             bindAction(view as NSSegmentedControl) { segButton in
                 let flags: [QRuleFlag] = [.Bold, .Italic, .Underline]
                 var result: [QRuleFlag] = []
@@ -185,12 +190,6 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
 
                 rule.flags = result
             }
-
-            assert(view as? NSSegmentedControl, "Column view must be an NSSegmentedControl")
-            let seg: NSSegmentedControl! = view as? NSSegmentedControl
-            seg.setSelected(contains(rule.flags, { $0.isBold }), forSegment: 0)
-            seg.setSelected(contains(rule.flags, { $0.isItalic }), forSegment: 1)
-            seg.setSelected(contains(rule.flags, { $0.isUnderline }), forSegment: 2)
 
         case let unknownIdent:
             NSLog("Unrecognized rule table column specified: \(unknownIdent)")
