@@ -46,8 +46,7 @@ func assignColorFromPList(inout color: NSColor, plist: QPropertyList, key: Strin
 /// Assigns a hex color to plist[key] if the color has an alpha value >= 1/255.
 /// If not visible, it is not stored in plist.
 func putColorIfVisible(inout plist: QPropertyList, key: String, color: NSColor) {
-    let alphaEpsilon: CGFloat = 1.0 / 255.0
-    if (color.alphaComponent >= alphaEpsilon) {
+    if color.isVisible() {
         plist[key] = color.toHexString()
     }
 }
