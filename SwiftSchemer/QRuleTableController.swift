@@ -129,19 +129,6 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
     }
 
 
-    func doubleClickedTableView(view: NSTableView) {
-        let column = view.clickedColumn
-        let row = view.clickedRow
-        if column == -1 || row == -1 {
-            return
-        }
-
-        if view.columnWithIdentifier(kQRuleColumnName) == column {
-            view.editColumn(column, row: row, withEvent: nil, select: true)
-        }
-    }
-
-
     func tableView(tableView: NSTableView!, viewForTableColumn tableColumn: NSTableColumn!, row: Int) -> NSView! {
         if !scheme {
             return nil
@@ -310,6 +297,25 @@ extension QRuleTableController {
         needsUpdate = enabled
         block()
         needsUpdate = past
+    }
+
+}
+
+
+// MARK: Double-Click to Edit Name
+
+extension QRuleTableController {
+
+    func doubleClickedTableView(view: NSTableView) {
+        let column = view.clickedColumn
+        let row = view.clickedRow
+        if column == -1 || row == -1 {
+            return
+        }
+
+        if view.columnWithIdentifier(kQRuleColumnName) == column {
+            view.editColumn(column, row: row, withEvent: nil, select: true)
+        }
     }
 
 }
