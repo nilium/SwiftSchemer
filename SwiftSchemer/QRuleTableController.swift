@@ -46,26 +46,6 @@ private let QRuleKeysToColumns = [
 ]
 
 
-/// Converts a font to have, or not have, a given trait. Just a wrapper around
-/// a font manager's convertFont:to(Not)?HaveTrait: methods.
-private func convertFontWithTrait(hasTrait: Bool, #trait: NSFontTraitMask, #font: NSFont, #fontManager: NSFontManager) -> NSFont {
-    if hasTrait {
-        return fontManager.convertFont(font, toHaveTrait: trait)
-    } else {
-        return fontManager.convertFont(font, toNotHaveTrait: trait)
-    }
-}
-
-
-/// Given a string, returns an NSAttributedString that has an underlined
-/// attribute.
-private func underlineString(str: String) -> NSAttributedString {
-    return NSAttributedString(string: str, attributes: [
-        NSUnderlineStyleAttributeName: NSUnderlineStyleSingle
-        ])
-}
-
-
 class QRuleTableController: NSObject {
 
     /// Override indicating whether the table view's reloadData method should
@@ -279,6 +259,26 @@ private let QStyleSegments: [(index: Int, flag: QRuleFlag)] = [
     (QItalicSegmentIndex, .Italic),
     (QUnderlineSegmentIndex, .Underline),
 ]
+
+
+/// Converts a font to have, or not have, a given trait. Just a wrapper around
+/// a font manager's convertFont:to(Not)?HaveTrait: methods.
+private func convertFontWithTrait(hasTrait: Bool, #trait: NSFontTraitMask, #font: NSFont, #fontManager: NSFontManager) -> NSFont {
+    if hasTrait {
+        return fontManager.convertFont(font, toHaveTrait: trait)
+    } else {
+        return fontManager.convertFont(font, toNotHaveTrait: trait)
+    }
+}
+
+
+/// Given a string, returns an NSAttributedString that has an underlined
+/// attribute.
+private func underlineString(str: String) -> NSAttributedString {
+    return NSAttributedString(string: str, attributes: [
+        NSUnderlineStyleAttributeName: NSUnderlineStyleSingle
+        ])
+}
 
 
 extension QRuleTableController {
