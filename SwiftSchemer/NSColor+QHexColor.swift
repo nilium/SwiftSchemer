@@ -7,6 +7,9 @@
 import Cocoa
 
 
+private let AlphaEpsilon: CGFloat = 1.0 / 255.0
+
+
 extension NSColor {
 
     /// Returns the receiver in the color space expected for color schemes.
@@ -97,6 +100,12 @@ extension NSColor {
         let r = octetToFloat(colorInt >> 16)
 
         return NSColor(deviceRed: r, green: g, blue: b, alpha: a)
+    }
+
+
+    /// Gets whether the color would be visible in a color scheme.
+    func isVisible() -> Bool {
+        return alphaComponent >= AlphaEpsilon
     }
 
 }
