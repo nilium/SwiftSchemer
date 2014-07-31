@@ -29,6 +29,15 @@ private let QRuleTagAdd = 0
 private let QRuleTagRemove = 1
 
 
+private func convertFontWithTrait(hasTrait: Bool, #trait: NSFontTraitMask, #font: NSFont, #fontManager: NSFontManager) -> NSFont {
+    if hasTrait {
+        return fontManager.convertFont(font, toHaveTrait: trait)
+    } else {
+        return fontManager.convertFont(font, toNotHaveTrait: trait)
+    }
+}
+
+
 class QRuleTableController: NSObject, NSTableViewDelegate {
 
     @IBOutlet weak var addRemoveButtons: NSSegmentedControl? = nil
@@ -161,6 +170,20 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
         case kQRuleColumnName:
             let text: NSTextField = view as NSTextField
             text.stringValue = rule.name
+
+            // Get rule's font style
+            let (bold, italic, underline) = (
+                contains(rule.flags, { $0.isBold }),
+                contains(rule.flags, { $0.isItalic }),
+                contains(rule.flags, { $0.isUnderline })
+            )
+
+            // Set the rule's bold/italic formatting via the font
+            var font = NSFont.userFixedPitchFontOfSize(0.0)
+            let fontManager = NSFontManager.sharedFontManager()
+            font = convertFontWithTrait(bold, trait: .BoldFontMask, font: font, fontManager: fontManager)
+            font = convertFontWithTrait(italic, trait: .ItalicFontMask, font: font, fontManager: fontManager)
+            text.font = font
 
             bindAction(text) { sender in
                 rule.name = sender.stringValue
