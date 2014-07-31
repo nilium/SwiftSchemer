@@ -300,24 +300,26 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
     /// Hooks up a view to its column and rule.
     func bindView(view: NSView, toRule rule: QSchemeRule, forColumn column: NSTableColumn) {
         switch column.identifier {
-        case kQRuleColumnName:
+        case kQRuleColumnName where view is NSTextField:
             bindNameColumnView(view as NSTextField, toRule: rule)
 
-        case kQRuleColumnBackground:
+        case kQRuleColumnBackground where view is NSColorWell:
             let well: NSColorWell = view as NSColorWell
             well.color = rule.background
 
             bindAction(well, updateRowWithColor { rule.background = $0 })
 
-        case kQRuleColumnForeground:
+        case kQRuleColumnForeground where view is NSColorWell:
             let well: NSColorWell = view as NSColorWell
             well.color = rule.foreground
 
             bindAction(well, updateRowWithColor { rule.foreground = $0 })
 
-        case kQRuleColumnFlags:
+        case kQRuleColumnFlags where view is NSSegmentedControl:
             bindRuleColumnFlagsView(view as NSSegmentedControl, toRule: rule)
 
+        case kQRuleColumnName, kQRuleColumnBackground, kQRuleColumnForeground, kQRuleColumnFlags:
+            NSLog("Got an expected column but an unexpected view type: \(view.className)")
 
         case let unknownIdent:
             NSLog("Unrecognized rule table column specified: \(unknownIdent)")
