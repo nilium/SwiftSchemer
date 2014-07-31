@@ -87,7 +87,15 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
 
 
     func doubleClickedTableView(view: NSTableView) {
-        // TODO: Trigger editing of rule label if label is double-clicked.
+        let column = view.clickedColumn
+        let row = view.clickedRow
+        if column == -1 || row == -1 {
+            return
+        }
+
+        if view.columnWithIdentifier(kQRuleColumnName) == column {
+            view.editColumn(column, row: row, withEvent: nil, select: true)
+        }
     }
 
 
