@@ -8,6 +8,27 @@ import Cocoa
 import SnowKit
 
 
+// I don't know why, but this line needs to be here or Swift will begin to
+// complain that NSTextField, NSSegmentedControl, and NSColorWell do not
+// conform to QControlBindingProtocol -- which, normally, it doesn't, except
+// that I've provided this conformance in QControlBinding.swift via an
+// extension. So it seems like Swift doesn't know that NSControl exists here,
+// but there's something odd about how it's deciding this code is
+// valid/invalid.
+//
+// See, this line's at the top of the file. If I put it below any bindAction
+// call, all bindAction calls after the declaration are valid, but all before
+// the first introduction of NSControl are invalid. This is clearly some sort
+// of strange compiler bug and maybe an optimization goof where it just won't
+// pull in a type it's not aware of.
+//
+// The end result, at any rate, is that this line is required in order for any
+// calls to bindAction to work, because otherwise Swift won't check supertypes
+// -- namely NSControl -- for protocol conformance.
+let _: NSControl?
+// So yeah, point of this is, I'm not crazy.
+
+
 let kQSelectedRuleChanged = "kQSelectedRuleChanged"
 let kQSelectedRuleInfo = "rule"
 
@@ -111,7 +132,7 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
             return nil
         }
 
-        if let view = tableView.makeViewWithIdentifier(tableColumn.identifier, owner: self) as? NSControl {
+        if let view = tableView.makeViewWithIdentifier(tableColumn.identifier, owner: self) as? NSView {
             bindView(view, toRule: scheme!.rules[row], forColumn: tableColumn)
             return view
         }
@@ -207,7 +228,7 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
 
 
     /// Hooks up a view to its column and rule.
-    func bindView(view: NSControl, toRule rule: QSchemeRule, forColumn column: NSTableColumn) {
+    func bindView(view: NSView, toRule rule: QSchemeRule, forColumn column: NSTableColumn) {
         switch column.identifier {
         case kQRuleColumnName:
             let text: NSTextField = view as NSTextField
