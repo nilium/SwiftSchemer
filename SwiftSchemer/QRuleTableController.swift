@@ -245,13 +245,15 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
         let cell = sender.selectedCell() as NSSegmentedCell
         let tag = cell.tagForSegment(seg)
 
-        switch tag {
-        case QRuleTagAdd:
-            addNewRule()
-        case QRuleTagRemove:
-            removeSelectedRules()
-        case let unknown:
-            NSLog("Unrecognized button tag \(unknown)")
+        shouldAutoUpdate(false) {
+            switch tag {
+            case QRuleTagAdd:
+                self.addNewRule()
+            case QRuleTagRemove:
+                self.removeSelectedRules()
+            case let unknown:
+                NSLog("Unrecognized button tag \(unknown)")
+            }
         }
     }
 
@@ -261,19 +263,32 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
         assert(table, "Table may not be nil")
 
         var newRules = scheme!.rules
-        table!.selectedRowIndexes.enumerateIndexesWithOptions(.Reverse) { index, _ in
+        let rows = table!.selectedRowIndexes
+        rows.enumerateIndexesWithOptions(.Reverse) { index, _ in
             newRules.removeAtIndex(index)
             return
         }
         scheme!.rules = newRules
+        table!.removeRowsAtIndexes(rows, withAnimation: .SlideLeft)
     }
 
 
     func addNewRule() {
         assert(scheme, "Scheme may not be nil")
+        assert(table, "Table may not be nil")
 
         if let scheme = self.scheme {
             scheme.rules += QSchemeRule()
+            let newRowIndex = table!.numberOfRows
+            let newRowIndexSet = NSIndexSet(index: newRowIndex)
+            table!.insertRowsAtIndexes(newRowIndexSet, withAnimation: .EffectNone)
+            table!.scrollRowToVisible(newRowIndex)
+
+            let nameColumn = table!.columnWithIdentifier(kQRuleColumnName)
+            if nameColumn != -1 {
+                table!.selectRowIndexes(newRowIndexSet, byExtendingSelection: false)
+                table!.editColumn(nameColumn, row: newRowIndex, withEvent: nil, select: true)
+            }
         }
     }
 
