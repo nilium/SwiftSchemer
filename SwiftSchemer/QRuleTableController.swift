@@ -155,7 +155,10 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
                     let columnIndex = table.columnWithIdentifier(column)
                     if columnIndex == -1 { return }
 
-                    table.reloadDataForRowIndexes(rowIndex, columnIndexes: NSIndexSet(index: columnIndex))
+                    table.reloadDataForRowIndexes(
+                        rowIndex,
+                        columnIndexes: NSIndexSet(indexesInRange: NSRange(0 ..< table.numberOfColumns))
+                    )
                 }
             }
         }
