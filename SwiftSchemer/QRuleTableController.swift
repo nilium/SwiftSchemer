@@ -120,6 +120,8 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
 
 
     func refreshColumnNames() {
+        if !scheme { return }
+
         if let table = self.table {
             table.backgroundColor = scheme!.viewportBackground
 
