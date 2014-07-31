@@ -50,6 +50,18 @@ private let QRuleTagAdd = 0
 private let QRuleTagRemove = 1
 
 
+private let QBoldSegmentIndex = 0
+private let QItalicSegmentIndex = 1
+private let QUnderlineSegmentIndex = 2
+
+
+private let QStyleSegments: [(index: Int, flag: QRuleFlag)] = [
+    (QBoldSegmentIndex, .Bold),
+    (QItalicSegmentIndex, .Italic),
+    (QUnderlineSegmentIndex, .Underline),
+]
+
+
 private func convertFontWithTrait(hasTrait: Bool, #trait: NSFontTraitMask, #font: NSFont, #fontManager: NSFontManager) -> NSFont {
     if hasTrait {
         return fontManager.convertFont(font, toHaveTrait: trait)
@@ -271,6 +283,20 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
     }
 
 
+    func bindRuleColumnFlagsView(view: NSSegmentedControl, toRule rule: QSchemeRule) {
+        for (index, flag) in QStyleSegments {
+            view.setSelected(contains(rule.flags, flag), forSegment: index)
+        }
+
+        bindAction(view) { view in
+            rule.flags = QStyleSegments
+                .filter { index, _ in view.isSelectedForSegment(index) }
+                .map { _, flag in flag }
+                + rule.flags.filter { $0.isUnknown }
+        }
+    }
+
+
     /// Hooks up a view to its column and rule.
     func bindView(view: NSView, toRule rule: QSchemeRule, forColumn column: NSTableColumn) {
         switch column.identifier {
@@ -290,23 +316,8 @@ class QRuleTableController: NSObject, NSTableViewDelegate {
             bindAction(well, updateRowWithColor { rule.foreground = $0 })
 
         case kQRuleColumnFlags:
-            let seg: NSSegmentedControl! = view as? NSSegmentedControl
-            seg.setSelected(contains(rule.flags, { $0.isBold }), forSegment: 0)
-            seg.setSelected(contains(rule.flags, { $0.isItalic }), forSegment: 1)
-            seg.setSelected(contains(rule.flags, { $0.isUnderline }), forSegment: 2)
+            bindRuleColumnFlagsView(view as NSSegmentedControl, toRule: rule)
 
-            bindAction(view as NSSegmentedControl) { segButton in
-                let flags: [QRuleFlag] = [.Bold, .Italic, .Underline]
-                var result: [QRuleFlag] = []
-
-                for (i, f) in enumerate(flags) {
-                    if segButton.isSelectedForSegment(i) {
-                        result += f
-                    }
-                }
-
-                rule.flags = result
-            }
 
         case let unknownIdent:
             NSLog("Unrecognized rule table column specified: \(unknownIdent)")
