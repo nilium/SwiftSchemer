@@ -156,9 +156,11 @@ class QRuleTableController: NSObject {
         }
 
         definedTable.backgroundColor = definedScheme.viewportBackground
-        ruleObservers += observeKeyPath("viewportBackground", ofObject: definedScheme, options: []) { [weak self] _, _, _ in
-            self?.refreshColumnNames()
-            return
+        for key in ["viewportBackground", "viewportForeground"] {
+            ruleObservers += observeKeyPath(key, ofObject: definedScheme, options: []) { [weak self] _, _, _ in
+                self?.refreshColumnNames()
+                return
+            }
         }
 
         ruleObservers += observeKeyPath("rules", ofObject: definedScheme, options: []) { [weak self] _, _, _ in
