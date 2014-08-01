@@ -13,8 +13,6 @@
 		1C32B05519832AC000A949A0 /* QRuleTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C32B05419832AC000A949A0 /* QRuleTableController.swift */; };
 		1C32B05719832ACD00A949A0 /* QSelectorTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C32B05619832ACD00A949A0 /* QSelectorTableController.swift */; };
 		1C32B05919832DE800A949A0 /* QSelectorTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C32B05819832DE800A949A0 /* QSelectorTableSource.swift */; };
-		1C5D029B197D01890095ECEB /* SnowKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C5D029A197D01890095ECEB /* SnowKit.framework */; };
-		1C5D029D197D02220095ECEB /* SnowKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1C5D029A197D01890095ECEB /* SnowKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1C7FFC7B197CEA9900863982 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7FFC7A197CEA9900863982 /* main.swift */; };
 		1C7FFC7D197CEA9900863982 /* QSchemeDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7FFC7C197CEA9900863982 /* QSchemeDocument.swift */; };
 		1C7FFC82197CEA9900863982 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C7FFC81197CEA9900863982 /* Images.xcassets */; };
@@ -29,6 +27,7 @@
 		1C851317198307DE002670DB /* QAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C851316198307DE002670DB /* QAppDelegate.swift */; };
 		1C8D03BC19838C07007D059B /* QControlBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8D03BB19838C07007D059B /* QControlBinding.swift */; };
 		1C8D03BE198481B6007D059B /* QRuleTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8D03BD198481B6007D059B /* QRuleTableSource.swift */; };
+		1CA72F51198B3940001A2107 /* SnowKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA72F4C198B3915001A2107 /* SnowKit.framework */; };
 		1CBA16281987216E00A436CD /* QRevisionTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBA16271987216E00A436CD /* QRevisionTracker.swift */; };
 		1CDC44D41985A8870092BB3F /* RawMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDC44D31985A8870092BB3F /* RawMask.swift */; };
 /* End PBXBuildFile section */
@@ -41,6 +40,27 @@
 			remoteGlobalIDString = 1C7FFC74197CEA9900863982;
 			remoteInfo = SwiftSchemer;
 		};
+		1CA72F4B198B3915001A2107 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1CA72F46198B3915001A2107 /* SnowKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1CFB185B197A25B1000EC612;
+			remoteInfo = SnowKit;
+		};
+		1CA72F4D198B3915001A2107 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1CA72F46198B3915001A2107 /* SnowKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1CFB1866197A25B1000EC612;
+			remoteInfo = SnowKitTests;
+		};
+		1CA72F4F198B393A001A2107 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1CA72F46198B3915001A2107 /* SnowKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1CFB185A197A25B1000EC612;
+			remoteInfo = SnowKit;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,7 +70,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1C5D029D197D02220095ECEB /* SnowKit.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,7 +82,6 @@
 		1C32B05419832AC000A949A0 /* QRuleTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRuleTableController.swift; sourceTree = "<group>"; };
 		1C32B05619832ACD00A949A0 /* QSelectorTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSelectorTableController.swift; sourceTree = "<group>"; };
 		1C32B05819832DE800A949A0 /* QSelectorTableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSelectorTableSource.swift; sourceTree = "<group>"; };
-		1C5D029A197D01890095ECEB /* SnowKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnowKit.framework; path = ../Projects/SnowKit/bin/Debug/SnowKit.framework; sourceTree = "<group>"; };
 		1C7FFC75197CEA9900863982 /* SwiftSchemer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftSchemer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C7FFC79197CEA9900863982 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C7FFC7A197CEA9900863982 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -83,6 +101,7 @@
 		1C851316198307DE002670DB /* QAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QAppDelegate.swift; sourceTree = "<group>"; };
 		1C8D03BB19838C07007D059B /* QControlBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QControlBinding.swift; sourceTree = "<group>"; };
 		1C8D03BD198481B6007D059B /* QRuleTableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRuleTableSource.swift; sourceTree = "<group>"; };
+		1CA72F46198B3915001A2107 /* SnowKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SnowKit.xcodeproj; path = ext/SnowKit/SnowKit.xcodeproj; sourceTree = "<group>"; };
 		1CBA16271987216E00A436CD /* QRevisionTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRevisionTracker.swift; sourceTree = "<group>"; };
 		1CDC44D31985A8870092BB3F /* RawMask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawMask.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,7 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C5D029B197D01890095ECEB /* SnowKit.framework in Frameworks */,
+				1CA72F51198B3940001A2107 /* SnowKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,21 +184,13 @@
 			name = Application;
 			sourceTree = "<group>";
 		};
-		1C10CAAD1984928F004E8018 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1C5D029A197D01890095ECEB /* SnowKit.framework */,
-			);
-			name = Frameworks;
-			path = ..;
-			sourceTree = "<group>";
-		};
 		1C7FFC6C197CEA9900863982 = {
 			isa = PBXGroup;
 			children = (
 				1C7FFC77197CEA9900863982 /* SwiftSchemer */,
 				1C7FFC8D197CEA9900863982 /* SwiftSchemerTests */,
 				1C7FFC76197CEA9900863982 /* Products */,
+				1CA72F46198B3915001A2107 /* SnowKit.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -209,7 +220,6 @@
 		1C7FFC78197CEA9900863982 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1C10CAAD1984928F004E8018 /* Frameworks */,
 				1C7FFC79197CEA9900863982 /* Info.plist */,
 				1C7FFC9C197CEBBE00863982 /* SwiftSchemer-Bridging-Header.h */,
 			);
@@ -231,6 +241,15 @@
 				1C7FFC8F197CEA9900863982 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1CA72F47198B3915001A2107 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1CA72F4C198B3915001A2107 /* SnowKit.framework */,
+				1CA72F4E198B3915001A2107 /* SnowKitTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		1CC7563E197DC17600CDA8E6 /* Resources */ = {
@@ -268,6 +287,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1CA72F50198B393A001A2107 /* PBXTargetDependency */,
 			);
 			name = SwiftSchemer;
 			productName = SwiftSchemer;
@@ -321,6 +341,12 @@
 			mainGroup = 1C7FFC6C197CEA9900863982;
 			productRefGroup = 1C7FFC76197CEA9900863982 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1CA72F47198B3915001A2107 /* Products */;
+					ProjectRef = 1CA72F46198B3915001A2107 /* SnowKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1C7FFC74197CEA9900863982 /* SwiftSchemer */,
@@ -328,6 +354,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1CA72F4C198B3915001A2107 /* SnowKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SnowKit.framework;
+			remoteRef = 1CA72F4B198B3915001A2107 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1CA72F4E198B3915001A2107 /* SnowKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SnowKitTests.xctest;
+			remoteRef = 1CA72F4D198B3915001A2107 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1C7FFC73197CEA9900863982 /* Resources */ = {
@@ -390,6 +433,11 @@
 			isa = PBXTargetDependency;
 			target = 1C7FFC74197CEA9900863982 /* SwiftSchemer */;
 			targetProxy = 1C7FFC8B197CEA9900863982 /* PBXContainerItemProxy */;
+		};
+		1CA72F50198B393A001A2107 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SnowKit;
+			targetProxy = 1CA72F4F198B393A001A2107 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
