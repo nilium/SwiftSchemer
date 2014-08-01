@@ -1,0 +1,3 @@
+[submodule "ext/SnowKit"]
+	path = ext/SnowKit
+	url = git@github.com:nilium/SnowKit.git
