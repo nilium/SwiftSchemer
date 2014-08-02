@@ -28,6 +28,7 @@
 		1C8D03BC19838C07007D059B /* QControlBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8D03BB19838C07007D059B /* QControlBinding.swift */; };
 		1C8D03BE198481B6007D059B /* QRuleTableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8D03BD198481B6007D059B /* QRuleTableSource.swift */; };
 		1CA72F51198B3940001A2107 /* SnowKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA72F4C198B3915001A2107 /* SnowKit.framework */; };
+		1CA72F5A198CA74E001A2107 /* SnowKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1CA72F4C198B3915001A2107 /* SnowKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1CBA16281987216E00A436CD /* QRevisionTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBA16271987216E00A436CD /* QRevisionTracker.swift */; };
 		1CDC44D41985A8870092BB3F /* RawMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDC44D31985A8870092BB3F /* RawMask.swift */; };
 /* End PBXBuildFile section */
@@ -70,6 +71,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				1CA72F5A198CA74E001A2107 /* SnowKit.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
