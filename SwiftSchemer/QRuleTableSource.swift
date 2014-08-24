@@ -22,7 +22,7 @@ class QRuleTableSource: NSObject, NSTableViewDataSource {
 
 
     func numberOfRowsInTableView(tableView: NSTableView!) -> Int {
-        return scheme?.rules.count ~| 0
+        return scheme?.rules.count ?? 0
     }
 
 }
@@ -49,7 +49,7 @@ extension QRuleTableSource {
         dropOperation: NSTableViewDropOperation
         ) -> Bool
     {
-        if dropOperation == .On || !scheme {
+        if dropOperation == .On || scheme == nil {
             return false
         }
 
@@ -102,7 +102,7 @@ extension QRuleTableSource {
         dropOperation: NSTableViewDropOperation
         ) -> Bool
     {
-        if dropOperation != .On || !scheme {
+        if dropOperation != .On || scheme == nil {
             return false
         }
 
@@ -165,7 +165,7 @@ extension QRuleTableSource {
         proposedDropOperation dropOperation: NSTableViewDropOperation
         ) -> NSDragOperation
     {
-        if !scheme {
+        if scheme == nil {
             return .None
         }
 
@@ -214,8 +214,8 @@ extension QRuleTableSource {
         if let scheme = self.scheme {
             let item = NSPasteboardItem()
             let plist: NSDictionary = [
-                "row": row.bridgeToObjectiveC(),
-                "rule": scheme.rules[row].toPropertyList().bridgeToObjectiveC()
+                "rule": scheme.rules[row].toPropertyList(),
+                "row": row
             ]
 
             item.setPropertyList(plist, forType: kQRulePasteType)

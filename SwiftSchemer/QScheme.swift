@@ -5,11 +5,12 @@
 //
 
 import Cocoa
+import SnowKit
 
 
 private func isBaseRulesDictionary(obj: AnyObject!) -> Bool {
     if let plist = obj as? QPropertyList {
-        if plist["settings"]? {
+        if plist["settings"] != nil {
             return plist.count == 1
         }
     }
@@ -33,7 +34,7 @@ private func getBaseRuleDictionary(settings: NSArray) -> QPropertyList? {
 
 private func getSyntaxRuleDictionaries(settings: NSArray) -> [QPropertyList] {
     let pred = NSPredicate(block: { (obj, _) -> Bool in
-            obj as? QPropertyList && !isBaseRulesDictionary(obj)
+            obj is QPropertyList && !isBaseRulesDictionary(obj)
         })
     return settings.filteredArrayUsingPredicate(pred).filter { $0 is QPropertyList }.map { $0 as QPropertyList }
 }
@@ -145,7 +146,7 @@ class QScheme: NSObject {
     let uuid: NSUUID
 
 
-    init() {
+    override init() {
         uuid = NSUUID.UUID()
     }
 
@@ -153,7 +154,7 @@ class QScheme: NSObject {
     init(propertyList: QPropertyList) {
         let settingsAry = propertyList["settings"] as? NSArray
 
-        assert(settingsAry?, "Cannot initialize scheme without valid property list")
+        assert(settingsAry != nil, "Cannot initialize scheme without valid property list")
 
         let baseRules = getBaseRuleDictionary(settingsAry!)!
         let plistRules = getSyntaxRuleDictionaries(settingsAry!)
@@ -184,7 +185,7 @@ class QScheme: NSObject {
         }
 
         for plistRule in plistRules {
-            rules += QSchemeRule(propertyList: plistRule)
+            rules.append(QSchemeRule(propertyList: plistRule))
         }
     }
 
@@ -213,11 +214,7 @@ class QScheme: NSObject {
 
         rules = scheme.rules.map { QSchemeRule(rule: $0) }
 
-        if uuid? {
-            self.uuid = uuid!
-        } else {
-            self.uuid = NSUUID.UUID()
-        }
+        self.uuid = uuid ?? NSUUID.UUID()
     }
 
 
@@ -245,7 +242,7 @@ class QScheme: NSObject {
         putColorIfVisible(&settings, "selectionBorder", selectionBorder)
         putColorIfVisible(&settings, "inactiveSelection", inactiveSelectionFill)
 
-        baseRules += ["settings": settings]
+        baseRules.append(["settings": settings])
         baseRules += rules.map { $0.toPropertyList() }
 
         plist["uuid"] = uuid.UUIDString

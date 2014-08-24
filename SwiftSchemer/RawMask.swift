@@ -7,11 +7,11 @@
 import Foundation
 
 
-operator infix &== { associativity none precedence 130 }
+infix operator &== { associativity none precedence 130 }
 
 
-@infix func &== <T: RawRepresentable where T.RawType: UnsignedInteger>(lhs: T, rhs: T) -> Bool {
-    let rhsRaw: T.RawType = rhs.toRaw()
-    let lhsRaw: T.RawType = lhs.toRaw()
+func &== <T: RawRepresentable where T.Raw: UnsignedIntegerType>(lhs: T, rhs: T) -> Bool {
+    let rhsRaw: T.Raw = rhs.toRaw()
+    let lhsRaw: T.Raw = lhs.toRaw()
     return (lhsRaw & rhsRaw) == rhsRaw
 }

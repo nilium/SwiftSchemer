@@ -18,7 +18,7 @@ class QSelectorTableSource: NSObject, NSTableViewDataSource {
 
 
     func numberOfRowsInTableView(tableView: NSTableView!) -> Int {
-        let count = rule?.selectors.count ~| 0
+        let count = rule?.selectors.count ?? 0
         return count
     }
 
@@ -35,11 +35,7 @@ class QSelectorTableSource: NSObject, NSTableViewDataSource {
 
 
     func tableView(tableView: NSTableView!, setObjectValue object: AnyObject!, forTableColumn tableColumn: NSTableColumn!, row: Int) {
-        if !rule {
-            NSLog("Attempt to set row \(row) of column \(tableColumn.identifier) to \(object) when rule is undefined")
-            assert(false)
-            return
-        }
+        assert(rule != nil, "Setting objects when rule is nil is not permitted")
 
         switch tableColumn.identifier as String {
         case kQSelectorDataColumn where object is NSString:
@@ -47,7 +43,6 @@ class QSelectorTableSource: NSObject, NSTableViewDataSource {
             notify(QSchemeChangedNotification, from: scheme)
         case kQSelectorDataColumn:
             NSLog("Attempt to write non-NSString value [\(object)] to selector at row \(row)")
-            assert(false)
         case let unknownColumn:
             NSLog("Attempt to write object [\(object)] to row \(row) of undefined column '\(unknownColumn)' from selector data source")
         }
@@ -75,7 +70,7 @@ extension QSelectorTableSource {
         dropOperation: NSTableViewDropOperation
         ) -> Bool
     {
-        if dropOperation == .On || !rule {
+        if dropOperation == .On || rule == nil {
             return false
         }
 
@@ -125,7 +120,7 @@ extension QSelectorTableSource {
         proposedDropOperation dropOperation: NSTableViewDropOperation
         ) -> NSDragOperation
     {
-        if !rule {
+        if rule == nil {
             return .None
         }
 
@@ -152,8 +147,8 @@ extension QSelectorTableSource {
         if let rule = self.rule {
             let item = NSPasteboardItem()
             let plist: NSDictionary = [
-                "selector": rule.selectors[row].bridgeToObjectiveC(),
-                "row": row.bridgeToObjectiveC()
+                "selector": rule.selectors[row],
+                "row": row
             ]
             item.setPropertyList(plist, forType: kQSelectorPasteType)
             return item

@@ -19,7 +19,7 @@ class QSchemeDocument: NSDocument {
     var schemeChangedObserver = QNotificationObserver.None
     var scheme: QScheme = QScheme() {
         didSet {
-            scheme.revisionTracker = QRevisionTracker(parent: self)
+            scheme.revisionTracker = QRevisionTracker(undoManager)
 
             schemeChangedObserver.disconnect()
             schemeChangedObserver =
@@ -50,7 +50,7 @@ class QSchemeDocument: NSDocument {
         didSet(previous) {
             disconnectObserver(&selectedRuleObserver)
 
-            if !(ruleController?) {
+            if ruleController == nil {
                 return
             }
 
@@ -77,10 +77,10 @@ class QSchemeDocument: NSDocument {
     }
 
 
-    init() {
+    override init() {
         super.init()
         scheme = QScheme()
-        scheme.revisionTracker = QRevisionTracker(parent: self)
+        scheme.revisionTracker = QRevisionTracker(undoManager)
     }
 
 
@@ -120,7 +120,7 @@ class QSchemeDocument: NSDocument {
         var name = url.lastPathComponent.stringByDeletingPathExtension
         plist["name"] = name
 
-        let nsPList = plist.bridgeToObjectiveC()
+        let nsPList: NSDictionary = plist
         if !nsPList.writeToURL(url, atomically: false) {
             outError.memory = NSError(domain: kQCannotWritePListException, code: 3, userInfo: [
                 "url": url,

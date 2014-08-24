@@ -38,7 +38,7 @@ class QSelectorTableController: NSObject, NSTableViewDelegate {
 
             if let rule = selectedRule {
                 selectorsObserver = observeKeyPath("selectors", ofObject: rule, options: []) { [weak self] _, _, _ in
-                    if self?.needsUpdate ~| false {
+                    if self?.needsUpdate ?? false {
                         self?.selectorTable?.reloadData()
                     }
                 }
@@ -56,7 +56,7 @@ class QSelectorTableController: NSObject, NSTableViewDelegate {
     @IBOutlet weak var addRemoveButtons: NSSegmentedControl? {
         didSet {
             addButtonEnabled = selectedRule != nil
-            removeButtonEnabled = (selectorTable?.selectedRowIndexes.count ~| 0) > 0
+            removeButtonEnabled = (selectorTable?.selectedRowIndexes.count ?? 0) > 0
         }
     }
 
@@ -97,7 +97,7 @@ class QSelectorTableController: NSObject, NSTableViewDelegate {
             needsUpdate = false
 
             let newRow = selectedRule!.selectors.count
-            selectedRule!.selectors += "selector"
+            selectedRule!.selectors.append("selector")
 
             table.beginUpdates()
             table.insertRowsAtIndexes(NSIndexSet(index: newRow), withAnimation: NSTableViewAnimationOptions.EffectNone)
@@ -135,13 +135,13 @@ class QSelectorTableController: NSObject, NSTableViewDelegate {
     // Getters for both will return false if the buttons haven't been loaded,
     // setters will do nothing if unloaded.
     var addButtonEnabled: Bool {
-        get { return addRemoveButtons?.isEnabledForSegment(0) ~| false }
+        get { return addRemoveButtons?.isEnabledForSegment(0) ?? false }
         set { addRemoveButtons?.setEnabled(newValue, forSegment: 0) }
     }
 
 
     var removeButtonEnabled: Bool {
-        get { return addRemoveButtons?.isEnabledForSegment(1) ~| false }
+        get { return addRemoveButtons?.isEnabledForSegment(1) ?? false }
         set { addRemoveButtons?.setEnabled(newValue, forSegment: 1) }
     }
 

@@ -13,11 +13,11 @@ extension NSView {
     /// `preservingConstraints` is true, any constraints referencing the
     /// receiver in its superview will be rewritten to reference `view`.
     func replaceInSuperviewWithView(view: NSView, preservingConstraints: Bool = true) {
-        assert(superview?, "Cannot replace self without a superview")
+        assert(superview != nil, "Cannot replace self without a superview")
         if preservingConstraints {
-            superview.replaceSubviewsPreservingConstraints([self: view])
+            superview!.replaceSubviewsPreservingConstraints([self: view])
         } else {
-            superview.replaceSubview(self, with: view)
+            superview!.replaceSubview(self, with: view)
         }
     }
 
@@ -70,8 +70,8 @@ extension NSView {
             updated.identifier = current.identifier
             updated.priority = current.priority
 
-            removedConstraints += current
-            newConstraints += updated
+            removedConstraints.append(current)
+            newConstraints.append(updated)
         }
 
         if !removedConstraints.isEmpty {

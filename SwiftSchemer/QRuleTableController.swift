@@ -110,7 +110,7 @@ class QRuleTableController: NSObject {
 
 
     func refreshColumnNames() {
-        if !scheme { return }
+        if scheme == nil { return }
 
         if let table = self.table {
             table.backgroundColor = scheme!.viewportBackground
@@ -132,10 +132,10 @@ class QRuleTableController: NSObject {
 
         return { [weak self] key, _, _ in
             let definedSelf: QRuleTableController! = self
-            if !definedSelf { return }
+            if definedSelf == nil { return }
 
             let table: NSTableView! = definedSelf.table
-            if !table { return }
+            if table == nil { return }
 
             let column = QRuleKeysToColumns[key]
             let columnIndex = table.columnWithIdentifier(column)
@@ -160,22 +160,22 @@ class QRuleTableController: NSObject {
         let definedScheme: QScheme! = self.scheme
 
         // Note: !(a && b) does not compile because it's a compiler bug.
-        if !definedTable || !definedScheme {
+        if definedTable == nil || definedScheme == nil {
             return
         }
 
         definedTable.backgroundColor = definedScheme.viewportBackground
         for key in ["viewportBackground", "viewportForeground"] {
-            ruleObservers += observeKeyPath(key, ofObject: definedScheme, options: []) { [weak self] _, _, _ in
+            ruleObservers.append(observeKeyPath(key, ofObject: definedScheme, options: []) { [weak self] _, _, _ in
                 self?.refreshColumnNames()
                 return
-            }
+            })
         }
 
-        ruleObservers += observeKeyPath("rules", ofObject: definedScheme, options: []) { [weak self] _, _, _ in
+        ruleObservers.append(observeKeyPath("rules", ofObject: definedScheme, options: []) { [weak self] _, _, _ in
             self?.reloadData()
             return
-        }
+        })
 
         if needsUpdate {
             definedTable.reloadData()
@@ -185,7 +185,7 @@ class QRuleTableController: NSObject {
             let block = observerForRule(rule, row: row)
 
             for (key, column) in QRuleKeysToColumns {
-                ruleObservers += observeKeyPath(key, ofObject: rule, options: [], block)
+                ruleObservers.append(observeKeyPath(key, ofObject: rule, options: [], block))
             }
         }
     }
@@ -198,7 +198,7 @@ class QRuleTableController: NSObject {
 extension QRuleTableController: NSTableViewDelegate {
 
     func tableView(tableView: NSTableView!, viewForTableColumn tableColumn: NSTableColumn!, row: Int) -> NSView! {
-        if !scheme {
+        if scheme == nil {
             return nil
         }
 
@@ -215,7 +215,7 @@ extension QRuleTableController: NSTableViewDelegate {
             let indices = view.selectedRowIndexes
             let selectedRule = indices.count != 1 ? nil : scheme?.rules[indices.firstIndex]
             let info: [NSObject: AnyObject]? =
-            selectedRule
+                selectedRule != nil
                 ? [kQSelectedRuleInfo: selectedRule!]
                 : nil
 
@@ -391,7 +391,7 @@ extension QRuleTableController {
     func updateRowWithColor(assign: (NSColor) -> Void) -> (NSColorWell) -> Void {
         return { [weak self] colorWell in
             if let con = self {
-                if !con.table {
+                if con.table == nil {
                     return
                 }
 
@@ -417,7 +417,7 @@ private let QRuleTagRemove = 1
 extension QRuleTableController {
 
     var removeButtonEnabled: Bool {
-        get { return addRemoveButtons?.isEnabledForSegment(1) ~| false }
+        get { return addRemoveButtons?.isEnabledForSegment(1) ?? false }
         set { addRemoveButtons?.setEnabled(newValue, forSegment: 1) }
     }
 
@@ -441,8 +441,8 @@ extension QRuleTableController {
 
 
     func removeSelectedRules() {
-        assert(scheme, "Scheme may not be nil")
-        assert(table, "Table may not be nil")
+        assert(scheme != nil, "Scheme may not be nil")
+        assert(table != nil, "Table may not be nil")
 
         var newRules = scheme!.rules
         let rows = table!.selectedRowIndexes
@@ -456,11 +456,11 @@ extension QRuleTableController {
 
 
     func addNewRule() {
-        assert(scheme, "Scheme may not be nil")
-        assert(table, "Table may not be nil")
+        assert(scheme != nil, "Scheme may not be nil")
+        assert(table != nil, "Table may not be nil")
 
         if let scheme = self.scheme {
-            scheme.rules += QSchemeRule()
+            scheme.rules.append(QSchemeRule())
             let newRowIndex = table!.numberOfRows
             let newRowIndexSet = NSIndexSet(index: newRowIndex)
             table!.insertRowsAtIndexes(newRowIndexSet, withAnimation: .EffectNone)

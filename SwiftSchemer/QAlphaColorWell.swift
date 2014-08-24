@@ -23,18 +23,18 @@ class QAlphaColorWell: NSColorWell {
     @IBInspectable var showsAlpha: Bool = false
 
 
-    init(frame: NSRect) {
+    override init(frame: NSRect) {
         super.init(frame: frame)
     }
 
 
-    init(coder: NSCoder!) {
+    required init(coder: NSCoder) {
         showsAlpha = coder.decodeBoolForKey(kQShowsAlphaKey)
         super.init(coder: coder)
     }
 
 
-    override func encodeWithCoder(coder: NSCoder!) {
+    override func encodeWithCoder(coder: NSCoder) {
         coder.encodeBool(showsAlpha, forKey: kQShowsAlphaKey)
         super.encodeWithCoder(coder)
     }

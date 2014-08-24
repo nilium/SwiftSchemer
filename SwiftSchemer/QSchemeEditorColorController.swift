@@ -41,7 +41,7 @@ class QSchemeEditorColorController: NSViewController {
             self.representedObject = newValue
             loadColorValues()
 
-            if !scheme { return }
+            if scheme == nil { return }
 
             colorObserver = QScheme.colorProperties.map { name in
                 observeKeyPath(name, ofObject: self.scheme, options: []) { [weak self] _, _, _ in
@@ -58,10 +58,17 @@ class QSchemeEditorColorController: NSViewController {
     }
 
 
-    init(scheme: QScheme, nibName: String?, bundle: NSBundle?) {
+    required init(scheme: QScheme, nibName: String?, bundle: NSBundle?) {
         assert(nibName != nil || bundle != nil, "At least nibName or bundle must be non-nil")
         super.init(nibName: nibName, bundle: bundle)
         self.scheme = scheme
+    }
+
+
+    required init(coder: NSCoder!) {
+        super.init(coder: coder)
+        // TODO: Add scheme serialization
+        self.scheme = QScheme()
     }
 
 
@@ -72,24 +79,22 @@ class QSchemeEditorColorController: NSViewController {
 
     /// Set all well colors to those held by the scheme.
     func loadColorValues() {
-        if viewBackWell? {
-            viewBackWell.color = scheme.viewportBackground
-            viewForeWell.color = scheme.viewportForeground
+        viewBackWell?.color = scheme.viewportBackground
+        viewForeWell?.color = scheme.viewportForeground
 
-            gutterBackWell.color = scheme.gutterBackground
-            gutterForeWell.color = scheme.gutterForeground
+        gutterBackWell?.color = scheme.gutterBackground
+        gutterForeWell?.color = scheme.gutterForeground
 
-            findBackWell.color = scheme.findHighlightBackground
-            findForeWell.color = scheme.findHighlightForeground
+        findBackWell?.color = scheme.findHighlightBackground
+        findForeWell?.color = scheme.findHighlightForeground
 
-            caretWell.color = scheme.caretForeground
-            lineHLWell.color = scheme.lineHighlight
-            invisiblesWell.color = scheme.invisiblesForeground
+        caretWell?.color = scheme.caretForeground
+        lineHLWell?.color = scheme.lineHighlight
+        invisiblesWell?.color = scheme.invisiblesForeground
 
-            selectionActiveWell.color = scheme.selectionFill
-            selectionInactiveWell.color = scheme.inactiveSelectionFill
-            selectionBorderWell.color = scheme.selectionBorder
-        }
+        selectionActiveWell?.color = scheme.selectionFill
+        selectionInactiveWell?.color = scheme.inactiveSelectionFill
+        selectionBorderWell?.color = scheme.selectionBorder
     }
 
 
@@ -100,50 +105,52 @@ class QSchemeEditorColorController: NSViewController {
 
 
     @IBAction func updateColor(sender: NSColorWell) {
-        assert(viewBackWell?, "Cannot call updateColor until the controller's views are loaded")
+        assert(viewBackWell != nil, "Cannot call updateColor until the controller's views are loaded")
 
         // What follows is not pretty, but happens to be fairly practical.
         switch sender {
         // Viewport colors
         case viewBackWell:
-            scheme.viewportBackground = sender.color
+            scheme?.viewportBackground = sender.color
         case viewForeWell:
-            scheme.viewportForeground = sender.color
+            scheme?.viewportForeground = sender.color
 
         // Gutter colors
         case gutterBackWell:
-            scheme.gutterBackground = sender.color
+            scheme?.gutterBackground = sender.color
         case gutterForeWell:
-            scheme.gutterForeground = sender.color
+            scheme?.gutterForeground = sender.color
 
         // Find highlights
         case findBackWell:
-            scheme.findHighlightBackground = sender.color
+            scheme?.findHighlightBackground = sender.color
         case findForeWell:
-            scheme.findHighlightForeground = sender.color
+            scheme?.findHighlightForeground = sender.color
 
         // Editor group
         case caretWell:
-            scheme.caretForeground = sender.color
+            scheme?.caretForeground = sender.color
         case lineHLWell:
-            scheme.lineHighlight = sender.color
+            scheme?.lineHighlight = sender.color
         case invisiblesWell:
-            scheme.invisiblesForeground = sender.color
+            scheme?.invisiblesForeground = sender.color
 
         // Selection colors
         case selectionActiveWell:
-            scheme.selectionFill = sender.color
+            scheme?.selectionFill = sender.color
         case selectionInactiveWell:
-            scheme.inactiveSelectionFill = sender.color
+            scheme?.inactiveSelectionFill = sender.color
         case selectionBorderWell:
-            scheme.selectionBorder = sender.color
+            scheme?.selectionBorder = sender.color
 
         default:
             NSLog("Received unrecognized color well as sender: \(sender)")
             return
         }
 
-        notify(QSchemeChangedNotification, from: scheme)
+        if let scheme = self.scheme {
+            notify(QSchemeChangedNotification, from: scheme)
+        }
     }
 
 }

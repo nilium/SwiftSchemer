@@ -17,7 +17,7 @@ enum QRuleFlag: Equatable {
     case Bold
     case Italic
     case Underline
-    case Unknown(named: String)
+    case Unknown(String)
 
 
     var name: String {
@@ -64,7 +64,7 @@ enum QRuleFlag: Equatable {
 }
 
 
-@infix func == (lhs: QRuleFlag, rhs: QRuleFlag) -> Bool {
+func == (lhs: QRuleFlag, rhs: QRuleFlag) -> Bool {
     return (lhs.isBold && rhs.isBold)
     || (lhs.isItalic && rhs.isItalic)
     || (lhs.isUnderline && rhs.isUnderline)
@@ -75,7 +75,7 @@ enum QRuleFlag: Equatable {
 private func convertRuleFlags(list: String?) -> [QRuleFlag] {
     let splitList = list?.componentsSeparatedByString(" ")
 
-    if !splitList {
+    if splitList == nil {
         return []
     }
 
@@ -88,7 +88,7 @@ private func convertRuleFlags(list: String?) -> [QRuleFlag] {
         case "underline":
             return QRuleFlag.Underline
         default:
-            return QRuleFlag.Unknown(named: entry)
+            return QRuleFlag.Unknown(entry)
         }
     }
 }
@@ -105,7 +105,6 @@ class QSchemeRule: NSObject {
 
     var selectors: [String] = [] {
         didSet {
-            revisionTracker.actionName ~|= "change to selectors"
             revisionTracker.addRevision { self.selectors = oldValue }
         }
     }
@@ -137,7 +136,7 @@ class QSchemeRule: NSObject {
             self.flags = convertRuleFlags(settings["fontStyle"] as? NSString)
         }
 
-        name = propertyList["name"] as? NSString ~| name
+        name = propertyList["name"] as? NSString ?? name
 
         if let scope: String = propertyList["scope"] as? NSString {
             let splitScope = split(scope, {$0 == ","}, allowEmptySlices: false)
@@ -155,8 +154,8 @@ class QSchemeRule: NSObject {
     }
 
 
-    init() {
-        /* nop */
+    override init() {
+        super.init()
     }
 
 

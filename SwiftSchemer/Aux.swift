@@ -38,7 +38,7 @@ func whiteColor(white: CGFloat = 1.0, alpha: CGFloat = 1.0) -> NSColor {
 /// Assigns a hex color from plist[key], if defined. Otherwise, does nothing.
 func assignColorFromPList(inout color: NSColor, plist: QPropertyList, key: String) {
     if let colorString = plist[key] as? NSString {
-        color = NSColor.fromHexString(colorString) ~| color
+        color = NSColor.fromHexString(colorString) ?? color
     }
 }
 
@@ -57,26 +57,26 @@ func putColorIfVisible(inout plist: QPropertyList, key: String, color: NSColor) 
 
 /// Returns the index of the given object in the sequence. Looks for the
 /// specific object, not a qualitatively equal object.
-func indexOfObject<S: Sequence, T where T == S.GeneratorType.Element, T: AnyObject>(seq: S, item: T) -> Int? {
+func indexOfObject<S: SequenceType, T where T == S.Generator.Element, T: AnyObject>(seq: S, item: T) -> Int? {
     return indexOf(seq) { $0 === item }
 }
 
 
 /// Returns the index of the first object in seq that is equal to item.
-func indexOf<S: Sequence, T where T == S.GeneratorType.Element, T: Equatable>(seq: S, item: T) -> Int? {
+func indexOf<S: SequenceType, T where T == S.Generator.Element, T: Equatable>(seq: S, item: T) -> Int? {
     return indexOf(seq) { $0 == item }
 }
 
 
 /// Returns the index of the first object in seq that is equal to item, using
 /// NSObject.isEqual.
-func indexOf<S: Sequence, T where T == S.GeneratorType.Element, T: NSObjectProtocol>(seq: S, item: T) -> Int? {
+func indexOf<S: SequenceType, T where T == S.Generator.Element, T: NSObjectProtocol>(seq: S, item: T) -> Int? {
     return indexOf(seq) { item.isEqual($0) }
 }
 
 
 /// Returns the index of the first object for which predicate(T) returns true.
-func indexOf<S: Sequence, T, L where T == S.GeneratorType.Element, L: LogicValue>(seq: S, predicate: (T) -> L) -> Int? {
+func indexOf<S: SequenceType, T, L where T == S.Generator.Element, L: BooleanType>(seq: S, predicate: (T) -> L) -> Int? {
     for (i, e) in enumerate(seq) {
         if predicate(e) {
             return i

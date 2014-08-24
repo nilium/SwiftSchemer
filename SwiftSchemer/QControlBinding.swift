@@ -34,7 +34,7 @@ extension NSObject {
     public var hasBoundAction: Bool {
         if self is QControlBindingProtocol {
             let obj: AnyObject? = objc_getAssociatedObject(self, kQActionBindingPtr)
-            return !(!obj)
+            return obj != nil
         }
         return false
     }
@@ -58,23 +58,23 @@ private let kQActionBindingPolicy = objc_AssociationPolicy(OBJC_ASSOCIATION_RETA
 /// The source variable for kQActionBindingPtr.
 private var kQActionBindingSource: Int = 0xabad1dea
 /// The key used to store bound action receivers as associated objects.
-private let kQActionBindingPtr = ConstUnsafePointer<()>(withUnsafePointer(&kQActionBindingSource, { $0 }))
+private let kQActionBindingPtr = UnsafePointer<Void>(withUnsafePointer(&kQActionBindingSource, { $0 }))
 
 
 /// The receiver for bound actions.
-private class QControlBinding: NSObject {
+public class QControlBinding: NSObject {
 
-    internal typealias ActionBlock = (AnyObject?) -> Void
+    typealias ActionBlock = (AnyObject?) -> Void
 
     private let block: ActionBlock
 
 
-    internal init(block: ActionBlock) {
+    init(block: ActionBlock) {
         self.block = block
     }
 
 
-    internal func performedAction(sender: AnyObject!) {
+    func performedAction(sender: AnyObject!) {
         block(sender)
     }
 
@@ -90,8 +90,8 @@ public func bindAction<T: QControlBindingProtocol>(control: T, block: (T) -> Voi
     // generic class, wrap the existing block in a block to do a cast from
     // AnyObject to T.
     let target = QControlBinding() { sender in
-        assert(sender, "sender was nil")
-        assert(sender as? T, "could not cast action sender to T")
+        assert(sender != nil, "sender was nil")
+        assert(sender is T, "could not cast action sender to T")
         if let casted = sender as? T {
             block(casted)
         }
